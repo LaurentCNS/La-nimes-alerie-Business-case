@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MoyenPaiementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MoyenPaiementRepository::class)]
@@ -15,6 +17,14 @@ class MoyenPaiement
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'moyenPaiement', targetEntity: Commande::class)]
+    private Collection $commandes;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +39,36 @@ class MoyenPaiement
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setMoyenPaiement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getMoyenPaiement() === $this) {
+                $commande->setMoyenPaiement(null);
+            }
+        }
 
         return $this;
     }

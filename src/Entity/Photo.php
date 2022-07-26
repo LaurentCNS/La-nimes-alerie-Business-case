@@ -19,6 +19,9 @@ class Photo
     #[ORM\Column]
     private ?bool $estPrincipale = null;
 
+    #[ORM\ManyToOne(inversedBy: 'photo')]
+    private ?Produit $produit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Photo
     public function setEstPrincipale(bool $estPrincipale): self
     {
         $this->estPrincipale = $estPrincipale;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

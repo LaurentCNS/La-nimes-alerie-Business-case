@@ -20,6 +20,12 @@ class Ligne
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $prixHt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ligne')]
+    private ?Produit $produit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ligne')]
+    private ?Panier $panier = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class Ligne
     public function setPrixHt(string $prixHt): self
     {
         $this->prixHt = $prixHt;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
 
         return $this;
     }

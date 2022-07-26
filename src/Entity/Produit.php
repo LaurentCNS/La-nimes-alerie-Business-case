@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,35 @@ class Produit
 
     #[ORM\Column]
     private ?bool $estActif = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Marque $marque = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Photo::class)]
+    private Collection $photo;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Promotion $promotion = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Categorie $categorie = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Avis::class)]
+    private Collection $avis;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Ligne::class)]
+    private Collection $ligne;
+
+    #[ORM\ManyToMany(targetEntity: Client::class, inversedBy: 'produits')]
+    private Collection $client;
+
+    public function __construct()
+    {
+        $this->photo = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+        $this->ligne = new ArrayCollection();
+        $this->client = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +121,156 @@ class Produit
     public function setEstActif(bool $estActif): self
     {
         $this->estActif = $estActif;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getPhoto(): Collection
+    {
+        return $this->photo;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photo->contains($photo)) {
+            $this->photo[] = $photo;
+            $photo->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photo->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getProduit() === $this) {
+                $photo->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProduit() === $this) {
+                $avi->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ligne>
+     */
+    public function getLigne(): Collection
+    {
+        return $this->ligne;
+    }
+
+    public function addLigne(Ligne $ligne): self
+    {
+        if (!$this->ligne->contains($ligne)) {
+            $this->ligne[] = $ligne;
+            $ligne->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigne(Ligne $ligne): self
+    {
+        if ($this->ligne->removeElement($ligne)) {
+            // set the owning side to null (unless already changed)
+            if ($ligne->getProduit() === $this) {
+                $ligne->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClient(): Collection
+    {
+        return $this->client;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->client->contains($client)) {
+            $this->client[] = $client;
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        $this->client->removeElement($client);
 
         return $this;
     }
