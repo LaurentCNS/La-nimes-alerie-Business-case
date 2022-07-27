@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EnumStatutPanier;
 use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +21,7 @@ class Panier
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
-    private ?int $statut = null;
+    private int $statut = EnumStatutPanier::CREE;
 
     #[ORM\ManyToOne(inversedBy: 'panier')]
     private ?Client $client = null;
