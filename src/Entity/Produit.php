@@ -19,7 +19,7 @@ class Produit
     #[ORM\Column(length: 100)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 500)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -51,6 +51,9 @@ class Produit
 
     #[ORM\ManyToMany(targetEntity: Client::class, inversedBy: 'produits')]
     private Collection $client;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    private ?string $tva = null;
 
     public function __construct()
     {
@@ -271,6 +274,18 @@ class Produit
     public function removeClient(Client $client): self
     {
         $this->client->removeElement($client);
+
+        return $this;
+    }
+
+    public function getTva(): ?string
+    {
+        return $this->tva;
+    }
+
+    public function setTva(string $tva): self
+    {
+        $this->tva = $tva;
 
         return $this;
     }

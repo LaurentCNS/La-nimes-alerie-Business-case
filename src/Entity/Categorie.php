@@ -21,9 +21,16 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Produit::class)]
     private Collection $produits;
 
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'enfants')]
+    private ?self $parent = null;
+
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    private Collection $enfants;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->enfants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +74,48 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($produit->getCategorie() === $this) {
                 $produit->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getEnfants(): Collection
+    {
+        return $this->enfants;
+    }
+
+    public function addEnfant(self $enfant): self
+    {
+        if (!$this->enfants->contains($enfant)) {
+            $this->enfants[] = $enfant;
+            $enfant->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnfant(self $enfant): self
+    {
+        if ($this->enfants->removeElement($enfant)) {
+            // set the owning side to null (unless already changed)
+            if ($enfant->getParent() === $this) {
+                $enfant->setParent(null);
             }
         }
 
