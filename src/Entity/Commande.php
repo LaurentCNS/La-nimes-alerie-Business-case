@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EnumEtatCommande;
 use App\Repository\CommandeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,11 +24,12 @@ class Commande
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     private ?MoyenPaiement $moyenPaiement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?Statut $statut = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     private ?Adresse $adresse = null;
+
+    #[ORM\Column]
+    private ?int $etat = EnumEtatCommande::EST_PAYEE;
 
     public function getId(): ?int
     {
@@ -70,18 +72,6 @@ class Commande
         return $this;
     }
 
-    public function getStatut(): ?Statut
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?Statut $statut): self
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
     public function getAdresse(): ?Adresse
     {
         return $this->adresse;
@@ -90,6 +80,18 @@ class Commande
     public function setAdresse(?Adresse $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

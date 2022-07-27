@@ -22,7 +22,6 @@ final class Version20220726222557 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE commande ADD moyen_paiement_id INT DEFAULT NULL, ADD statut_id INT DEFAULT NULL, ADD adresse_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE commande ADD CONSTRAINT FK_6EEAA67D9C7E259C FOREIGN KEY (moyen_paiement_id) REFERENCES moyen_paiement (id)');
-        $this->addSql('ALTER TABLE commande ADD CONSTRAINT FK_6EEAA67DF6203804 FOREIGN KEY (statut_id) REFERENCES statut (id)');
         $this->addSql('ALTER TABLE commande ADD CONSTRAINT FK_6EEAA67D4DE7DC5C FOREIGN KEY (adresse_id) REFERENCES adresse (id)');
         $this->addSql('CREATE INDEX IDX_6EEAA67D9C7E259C ON commande (moyen_paiement_id)');
         $this->addSql('CREATE INDEX IDX_6EEAA67DF6203804 ON commande (statut_id)');
@@ -39,7 +38,7 @@ final class Version20220726222557 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE commande DROP FOREIGN KEY FK_6EEAA67D9C7E259C');
-        $this->addSql('ALTER TABLE commande DROP FOREIGN KEY FK_6EEAA67DF6203804');
+
         $this->addSql('ALTER TABLE commande DROP FOREIGN KEY FK_6EEAA67D4DE7DC5C');
         $this->addSql('DROP INDEX IDX_6EEAA67D9C7E259C ON commande');
         $this->addSql('DROP INDEX IDX_6EEAA67DF6203804 ON commande');
