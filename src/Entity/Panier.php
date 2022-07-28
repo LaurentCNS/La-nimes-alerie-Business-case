@@ -29,6 +29,15 @@ class Panier
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Ligne::class)]
     private Collection $ligne;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datePaiement = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Adresse $adresse = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?MoyenPaiement $moyenPaiement = null;
+
 
 
     public function __construct()
@@ -103,6 +112,42 @@ class Panier
                 $ligne->setPanier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDatePaiement(): ?\DateTimeInterface
+    {
+        return $this->datePaiement;
+    }
+
+    public function setDatePaiement(?\DateTimeInterface $datePaiement): self
+    {
+        $this->datePaiement = $datePaiement;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getMoyenPaiement(): ?MoyenPaiement
+    {
+        return $this->moyenPaiement;
+    }
+
+    public function setMoyenPaiement(?MoyenPaiement $moyenPaiement): self
+    {
+        $this->moyenPaiement = $moyenPaiement;
 
         return $this;
     }

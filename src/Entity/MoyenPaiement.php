@@ -18,13 +18,15 @@ class MoyenPaiement
     #[ORM\Column(length: 50)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'moyenPaiement', targetEntity: Commande::class)]
-    private Collection $commandes;
+    #[ORM\OneToMany(mappedBy: 'moyenPaiement', targetEntity: Panier::class)]
+    private Collection $paniers;
 
     public function __construct()
     {
-        $this->commandes = new ArrayCollection();
+        $this->paniers = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -44,32 +46,33 @@ class MoyenPaiement
     }
 
     /**
-     * @return Collection<int, Commande>
+     * @return Collection<int, Panier>
      */
-    public function getCommandes(): Collection
+    public function getPaniers(): Collection
     {
-        return $this->commandes;
+        return $this->paniers;
     }
 
-    public function addCommande(Commande $commande): self
+    public function addPanier(Panier $panier): self
     {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->setMoyenPaiement($this);
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->setMoyenPaiement($this);
         }
 
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
+    public function removePanier(Panier $panier): self
     {
-        if ($this->commandes->removeElement($commande)) {
+        if ($this->paniers->removeElement($panier)) {
             // set the owning side to null (unless already changed)
-            if ($commande->getMoyenPaiement() === $this) {
-                $commande->setMoyenPaiement(null);
+            if ($panier->getMoyenPaiement() === $this) {
+                $panier->setMoyenPaiement(null);
             }
         }
 
         return $this;
     }
+
 }

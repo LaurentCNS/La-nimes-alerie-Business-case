@@ -1,15 +1,24 @@
 App\Entity\Panier:
-    panier{0..500}:
+    panier{0..300}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
-        statut: 200
-        client: '@client*'
-
-    panier{501..650}:
-        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
         statut: 100
         client: '@client*'
+        adresse: '@adresse*'
 
-    panier{651..750}:
+    panier{301..800}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 200
+        client: '@client*'
+        adresse: '@adresse*'
+
+    panier{801..1000}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
         statut: 300
         client: '@client*'
+        adresse: '@adresse*'
