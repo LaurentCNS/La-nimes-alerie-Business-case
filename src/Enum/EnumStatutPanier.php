@@ -4,7 +4,7 @@ namespace App\Enum;
 
 Class EnumStatutPanier
 {
-    const CREE = 100;
+    const CREEE = 100;
     const VALIDEE = 200;
     const ABANDONNEE = 300;
     const PREPARATION = 400;

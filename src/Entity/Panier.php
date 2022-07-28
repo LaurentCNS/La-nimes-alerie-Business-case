@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Enum\EnumStatutPanier;
 use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,6 +11,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get'],
+    itemOperations: ['get']
+)]
 class Panier
 {
     #[ORM\Id]
@@ -21,7 +26,7 @@ class Panier
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
-    private int $statut = EnumStatutPanier::CREE;
+    private int $statut = EnumStatutPanier::CREEE;
 
     #[ORM\ManyToOne(inversedBy: 'panier')]
     private ?Client $client = null;
