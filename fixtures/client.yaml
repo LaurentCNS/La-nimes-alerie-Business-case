@@ -1,8 +1,20 @@
 parameters:
+    passAdmin: '$2y$13$JQXfKCpisShXJopl4RViY.lyynZIkuRMDC2UzXjsTxAAr4Chm1aA2' # password: Issou2021
     password: '$2y$13$vldgApLZb5YMp51QTlLTyOSQf.TTiDYfd55FuaF6ZV2TAAdgE3enG' # password: 1234
 
 App\Entity\Client:
     client0:
+        email (unique): 'LaTerreEstPlate@lanimesalerie.fr'
+        password: '<{passAdmin}>'
+        nom: 'Capard'
+        prenom: 'Régis'
+        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        genre: '@genre*'
+        adresse: '@adresse*'
+        roles: [ROLE_ADMIN]
+
+    client1:
         email (unique): 'user@user.fr'
         password: '<{password}>'
         nom: '<firstName()>'
@@ -12,17 +24,6 @@ App\Entity\Client:
         genre: '@genre*'
         adresse: '@adresse*'
         roles: [ROLE_USER]
-
-    client1:
-        email (unique): 'admin@admin.fr'
-        password: '<{password}>'
-        nom: '<firstName()>'
-        prenom: '<lastName()>'
-        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
-        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        genre: '@genre*'
-        adresse: '@adresse*'
-        roles: [ROLE_ADMIN]
 
     client{2..500}:
         email (unique): '<safeEmail()>'
