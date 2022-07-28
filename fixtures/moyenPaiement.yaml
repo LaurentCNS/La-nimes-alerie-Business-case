@@ -1,11 +1,11 @@
-App\Entity\MoyenPaiement:
-    moyenPaiement0:
-        type: 'Carte Bancaire'
+# App\Entity\MoyenPaiement:
+#     moyenPaiement0:
+#         type: 'Carte Bancaire'
 
-    moyenPaiement1:
-        type: 'Virement Bancaire'
+#     moyenPaiement1:
+#         type: 'Virement Bancaire'
 
-    moyenPaiement2:
-        type: 'Paypal'
+#     moyenPaiement2:
+#         type: 'Paypal'
 
     

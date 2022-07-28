@@ -2,12 +2,46 @@ parameters:
     password: '$2y$13$vldgApLZb5YMp51QTlLTyOSQf.TTiDYfd55FuaF6ZV2TAAdgE3enG' # password: 1234
 
 App\Entity\Client:
-    client{0..500}:
+    client0:
+        email (unique): 'user@user.fr'
+        password: '<{password}>'
+        nom: '<firstName()>'
+        prenom: '<lastName()>'
+        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        #genre: '@genre*'
+        #adresse: '@adresse*'
+        roles: [ROLE_USER]
+
+    client1:
+        email (unique): 'admin@admin.fr'
+        password: '<{password}>'
+        nom: '<firstName()>'
+        prenom: '<lastName()>'
+        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        #genre: '@genre*'
+        #adresse: '@adresse*'
+        roles: [ROLE_ADMIN]
+
+    client2:
+        email (unique): 'stats@stats.fr'
+        password: '<{password}>'
+        nom: '<firstName()>'
+        prenom: '<lastName()>'
+        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        #genre: '@genre*'
+        #adresse: '@adresse*'
+        roles: [ROLE_STATS]
+
+    client{3..500}:
         email (unique): '<safeEmail()>'
         password: '<{password}>'
         nom: '<firstName()>'
         prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        genre: '@genre*'
-        adresse: '@adresse*'
+        #genre: '@genre*'
+        #adresse: '@adresse*'
+        roles: [ROLE_USER]

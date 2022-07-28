@@ -13,8 +13,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ApiResource(
-    collectionOperations: ['get'],
-    itemOperations: ['get']
+    collectionOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"], 
+    ],
+    itemOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        ]
 )]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {

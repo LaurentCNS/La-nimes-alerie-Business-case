@@ -1,35 +1,35 @@
-App\Entity\Marque:
-    marque0:
-        nom: '4Pets'
+# App\Entity\Marque:
+#     marque0:
+#         nom: '4Pets'
 
-    marque1:
-        nom: '8in1'
+#     marque1:
+#         nom: '8in1'
 
-    marque2:
-        nom: 'Acana'
+#     marque2:
+#         nom: 'Acana'
 
-    marque3:
-        nom: 'Adaptil'
+#     marque3:
+#         nom: 'Adaptil'
 
-    marque4:
-        nom: 'Affinity'
+#     marque4:
+#         nom: 'Affinity'
 
-    marque5:
-        nom: 'Advanturos'
+#     marque5:
+#         nom: 'Advanturos'
 
-    marque6:
-        nom: 'Almo nature'
+#     marque6:
+#         nom: 'Almo nature'
 
-    marque7:
-        nom: 'Ani One'
+#     marque7:
+#         nom: 'Ani One'
 
-    marque8:
-        nom: 'Applaws'  
+#     marque8:
+#         nom: 'Applaws'  
 
-    marque9: 
-        nom: 'Cats love' 
+#     marque9: 
+#         nom: 'Cats love' 
 
-    marque10:
-        nom: 'Catslab' 
+#     marque10:
+#         nom: 'Catslab' 
     
         

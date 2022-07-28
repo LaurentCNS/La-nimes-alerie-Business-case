@@ -12,8 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 #[ApiResource(
-    collectionOperations: ['get'],
-    itemOperations: ['get']
+    collectionOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"], 
+    ],
+    itemOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        ]
 )]
 class Panier
 {
