@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AdresseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,21 +26,77 @@ class Adresse
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[
+        Assert\NotBlank([
+            'message' => 'adress.ligne.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 50,
+            'minMessage' => 'adress.ligne.min_length',
+            'maxMessage' => 'adress.ligne.max_length',
+        ]),     
+    ]
     private ?string $ligne1 = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[
+        Assert\Length([
+            'max' => 50,
+            'maxMessage' => 'adress.ligne.max_length',
+        ]),     
+    ]
     private ?string $ligne2 = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[
+        Assert\Length([
+            'max' => 50,
+            'maxMessage' => 'adress.ligne.max_length',
+        ]),     
+    ]
     private ?string $ligne3 = null;
 
     #[ORM\Column(length: 10)]
+    #[
+        Assert\NotBlank([
+            'message' => 'adress.code_postal.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 5,
+            'max' => 10,
+            'minMessage' => 'adress.code_postal.min_length',
+            'maxMessage' => 'adress.code_postal.max_length',
+        ]),     
+    ]
     private ?string $codePostal = null;
 
     #[ORM\Column(length: 50)]
+    #[
+        Assert\NotBlank([
+            'message' => 'adress.ville.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 50,
+            'minMessage' => 'adress.ville.min_length',
+            'maxMessage' => 'adress.ville.max_length',
+        ]),     
+    ]
     private ?string $ville = null;
 
     #[ORM\Column(length: 50)]
+    #[
+        Assert\NotBlank([
+            'message' => 'adress.pays.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 50,
+            'minMessage' => 'adress.pays.min_length',
+            'maxMessage' => 'adress.pays.max_length',
+        ]),     
+    ]
     private ?string $pays = null;
 
     #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Client::class)]

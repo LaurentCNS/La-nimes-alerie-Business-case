@@ -1,0 +1,136 @@
+# validators.fr.yaml
+
+adresse:
+    ligne1:
+        not_blank: 'Votre adresse est obligatoire'
+        min_length: 'Votre adresse doit contenir au moins 3 caractères'
+        max_length: 'Votre adresse ne doit pas dépasser 50 caractères'
+
+    ligne2:
+        max_length: 'Votre adresse ne doit pas dépasser 50 caractères'
+
+    ligne3:
+        max_length: 'Votre adresse ne doit pas dépasser 50 caractères'
+
+    code_postal:
+        not_blank: 'Le code postal est obligatoire'
+        min_length: 'Le code postal doit contenir 5 caractères'
+        max_length: 'Le code postal ne doit pas dépasser 5 caractères'
+
+    ville:
+        not_blank: 'La ville est obligatoire'
+        min_length: 'La ville doit contenir au moins 3 caractères'
+        max_length: 'La ville ne doit pas dépasser 50 caractères'
+
+    pays:
+        not_blank: 'Le pays est obligatoire'
+        min_length: 'Le pays doit contenir au moins 3 caractères'
+        max_length: 'Le pays ne doit pas dépasser 50 caractères'
+
+avis:
+    date:
+        not_blank: 'La date est obligatoire'
+
+    description:
+        not_blank: 'La description est obligatoire'
+        min_length: 'La description doit contenir au moins 3 caractères'
+        max_length: 'La description ne doit pas dépasser 500 caractères'
+
+    note:
+        not_blank: 'La note est obligatoire'
+        greater_than_or_equal: 'La note doit être supérieure à 0'
+        less_than_or_equal: 'La note doit être inférieure ou égale à 10'
+
+categorie:
+    nom:
+        not_blank: 'Le nom est obligatoire'
+        min_length: 'Le nom doit contenir au moins 3 caractères'
+        max_length: 'Le nom ne doit pas dépasser 50 caractères'
+
+client:
+    email:
+        not_blank: 'L\'email est obligatoire'
+        email: 'L\'email n\'est pas valide'
+
+    password:
+        not_blank: 'Le mot de passe est obligatoire'
+        min_length: 'Le mot de passe doit contenir au moins 6 caractères'
+        max_length: 'Le mot de passe ne doit pas dépasser 255 caractères'
+
+    nom:
+        not_blank: 'Le nom est obligatoire'
+        min_length: 'Le nom doit contenir au moins 3 caractères'
+        max_length: 'Le nom ne doit pas dépasser 30 caractères'
+    
+    prenom:
+        not_blank: 'Le prénom est obligatoire'
+        min_length: 'Le prénom doit contenir au moins 3 caractères'
+        max_length: 'Le prénom ne doit pas dépasser 30 caractères'
+
+    date_naissance:
+        not_blank: 'La date de naissance est obligatoire'
+
+genre:
+    libelle:
+        not_blank: 'Le libelle est obligatoire'
+
+ligne:
+    quantite:
+        not_blank: 'La quantité est obligatoire'
+        greater_than_or_equal: 'La quantité doit être supérieure à 0'
+        less_than_or_equal: 'La quantité doit être inférieure ou égale à 99'
+    
+    prix:
+        not_blank: 'Le prix est obligatoire'
+        greater_than_or_equal: 'Le prix doit être supérieure à 0'
+
+marque:
+    nom:
+        not_blank: 'Le nom est obligatoire'
+        min_length: 'Le nom doit contenir au moins 3 caractères'
+        max_length: 'Le nom ne doit pas dépasser 50 caractères'
+
+moyen_paiement:
+    libelle:
+        not_blank: 'Le libelle est obligatoire'
+        min_length: 'Le libelle doit contenir au moins 3 caractères'
+        max_length: 'Le libelle ne doit pas dépasser 50 caractères'
+
+panier:
+    date_creation:
+        not_blank: 'La date de création est obligatoire'
+
+    statut:
+        not_blank: 'Le statut est obligatoire'
+ 
+photo:
+    url:
+        not_blank: 'L\'url est obligatoire'
+        min_length: 'L\'url doit contenir au moins 1 caractères'
+        max_length: 'L\'url ne doit pas dépasser 100 caractères'
+
+produit:
+    libelle:
+        not_blank: 'Le libelle est obligatoire'
+        min_length: 'Le libelle doit contenir au moins 3 caractères'
+        max_length: 'Le libelle ne doit pas dépasser 100 caractères'
+
+    description:
+        not_blank: 'La description est obligatoire'
+        min_length: 'La description doit contenir au moins 3 caractères'
+        max_length: 'La description ne doit pas dépasser 500 caractères'
+
+    date_entree:
+        not_blank: 'La date d\'entrée est obligatoire'
+
+    prix_ht:
+        not_blank: 'Le prix HT est obligatoire'
+        greater_than_or_equal: 'Le prix HT doit être supérieure à 0'
+
+    tva:
+        not_blank: 'La TVA est obligatoire'
+        greater_than_or_equal: 'La TVA doit être supérieure à 0'
+
+promotion:
+    pourcentage:
+        not_blank: 'Le pourcentage est obligatoire'

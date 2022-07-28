@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +17,18 @@ class Photo
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[
+        Assert\NotBlank([
+            'message' => 'photo.url.not_blank',
+        ]),
+        Assert\length([
+            'min' => 3,
+            'max' => 100,
+            'minMessage' => 'photo.url.min_length',
+            'maxMessage' => 'photo.url.max_length',
+        ]),
+
+    ]
     private ?string $url = null;
 
     #[ORM\Column]

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,6 +29,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.email.not_blank',
+        ]),
+        Assert\Email([
+            'message' => 'client.email.invalid',
+        ]),
+    ]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -37,18 +46,61 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.password.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 6,
+            'max' => 255,
+            'minMessage' => 'client.password.min_length',
+            'maxMessage' => 'client.password.max_length',
+        ]),
+    ]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.nom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 30,
+            'minMessage' => 'client.nom.min_length',
+            'maxMessage' => 'client.nom.max_length',
+        ]),     
+    ]
     private ?string $nom = null;
 
     #[ORM\Column(length: 30)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.prenom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 30,
+            'minMessage' => 'client.prenom.min_length',
+            'maxMessage' => 'client.prenom.max_length',
+        ]),     
+    ]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.date_naissance.not_blank',
+        ]),
+    ]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.date_inscription.not_blank',
+        ]),
+    ]
     private ?\DateTimeInterface $dateInscription = null;
 
     #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'client')]

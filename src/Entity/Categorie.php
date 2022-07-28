@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,6 +26,17 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[
+        Assert\NotBlank([
+            'message' => 'categorie.nom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 30,
+            'minMessage' => 'categorie.nom.min_length',
+            'maxMessage' => 'categorie.nom.max_length',
+        ]),     
+    ]
     private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Produit::class)]

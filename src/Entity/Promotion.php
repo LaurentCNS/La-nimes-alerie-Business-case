@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PromotionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,6 +27,11 @@ class Promotion
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[
+        Assert\NotBlank([
+            'message' => 'promotion.taux.not_blank',
+        ]),    
+    ]
     private ?string $pourcentage = null;
 
     #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Produit::class)]

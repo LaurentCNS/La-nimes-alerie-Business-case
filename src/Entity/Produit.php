@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,15 +27,51 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[
+        Assert\NotBlank([
+            'message' => 'produit.nom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 100,
+            'minMessage' => 'produit.nom.min_length',
+            'maxMessage' => 'produit.nom.max_length',
+        ]),     
+    ]
     private ?string $libelle = null;
 
     #[ORM\Column(length: 500)]
+    #[
+        Assert\NotBlank([
+            'message' => 'produit.description.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 500,
+            'minMessage' => 'produit.description.min_length',
+            'maxMessage' => 'produit.description.max_length',
+        ]),     
+    ]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[
+        Assert\NotBlank([
+            'message' => 'produit.date_debut.not_blank',
+        ]),   
+    ]
     private ?\DateTimeInterface $dateEntree = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[
+        Assert\NotBlank([
+            'message' => 'produit.prix.not_blank',
+        ]),
+        Assert\GreaterThanOrEqual([
+            'value' => 0,
+            'message' => 'produit.prix.greater_than_or_equal',
+        ]),
+    ]
     private ?string $prixHt = null;
 
     #[ORM\Column]
@@ -62,6 +99,15 @@ class Produit
     private Collection $client;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[
+        Assert\NotBlank([
+            'message' => 'produit.taux_tva.not_blank',
+        ]),
+        Assert\GreaterThanOrEqual([
+            'value' => 0,
+            'message' => 'produit.taux_tva.greater_than_or_equal',
+        ]),
+    ]
     private ?string $tva = null;
 
     public function __construct()

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,6 +26,11 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 10)]
+    #[
+        Assert\NotBlank([
+            'message' => 'genre.nom.not_blank',
+        ]),  
+    ]
     private ?string $libelle = null;
 
     #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Client::class)]

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LigneRepository;
 use Doctrine\DBAL\Types\Types;
@@ -24,9 +25,28 @@ class Ligne
     private ?int $id = null;
 
     #[ORM\Column]
+    #[
+        Assert\NotBlank([
+            'message' => 'ligne.numero.not_blank',
+        ]),
+        Assert\GreaterThanOrEqual( 0 ,
+            message:'ligne.numero.greater_than_or_equal',
+        ),
+        Assert\LessThanOrEqual(99 ,
+            message:'ligne.numero.less_than_or_equal',
+        ),
+    ]
     private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[
+        Assert\NotBlank([
+            'message' => 'ligne.prix.not_blank',
+        ]),
+        Assert\GreaterThanOrEqual( 0 ,
+            message:'ligne.prix.greater_than_or_equal',
+        ),
+    ]
     private ?string $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'ligne')]

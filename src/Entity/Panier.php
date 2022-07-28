@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Enum\EnumStatutPanier;
 use App\Repository\PanierRepository;
@@ -27,9 +28,19 @@ class Panier
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[
+        Assert\NotBlank([
+            'message' => 'panier.date_creation.not_blank',
+        ]),
+    ]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
+    #[
+        Assert\NotBlank([
+            'message' => 'panier.statut.not_blank',
+        ]),
+    ]
     private int $statut = EnumStatutPanier::CREEE;
 
     #[ORM\ManyToOne(inversedBy: 'panier')]

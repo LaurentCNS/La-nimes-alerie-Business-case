@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MarqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,6 +26,17 @@ class Marque
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[
+        Assert\NotBlank([
+            'message' => 'marque.nom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 50,
+            'minMessage' => 'marque.nom.min_length',
+            'maxMessage' => 'marque.nom.max_length',
+        ]),     
+    ]
     private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Produit::class)]
