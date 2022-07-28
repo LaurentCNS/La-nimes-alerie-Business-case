@@ -1,0 +1,31 @@
+App\Entity\Produit:
+    produit{0..50}:
+        libelle: '<word(3)>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 20
+        est_actif: true
+        tva: 0.10
+        categorie: '@categorie*'
+        marque: '@marque*'
+
+    produit{51..65}:
+        libelle: '<word(3)>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 20
+        est_actif: true
+        tva: 0.10
+        categorie: '@categorie*'
+        marque: '@marque*'
+        promotion: '@promotion*'
+
+    produit{66..75}:
+        libelle: '<word(3)>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 20
+        est_actif: false
+        tva: 0.10
+        categorie: '@categorie*'
+        marque: '@marque*'

@@ -1,0 +1,8 @@
+App\Entity\Commande:
+    commande{0..50}:
+        date_conversion: '<dateTimeBetween("-3000 days", "now")>'
+        date_facturation: '<dateTimeBetween($date_conversion, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        adresse: '@adresse*'
+        panier (unique): '@panier*'
+        etat: 100

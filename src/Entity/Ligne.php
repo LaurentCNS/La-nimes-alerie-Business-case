@@ -18,7 +18,7 @@ class Ligne
     private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $prixHt = null;
+    private ?string $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'ligne')]
     private ?Produit $produit = null;
@@ -43,14 +43,14 @@ class Ligne
         return $this;
     }
 
-    public function getPrixHt(): ?string
+    public function getprix(): ?string
     {
-        return $this->prixHt;
+        return $this->prix;
     }
 
-    public function setPrixHt(string $prixHt): self
+    public function setprix(string $prix): self
     {
-        $this->prixHt = $prixHt;
+        $this->prix = $prix;
 
         return $this;
     }

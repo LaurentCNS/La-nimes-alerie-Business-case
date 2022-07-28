@@ -17,7 +17,7 @@ class Avis
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateAvis = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 500)]
     private ?string $description = null;
 
     #[ORM\Column]

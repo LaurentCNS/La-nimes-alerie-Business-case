@@ -31,6 +31,11 @@ class Commande
     #[ORM\Column]
     private ?int $etat = EnumEtatCommande::EST_PAYEE;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,4 +100,18 @@ class Commande
 
         return $this;
     }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+
 }

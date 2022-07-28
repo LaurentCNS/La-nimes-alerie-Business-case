@@ -1,0 +1,9 @@
+App\Entity\Genre:
+    genre0:
+        libelle: 'Homme'
+
+    genre1:
+        libelle: 'Femme'
+
+    genre2:
+        libelle: 'Autre'

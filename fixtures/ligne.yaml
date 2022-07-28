@@ -1,0 +1,7 @@
+App\Entity\Ligne:
+    ligne{0..5}:
+        quantite: '1'
+        prix: '10'
+        panier: '@panier*'
+        produit: '@produit*'
+

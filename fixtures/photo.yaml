@@ -1,0 +1,11 @@
+App\Entity\Photo:
+    photo{0..50}:
+        url: 'https://media.croqlavie.fr/596-medium_default/croquettes-pour-petit-chien-pure-serenite.jpg'
+        est_principale: true
+        produit: '@produit*'
+
+    photo{0..20}:
+        url: 'https://www.croquettesdefrance.fr/wp-content/uploads/2018/10/etiquette-25105kg.jpg'
+        est_principale: false
+        produit: '@produit*'
+        

@@ -1,0 +1,15 @@
+App\Entity\Panier:
+    panier{0..500}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        statut: 200
+        client: '@client*'
+
+    panier{501..650}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        statut: 100
+        client: '@client*'
+
+    panier{651..750}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        statut: 300
+        client: '@client*'

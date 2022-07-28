@@ -1,0 +1,99 @@
+App\Entity\Categorie:
+    categorie0:
+        nom: 'Chiens'
+
+    categorie1:
+        nom: 'Chats'
+
+    categorie2:
+        nom: 'Oiseaux'
+
+    categorie3:
+        nom: 'Poisson'
+
+    categorie4:
+        nom: 'Rongeurs'
+
+    categorie5:
+        nom: 'Reptiles'
+
+    categorie6:
+        nom: 'Alimentation'
+        parent: '@categorie0'
+
+    categorie7:
+        nom: 'Accessoire'
+        parent: '@categorie0'
+
+    categorie8:
+        nom: 'Jouets'
+        parent: '@categorie0'
+
+    categorie9:
+        nom: 'Parapharmacie'
+        parent: '@categorie0'
+
+    categorie10:
+        nom: 'Alimentation'
+        parent: '@categorie1'
+
+    categorie11:
+        nom: 'Accessoire'
+        parent: '@categorie1'
+
+    categorie12:
+        nom: 'Jouets'
+        parent: '@categorie1'
+
+    categorie13:
+        nom: 'Parapharmacie'
+        parent: '@categorie1'
+
+    categorie14:
+        nom: 'Alimentation'
+        parent: '@categorie2'
+
+    categorie15:
+        nom: 'Accessoire'
+        parent: '@categorie2'
+
+    categorie16:
+        nom: 'Jouets'
+        parent: '@categorie2'
+
+    categorie17:
+        nom: 'Parapharmacie'
+        parent: '@categorie2'
+
+    categorie18:
+        nom: 'Alimentation'
+        parent: '@categorie3'
+
+    categorie19:
+        nom: 'Accessoire'
+        parent: '@categorie3'
+
+    categorie20:
+        nom: 'Jouets'
+        parent: '@categorie3'
+
+    categorie21:
+        nom: 'Parapharmacie'
+        parent: '@categorie3'
+
+    categorie22:
+        nom: 'Alimentation'
+        parent: '@categorie4'
+
+    categorie23:
+        nom: 'Accessoire'
+        parent: '@categorie4'
+
+    categorie24:
+        nom: 'Jouets'
+        parent: '@categorie4'
+
+    categorie25:
+        nom: 'Parapharmacie'
+        parent: '@categorie4'
+

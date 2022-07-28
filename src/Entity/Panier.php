@@ -29,8 +29,7 @@ class Panier
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Ligne::class)]
     private Collection $ligne;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Commande $commande = null;
+
 
     public function __construct()
     {
@@ -108,15 +107,6 @@ class Panier
         return $this;
     }
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
 
-    public function setCommande(?Commande $commande): self
-    {
-        $this->commande = $commande;
 
-        return $this;
-    }
 }
