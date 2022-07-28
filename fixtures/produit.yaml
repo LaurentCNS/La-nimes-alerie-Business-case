@@ -6,8 +6,8 @@ App\Entity\Produit:
         prix_ht: 20
         est_actif: true
         tva: 0.10
-        #categorie: '@categorie*'
-        #marque: '@marque*'
+        categorie: '@categorie*'
+        marque: '@marque*'
 
     produit{51..65}:
         libelle: '<word(3)>'
@@ -16,8 +16,8 @@ App\Entity\Produit:
         prix_ht: 20
         est_actif: true
         tva: 0.10
-        #categorie: '@categorie*'
-        #marque: '@marque*'
+        categorie: '@categorie*'
+        marque: '@marque*'
         promotion: '@promotion*'
 
     produit{66..75}:
@@ -27,5 +27,5 @@ App\Entity\Produit:
         prix_ht: 20
         est_actif: false
         tva: 0.10
-        #categorie: '@categorie*'
-        #marque: '@marque*'
+        categorie: '@categorie*'
+        marque: '@marque*'

@@ -8,7 +8,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LigneRepository::class)]
-
+#[ApiResource(
+    collectionOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+    ],
+    itemOperations: [
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        ]
+)]
 class Ligne
 {
     #[ORM\Id]

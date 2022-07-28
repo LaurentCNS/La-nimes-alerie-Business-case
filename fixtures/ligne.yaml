@@ -1,7 +1,7 @@
-# App\Entity\Ligne:
-#     ligne{0..400}:
-#         quantite: <numberBetween(1, 5)>
-#         prix: <numberBetween(1, 99)>
-#         panier: '@panier*'
-#         produit: '@produit*'
+App\Entity\Ligne:
+    ligne{0..400}:
+        quantite: <numberBetween(1, 5)>
+        prix: <numberBetween(1, 99)>
+        panier: '@panier*'
+        produit: '@produit*'
 

@@ -1,7 +1,7 @@
-# App\Entity\Avis:
-#     avis{0..250}:
-#         date_avis: '<dateTimeBetween("-3000 days", "now")>'
-#         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
-#         note: '<numberBetween(0, 10)>'
-#         produit: '@produit*'
-#         client: '@client*'
+App\Entity\Avis:
+    avis{0..250}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '<numberBetween(0, 10)>'
+        produit: '@produit*'
+        client: '@client*'

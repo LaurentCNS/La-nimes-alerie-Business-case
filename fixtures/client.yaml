@@ -9,8 +9,8 @@ App\Entity\Client:
         prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        #genre: '@genre*'
-        #adresse: '@adresse*'
+        genre: '@genre*'
+        adresse: '@adresse*'
         roles: [ROLE_USER]
 
     client1:
@@ -20,28 +20,17 @@ App\Entity\Client:
         prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        #genre: '@genre*'
-        #adresse: '@adresse*'
+        genre: '@genre*'
+        adresse: '@adresse*'
         roles: [ROLE_ADMIN]
 
-    client2:
-        email (unique): 'stats@stats.fr'
-        password: '<{password}>'
-        nom: '<firstName()>'
-        prenom: '<lastName()>'
-        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
-        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        #genre: '@genre*'
-        #adresse: '@adresse*'
-        roles: [ROLE_STATS]
-
-    client{3..500}:
+    client{2..500}:
         email (unique): '<safeEmail()>'
         password: '<{password}>'
         nom: '<firstName()>'
         prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        #genre: '@genre*'
-        #adresse: '@adresse*'
+        genre: '@genre*'
+        adresse: '@adresse*'
         roles: [ROLE_USER]

@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"], 
+        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
