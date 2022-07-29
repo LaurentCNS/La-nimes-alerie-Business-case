@@ -12,9 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PromotionRepository::class)]
 #[ApiResource(
-    collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
-    ],
+    collectionOperations: [],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
         ]

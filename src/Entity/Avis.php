@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 #[ApiResource(
-    collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
-    ],
+    collectionOperations: [],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
         ]

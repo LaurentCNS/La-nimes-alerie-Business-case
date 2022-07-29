@@ -11,9 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MoyenPaiementRepository::class)]
 #[ApiResource(
-    collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
-    ],
+    collectionOperations: [],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_ADMIN')"],
         ]

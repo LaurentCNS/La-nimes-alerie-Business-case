@@ -15,7 +15,7 @@ App\Entity\Client:
         roles: [ROLE_ADMIN]
 
     client1:
-        email (unique): 'user@user.fr'
+        email (unique): 'LaFaceCachéeDeLaLune@lanimesalerie.fr'
         password: '<{password}>'
         nom: '<firstName()>'
         prenom: '<lastName()>'
@@ -23,7 +23,7 @@ App\Entity\Client:
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
         genre: '@genre*'
         adresse: '@adresse*'
-        roles: [ROLE_USER]
+        roles: [ROLE_STATS]
 
     client{2..500}:
         email (unique): '<safeEmail()>'
