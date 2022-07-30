@@ -15,10 +15,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
     ],
     itemOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
         ]
 )]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
@@ -38,6 +38,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         ]),
     ]
     private ?string $email = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -92,15 +95,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         Assert\NotBlank([
             'message' => 'client.date_naissance.not_blank',
         ]),
+        Assert\LessThan([
+            'value' => '-16 years',
+            'message' => 'client.date_naissance.invalid',
+        ]),
     ]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[
-        Assert\NotBlank([
-            'message' => 'client.date_inscription.not_blank',
-        ]),
-    ]
     private ?\DateTimeInterface $dateInscription = null;
 
     #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'client')]
@@ -130,6 +132,19 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+    
+//
     public function getEmail(): ?string
     {
         return $this->email;
@@ -149,7 +164,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**

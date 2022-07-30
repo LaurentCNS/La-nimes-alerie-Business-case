@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: LigneRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
     ],
     itemOperations: [
-        "get" => ["security" => "is_granted('ROLE_ADMIN')"],
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
         ]
 )]
 class Ligne

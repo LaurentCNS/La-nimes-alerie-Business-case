@@ -4,7 +4,8 @@ parameters:
 
 App\Entity\Client:
     client0:
-        email (unique): 'LaTerreEstPlate@lanimesalerie.fr'
+        username: 'LaTerreEstPlate'
+        email (unique): 'admin@test.fr'
         password: '<{passAdmin}>'
         nom: 'Capard'
         prenom: 'Régis'
@@ -15,8 +16,9 @@ App\Entity\Client:
         roles: [ROLE_ADMIN]
 
     client1:
-        email (unique): 'LaFaceCachéeDeLaLune@lanimesalerie.fr'
-        password: '<{password}>'
+        username: 'LaFaceCachéeDeLaLune'
+        email (unique): 'stats@test.fr'
+        password: '<{passAdmin}>'
         nom: '<firstName()>'
         prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
@@ -26,6 +28,7 @@ App\Entity\Client:
         roles: [ROLE_STATS]
 
     client{2..500}:
+        username (unique): '<username()>'
         email (unique): '<safeEmail()>'
         password: '<{password}>'
         nom: '<firstName()>'
