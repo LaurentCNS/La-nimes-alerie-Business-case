@@ -34,23 +34,32 @@
 	<!--NAVBAR-->
 	<div class="navtop">
 		<ul>
-			{% for categorie in categories %}
-				<li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ categorie.id }}" aria-controls="offcanvasTop">
-					<p>{{ categorie.nom }}<span class="arrow"></span>
+			{% for animal in animals %}
+				<li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ animal.id }}" aria-controls="offcanvasTop">
+					<p>{{ animal.libelle }}<span class="arrow"></span>
 					</p>
 				</li>
 				<!--OFFCANVAS-->
-				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ categorie.id }}" aria-labelledby="offcanvasTopLabel">
+				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animal.id }}" aria-labelledby="offcanvasTopLabel">
 					<div class="offcanvas-header">
 						<h5 id="offcanvasTopLabel">Menu</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
-						<ul>
-									<li>
-										test
-									</li>
-						</ul>
+
+						{% for categorie in categories %}
+							{% if categorie.animal.id == animal.id and categorie.parent == null %}
+								{{ categorie.nom }}
+								<ul>
+									{% for sousCategorie in sousCategories %}
+										{% if sousCategorie.animal.id == animal.id and sousCategorie.parent.id == categorie.id %}
+											<li>{{ sousCategorie.nom }}</li>
+										{% endif %}
+									{% endfor %}
+								</ul></br>
+							{% endif %}
+						{% endfor %}
+
 					</div>
 				</div>
 			{% endfor %}

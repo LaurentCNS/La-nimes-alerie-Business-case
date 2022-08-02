@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\HomeController;
 use App\Enum\EnumStatutPanier;
 use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,6 +16,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"], 
+        "get_nbCommandes" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier",
+            "defaults" => ["_format" => "json"],
+            "controller" => HomeController::class,
+        ],
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],

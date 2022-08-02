@@ -63,4 +63,18 @@ class PanierRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    // compter le nombre de panier avec le statut 400
+    public function nbCommandes(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.statut = 200')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+   
+    
+   
+    
 }

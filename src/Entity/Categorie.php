@@ -23,7 +23,7 @@ class Categorie
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 80)]
     #[
         Assert\NotBlank([
             'message' => 'categorie.nom.not_blank',
@@ -45,6 +45,9 @@ class Categorie
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $enfants;
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?Animal $animal = null;
 
     public function __construct()
     {
@@ -137,6 +140,18 @@ class Categorie
                 $enfant->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): self
+    {
+        $this->animal = $animal;
 
         return $this;
     }

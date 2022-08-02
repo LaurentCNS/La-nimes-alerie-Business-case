@@ -63,4 +63,13 @@ class CategorieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByParent(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.parent is not null')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

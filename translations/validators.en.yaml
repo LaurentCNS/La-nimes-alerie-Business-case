@@ -45,7 +45,7 @@ categorie:
     nom:
         not_blank: 'Le nom est obligatoire'
         min_length: 'Le nom doit contenir au moins 3 caractères'
-        max_length: 'Le nom ne doit pas dépasser 50 caractères'
+        max_length: 'Le nom ne doit pas dépasser 80 caractères'
 
 client:
     email:

@@ -1,99 +1,546 @@
 App\Entity\Categorie:
     categorie0:
-        nom: 'Chiens'
+        nom: 'Alimentation'
+        animal: '@animal0'
+       
 
     categorie1:
-        nom: 'Chats'
+        nom: 'Accessoire'
+        animal: '@animal0'
+        
 
     categorie2:
-        nom: 'Oiseaux'
+        nom: 'Jouets'
+        animal: '@animal0'
+       
 
     categorie3:
-        nom: 'Poisson'
+        nom: 'Parapharmacie'
+        animal: '@animal0'
+        
 
     categorie4:
-        nom: 'Rongeurs'
+        nom: 'Alimentation'
+        animal: '@animal1'
+        
 
     categorie5:
-        nom: 'Reptiles'
+        nom: 'Hygiène et accessoires'
+        animal: '@animal1'
+        
 
     categorie6:
-        nom: 'Alimentation'
-        parent: '@categorie0'
+        nom: 'Jouets'
+        animal: '@animal1'
+        
 
     categorie7:
-        nom: 'Accessoire'
-        parent: '@categorie0'
+        nom: 'Parapharmacie'
+        animal: '@animal1'
+        
 
     categorie8:
-        nom: 'Jouets'
-        parent: '@categorie0'
+        nom: 'Alimentation'
+        animal: '@animal2'
+        
 
     categorie9:
-        nom: 'Parapharmacie'
-        parent: '@categorie0'
+        nom: 'Habitat'
+        animal: '@animal2'
+        
 
     categorie10:
-        nom: 'Alimentation'
-        parent: '@categorie1'
+        nom: 'Hygiene'
+        animal: '@animal2'
+        
 
     categorie11:
-        nom: 'Accessoire'
-        parent: '@categorie1'
+        nom: 'Nature'
+        animal: '@animal2'
+        
 
     categorie12:
-        nom: 'Jouets'
-        parent: '@categorie1'
+        nom: 'Alimentation'
+        animal: '@animal3'
+        
 
     categorie13:
-        nom: 'Parapharmacie'
-        parent: '@categorie1'
+        nom: 'Habitat'
+        animal: '@animal3'
+        
 
     categorie14:
-        nom: 'Alimentation'
-        parent: '@categorie2'
+        nom: 'Filtration'
+        animal: '@animal3'
+        
 
     categorie15:
-        nom: 'Accessoire'
-        parent: '@categorie2'
+        nom: 'Traitement'
+        animal: '@animal3'
+        
 
     categorie16:
-        nom: 'Jouets'
-        parent: '@categorie2'
+        nom: 'Lapin'
+        animal: '@animal4'
+        
 
     categorie17:
-        nom: 'Parapharmacie'
-        parent: '@categorie2'
+        nom: 'Hamster'
+        animal: '@animal4'
+        
 
     categorie18:
-        nom: 'Alimentation'
-        parent: '@categorie3'
+        nom: 'Cobaye'
+        animal: '@animal4'
+        
 
     categorie19:
-        nom: 'Accessoire'
-        parent: '@categorie3'
+        nom: 'Furet'
+        animal: '@animal4'
+
 
     categorie20:
-        nom: 'Jouets'
-        parent: '@categorie3'
+        nom: 'Alimentation'
+        animal: '@animal5'
+       
 
     categorie21:
-        nom: 'Parapharmacie'
-        parent: '@categorie3'
+        nom: 'Habitat'
+        animal: '@animal5'
+        
 
     categorie22:
-        nom: 'Alimentation'
-        parent: '@categorie4'
+        nom: 'Traitement'
+        animal: '@animal5'
 
     categorie23:
-        nom: 'Accessoire'
-        parent: '@categorie4'
+        nom: 'Croquettes'
+        animal: '@animal0'
+        parent: '@categorie0'
+        
 
     categorie24:
-        nom: 'Jouets'
-        parent: '@categorie4'
+        nom: 'Croquettes bio'
+        animal: '@animal0'
+        parent: '@categorie0'
+
 
     categorie25:
-        nom: 'Parapharmacie'
+        nom: 'Friandises'
+        animal: '@animal0'
+        parent: '@categorie0'
+       
+
+    categorie26:
+        nom: 'Patées'
+        animal: '@animal0'
+        parent: '@categorie0'
+        
+
+    categorie27:
+        nom: 'Aliments pour chiots'
+        animal: '@animal0'
+        parent: '@categorie0'
+
+    categorie28:
+        nom: 'Gamelles et distributeurs'
+        animal: '@animal0'
+        parent: '@categorie1'
+
+    categorie29:
+        nom: 'Collier, laisses'
+        animal: '@animal0'
+        parent: '@categorie1'
+        
+
+    categorie30:
+        nom: 'Couchage'
+        animal: '@animal0'
+        parent: '@categorie1'
+
+
+    categorie31:
+        nom: 'Manteaux'
+        animal: '@animal0'
+        parent: '@categorie1'
+       
+
+    categorie32:
+        nom: 'Balles'
+        animal: '@animal0'
+        parent: '@categorie2'
+        
+
+    categorie33:
+        nom: 'Peluches'
+        animal: '@animal0'
+        parent: '@categorie2'
+
+    categorie34:
+        nom: 'Jouets éducatifs'
+        animal: '@animal0'
+        parent: '@categorie2'
+
+    categorie35:
+        nom: 'Sprays et poudres'
+        animal: '@animal0'
+        parent: '@categorie3'
+        
+
+    categorie36:
+        nom: 'Shampoings'
+        animal: '@animal0'
+        parent: '@categorie3'
+
+    categorie37:
+        nom: 'Pipettes'
+        animal: '@animal0'
+        parent: '@categorie3'
+
+    categorie38:
+        nom: 'Soins bucco-dentaires'
+        animal: '@animal0'
+        parent: '@categorie3'
+
+    categorie39:
+        nom: 'Soins des oreilles'
+        animal: '@animal0'
+        parent: '@categorie3'
+
+    categorie40:
+        nom: 'Soins des yeux'
+        animal: '@animal0'
+        parent: '@categorie3'
+        
+
+    categorie41:
+        nom: 'Anti-stress'
+        animal: '@animal0'
+        parent: '@categorie3'
+
+
+    categorie42:
+        nom: 'Croquettes'
+        animal: '@animal1'
+        parent: '@categorie4'
+       
+
+    categorie43:
+        nom: 'Croquettes bio'
+        animal: '@animal1'
+        parent: '@categorie4'
+        
+
+    categorie44:
+        nom: 'Friandises'
+        animal: '@animal1'
         parent: '@categorie4'
 
+    categorie45:
+        nom: 'Patées'
+        animal: '@animal1'
+        parent: '@categorie4'
+
+    categorie46:
+        nom: 'Aliments pour chaton'
+        animal: '@animal1'
+        parent: '@categorie4'
+        
+
+    categorie47:
+        nom: 'Gamelles et distributeurs'
+        animal: '@animal1'
+        parent: '@categorie5'
+
+    categorie48:
+        nom: 'Litière'
+        animal: '@animal1'
+        parent: '@categorie5'
+
+    categorie49:
+        nom: 'Couchage'
+        animal: '@animal1'
+        parent: '@categorie5'
+       
+
+    categorie50:
+        nom: 'Balles'
+        animal: '@animal1'
+        parent: '@categorie6'
+        
+
+    categorie51:
+        nom: 'Herbe à chat'
+        animal: '@animal1'
+        parent: '@categorie6'
+
+    categorie52:
+        nom: 'Sprays et poudres'
+        animal: '@animal1'
+        parent: '@categorie7'
+
+    categorie53:
+        nom: 'Pipettes'
+        animal: '@animal1'
+        parent: '@categorie7'
+        
+
+    categorie54:
+        nom: 'Soins bucco-dentaires'
+        animal: '@animal1'
+        parent: '@categorie7'
+
+    categorie55:
+        nom: 'Soins des oreilles'
+        animal: '@animal1'
+        parent: '@categorie7'
+
+    categorie56:
+        nom: 'Soins des yeux'
+        animal: '@animal1'
+        parent: '@categorie7'
+        
+
+    categorie57:
+        nom: 'Anti-stress'
+        animal: '@animal1'
+        parent: '@categorie7'
+
+    categorie58:
+        nom: 'Graines'
+        animal: '@animal2'
+        parent: '@categorie8'
+
+    categorie59:
+        nom: 'Friandises'
+        animal: '@animal2'
+        parent: '@categorie8'
+        
+
+    categorie60:
+        nom: 'Canaries et peruches'
+        animal: '@animal2'
+        parent: '@categorie8'
+
+    categorie61:
+        nom: 'Cabane'
+        animal: '@animal2'
+        parent: '@categorie9'
+
+    categorie62:
+        nom: 'Cage et voliere'
+        animal: '@animal2'
+        parent: '@categorie9'
+       
+
+    categorie63:
+        nom: 'Acessoires pour cages'
+        animal: '@animal2'
+        parent: '@categorie9'
+        
+
+    categorie64:
+        nom: 'Litières et fonds de cage'
+        animal: '@animal2'
+        parent: '@categorie10'
+
+    categorie65:
+        nom: 'Nichoirs'
+        animal: '@animal2'
+        parent: '@categorie11'
+
+    categorie66:
+        nom: 'Hotel à insectes'
+        animal: '@animal2'
+        parent: '@categorie11'
+        
+
+    categorie67:
+        nom: 'Mangeoire'
+        animal: '@animal2'
+        parent: '@categorie11'
+
+    categorie68:
+        nom: 'Poissons exotiques'
+        animal: '@animal3'
+        parent: '@categorie12'
+
+    categorie69:
+        nom: "Poissons d'eau de mer"
+        animal: '@animal3'
+        parent: '@categorie12'
+        
+
+    categorie70:
+        nom: "Poissons d'eau froide"
+        animal: '@animal3'
+        parent: '@categorie12'
+
+    categorie71:
+        nom: 'Aquarium'
+        animal: '@animal3'
+        parent: '@categorie13'
+
+    categorie72:
+        nom: 'Décorations'
+        animal: '@animal3'
+        parent: '@categorie13'
+        
+
+    categorie73:
+        nom: 'Chauffage'
+        animal: '@animal3'
+        parent: '@categorie13'
+
+    categorie74:
+        nom: "Diffusion d'air"
+        animal: '@animal3'
+        parent: '@categorie13'
+
+    categorie75:
+        nom: 'Filtres et pompes'
+        animal: '@animal3'
+        parent: '@categorie14'
+       
+
+    categorie76:
+        nom: 'Masses filtrantes'
+        animal: '@animal3'
+        parent: '@categorie14'
+        
+
+    categorie77:
+        nom: 'Entretien'
+        animal: '@animal3'
+        parent: '@categorie14'
+
+    categorie78:
+        nom: "Controle de l'eau"
+        animal: '@animal3'
+        parent: '@categorie15'
+
+    categorie79:
+        nom: 'Produits de soins pour poissons'
+        animal: '@animal3'
+        parent: '@categorie15'
+        
+
+    categorie80:
+        nom: 'Traitement des plantes'
+        animal: '@animal3'
+        parent: '@categorie15'
+
+    categorie81:
+        nom: 'Alimentation'
+        animal: '@animal4'
+        parent: '@categorie16'
+
+    categorie82:
+        nom: 'Habitat'
+        animal: '@animal4'
+        parent: '@categorie16'
+
+    categorie83:
+        nom: 'Jouets'
+        animal: '@animal4'
+        parent: '@categorie16'
+
+    categorie84:
+        nom: 'Hygiène et accessoires'
+        animal: '@animal4'
+        parent: '@categorie16'
+
+    categorie85:
+        nom: 'Alimentation'
+        animal: '@animal4'
+        parent: '@categorie17'
+
+    categorie86:
+        nom: 'Habitat'
+        animal: '@animal4'
+        parent: '@categorie17'
+
+    categorie87:
+        nom: 'Jouets'
+        animal: '@animal4'
+        parent: '@categorie17'
+
+    categorie88:
+        nom: 'Hygiène et accessoires'
+        animal: '@animal4'
+        parent: '@categorie17'
+
+    categorie89:
+        nom: 'Alimentation'
+        animal: '@animal4'
+        parent: '@categorie18'
+
+    categorie90:
+        nom: 'Habitat'
+        animal: '@animal4'
+        parent: '@categorie18'
+
+    categorie91:
+        nom: 'Jouets'
+        animal: '@animal4'
+        parent: '@categorie18'
+
+    categorie92:
+        nom: 'Hygiène et accessoires'
+        animal: '@animal4'
+        parent: '@categorie18'
+
+    categorie93:
+        nom: 'Alimentation'
+        animal: '@animal4'
+        parent: '@categorie19'
+
+    categorie94:
+        nom: 'Habitat'
+        animal: '@animal4'
+        parent: '@categorie19'
+
+    categorie95:
+        nom: 'Jouets'
+        animal: '@animal4'
+        parent: '@categorie19'
+
+    categorie96:
+        nom: 'Hygiène et accessoires'
+        animal: '@animal4'
+        parent: '@categorie19'
+
+    categorie97:
+        nom: 'Nourriture tout reptile'
+        animal: '@animal5'
+        parent: '@categorie20'
+
+    categorie98:
+        nom: 'Nourriture pour tortue'
+        animal: '@animal5'
+        parent: '@categorie20'
+
+    categorie99:
+        nom: 'Terrarium'
+        animal: '@animal5'
+        parent: '@categorie21'
+
+    categorie100:
+        nom: 'Décoration'
+        animal: '@animal5'
+        parent: '@categorie21'
+
+    categorie101:
+        nom: 'Substrat'
+        animal: '@animal5'
+        parent: '@categorie21'
+
+    categorie102:
+        nom: 'Mangeoires et abreuvoirs'
+        animal: '@animal5'
+        parent: '@categorie21'
+
+    categorie103:
+        nom: "Désinfectants et traitement de l'eau"
+        animal: '@animal5'
+        parent: '@categorie22'

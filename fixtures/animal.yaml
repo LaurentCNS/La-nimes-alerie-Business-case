@@ -1,0 +1,18 @@
+App\Entity\Animal:
+    animal0:
+        libelle: 'Chiens'
+
+    animal1:
+        libelle: 'Chats'
+
+    animal2:
+        libelle: 'Oiseaux'
+
+    animal3:
+        libelle: 'Poisson'
+
+    animal4:
+        libelle: 'Rongeurs'
+
+    animal5:
+        libelle: 'Reptiles'
