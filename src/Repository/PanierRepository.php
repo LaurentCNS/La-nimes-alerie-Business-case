@@ -64,7 +64,19 @@ class PanierRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    // compter le nombre de panier avec le statut 200
+    // Montant total des commandes payées : panier avec le statut 200
+    public function montantTotalVentes(): float
+    {
+        return $this->createQueryBuilder('p')
+            ->select('SUM(ligne.prix*ligne.quantite)')
+            ->join('p.ligne', 'ligne')
+            ->where('p.statut = 200')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
+    // Nombre de commandes abouties (payées) : panier avec le statut 200
     public function nbCommandes(): int
     {
         return $this->createQueryBuilder('p')
@@ -73,18 +85,17 @@ class PanierRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+
+    // Nombre total de paniers : panier avec le statut 200,300 et 400
+    public function nbPaniers(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.statut = 100 OR p.statut = 200 OR p.statut = 300')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
    
-    // compter le nombre de panier total
-    // public function nbTotalPanier(): int
-    // {
-    //     return $this->createQueryBuilder('p')
-    //         ->select('ccout(p.id)')
-    //         ->where('p.statut = :status')
-    //         ->setParameter('status', 200)
-    //         ->getQuery()
-    //         ->getSingleScalarResult();
-    // }
-    
-   
-    
+
 }

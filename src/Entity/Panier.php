@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\NbPanierController;
+use App\Controller\stats\NbTotalVentesController;
+use App\Controller\stats\NbCommandeController;
+use App\Controller\stats\NbPanierController;
 use App\Enum\EnumStatutPanier;
 use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,12 +18,25 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"], 
+        "get_nbTotalVentes" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/nbTotalVentes",
+            "defaults" => ["_format" => "json"],
+            "controller" => NbTotalVentesController::class,
+        ],
         "get_nbCommandes" => ["security" => "is_granted('ROLE_STATS')",
             "method" => "GET",
             "path" => "/panier/nbCommandes",
             "defaults" => ["_format" => "json"],
+            "controller" => NbCommandeController::class,
+        ],
+        "get_nbPaniers" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/nbPaniers",
+            "defaults" => ["_format" => "json"],
             "controller" => NbPanierController::class,
         ],
+        
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],

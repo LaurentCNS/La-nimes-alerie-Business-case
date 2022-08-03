@@ -39,7 +39,7 @@ class HeaderExtension extends AbstractExtension
         return $categories;
     }
 
-    //Fonction de rappel de CategorieRepository pour récuperer toutes les categories dont le parent id de categories est different de null
+    //Fonction de rappel de CategorieRepository pour récuperer toutes les sous-categories
     public function getSousCategories(): array
     {
         $sousCategories = $this->categorieRepository->findSousCategorie();
