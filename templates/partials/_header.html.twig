@@ -34,26 +34,26 @@
 	<!--NAVBAR-->
 	<div class="navtop">
 		<ul>
-			{% for animal in animals %}
-				<li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ animal.id }}" aria-controls="offcanvasTop">
-					<p>{{ animal.libelle }}<span class="arrow"></span>
+			{% for animaux in functionTwigGetAnimaux() %}
+				<li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ animaux.id }}" aria-controls="offcanvasTop">
+					<p>{{ animaux.libelle }}<span class="arrow"></span>
 					</p>
 				</li>
 				<!--OFFCANVAS-->
-				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animal.id }}" aria-labelledby="offcanvasTopLabel">
+				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animaux.id }}" aria-labelledby="offcanvasTopLabel">
 					<div class="offcanvas-header">
 						<h5 id="offcanvasTopLabel">Menu</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
 
-						{% for categorie in categories %}
-							{% if categorie.animal.id == animal.id and categorie.parent == null %}
-								{{ categorie.nom }}
+						{% for categories in functionTwigGetCategories() %}
+							{% if categories.animal.id == animaux.id %}
+								{{ categories.nom }}
 								<ul>
-									{% for sousCategorie in sousCategories %}
-										{% if sousCategorie.animal.id == animal.id and sousCategorie.parent.id == categorie.id %}
-											<li>{{ sousCategorie.nom }}</li>
+									{% for sousCategories in functionTwigGetSousCategories() %}
+										{% if sousCategories.animal.id == animaux.id and sousCategories.parent.id == categories.id %}
+											<li>{{ sousCategories.nom }}</li>
 										{% endif %}
 									{% endfor %}
 								</ul></br>

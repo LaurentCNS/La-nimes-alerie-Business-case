@@ -64,7 +64,18 @@ class CategorieRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function findByParent(): array
+    //Fonction pour récupérer les catégories
+    public function findCategorie(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.parent is null')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    //Fonction pour récupérer les sous-catégories
+    public function findSousCategorie(): array
     {
         return $this->createQueryBuilder('c')
             ->Where('c.parent is not null')
