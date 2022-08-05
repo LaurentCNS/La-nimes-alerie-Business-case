@@ -26,13 +26,13 @@ class MoyenPaiement
     #[ORM\Column(length: 50)]
     #[
         Assert\NotBlank([
-            'message' => 'moyen_paiement.nom.not_blank',
+            'message' => 'moyen_paiement.libelle.not_blank',
         ]),
         Assert\Length([
             'min' => 3,
             'max' => 50,
-            'minMessage' => 'moyen_paiement.nom.min_length',
-            'maxMessage' => 'moyen_paiement.nom.max_length',
+            'minMessage' => 'moyen_paiement.libelle.min_length',
+            'maxMessage' => 'moyen_paiement.libelle.max_length',
         ]),     
     ]
     private ?string $type = null;

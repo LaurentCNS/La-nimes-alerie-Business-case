@@ -1,0 +1,3 @@
+App\Entity\NbVisites:
+  nbVisites{0..1200}:
+    date_visite: '<dateTimeBetween("-3000 days", "now")>'

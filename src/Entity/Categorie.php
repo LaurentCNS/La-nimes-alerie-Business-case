@@ -30,7 +30,7 @@ class Categorie
         ]),
         Assert\Length([
             'min' => 3,
-            'max' => 30,
+            'max' => 80,
             'minMessage' => 'categorie.nom.min_length',
             'maxMessage' => 'categorie.nom.max_length',
         ]),     

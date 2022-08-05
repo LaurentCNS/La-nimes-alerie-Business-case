@@ -34,13 +34,13 @@ class Avis
     #[ORM\Column(length: 500)]
     #[
         Assert\NotBlank([
-            'message' => 'avis.commentaire.not_blank',
+            'message' => 'avis.description.not_blank',
         ]),
         Assert\Length([
             'min' => 3,
             'max' => 500,
-            'minMessage' => 'avis.commentaire.min_length',
-            'maxMessage' => 'avis.commentaire.max_length',
+            'minMessage' => 'avis.description.min_length',
+            'maxMessage' => 'avis.description.max_length',
         ]),     
     ]
     private ?string $description = null;

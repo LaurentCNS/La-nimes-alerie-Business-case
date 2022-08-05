@@ -27,13 +27,13 @@ class Ligne
     #[ORM\Column]
     #[
         Assert\NotBlank([
-            'message' => 'ligne.numero.not_blank',
+            'message' => 'ligne.quantite.not_blank',
         ]),
         Assert\GreaterThanOrEqual( 0 ,
-            message:'ligne.numero.greater_than_or_equal',
+            message:'ligne.quantite.greater_than_or_equal',
         ),
         Assert\LessThanOrEqual(99 ,
-            message:'ligne.numero.less_than_or_equal',
+            message:'ligne.quantite.less_than_or_equal',
         ),
     ]
     private ?int $quantite = null;

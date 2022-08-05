@@ -40,6 +40,17 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.username.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 180,
+            'minMessage' => 'client.username.min_length',
+            'maxMessage' => 'client.username.max_length',
+        ]),
+    ]
     private ?string $username = null;
 
     #[ORM\Column]

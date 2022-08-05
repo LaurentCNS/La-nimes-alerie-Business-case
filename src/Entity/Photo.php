@@ -22,7 +22,7 @@ class Photo
             'message' => 'photo.url.not_blank',
         ]),
         Assert\length([
-            'min' => 3,
+            'min' => 1,
             'max' => 100,
             'minMessage' => 'photo.url.min_length',
             'maxMessage' => 'photo.url.max_length',

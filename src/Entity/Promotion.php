@@ -27,7 +27,7 @@ class Promotion
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     #[
         Assert\NotBlank([
-            'message' => 'promotion.taux.not_blank',
+            'message' => 'promotion.pourcentage.not_blank',
         ]),    
     ]
     private ?string $pourcentage = null;

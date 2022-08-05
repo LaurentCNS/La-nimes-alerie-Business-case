@@ -27,7 +27,13 @@ class Genre
     #[
         Assert\NotBlank([
             'message' => 'genre.nom.not_blank',
-        ]),  
+        ]),
+        Assert\Length([
+            'min' => 2,
+            'max' => 10,
+            'minMessage' => 'genre.nom.min_length',
+            'maxMessage' => 'genre.nom.max_length',
+        ]),
     ]
     private ?string $libelle = null;
 

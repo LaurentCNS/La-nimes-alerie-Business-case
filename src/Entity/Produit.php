@@ -29,13 +29,13 @@ class Produit
     #[ORM\Column(length: 100)]
     #[
         Assert\NotBlank([
-            'message' => 'produit.nom.not_blank',
+            'message' => 'produit.libelle.not_blank',
         ]),
         Assert\Length([
             'min' => 3,
             'max' => 100,
-            'minMessage' => 'produit.nom.min_length',
-            'maxMessage' => 'produit.nom.max_length',
+            'minMessage' => 'produit.libelle.min_length',
+            'maxMessage' => 'produit.libelle.max_length',
         ]),     
     ]
     private ?string $libelle = null;
@@ -57,7 +57,7 @@ class Produit
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[
         Assert\NotBlank([
-            'message' => 'produit.date_debut.not_blank',
+            'message' => 'produit.date_entree.not_blank',
         ]),   
     ]
     private ?\DateTimeInterface $dateEntree = null;
@@ -101,11 +101,11 @@ class Produit
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     #[
         Assert\NotBlank([
-            'message' => 'produit.taux_tva.not_blank',
+            'message' => 'produit.tva.not_blank',
         ]),
         Assert\GreaterThanOrEqual([
             'value' => 0,
-            'message' => 'produit.taux_tva.greater_than_or_equal',
+            'message' => 'produit.tva.greater_than_or_equal',
         ]),
     ]
     private ?string $tva = null;

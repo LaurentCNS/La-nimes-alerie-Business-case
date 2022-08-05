@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,6 +17,17 @@ class Animal
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
+    #[
+        Assert\NotBlank([
+            'message' => 'animal.libelle.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 20,
+            'minMessage' => 'animal.libelle.min_length',
+            'maxMessage' => 'animal.libelle.max_length',
+        ]),
+    ]
     private ?string $libelle = null;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Categorie::class)]
