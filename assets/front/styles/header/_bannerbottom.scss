@@ -1,3 +1,10 @@
+.navbottom{
+    font-family: 'Arya', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 #compagny{
     margin-top: 50px;
     margin-bottom: 50px;
@@ -13,7 +20,7 @@
 #compagny .arrowleft{
     width: 400px;
     height: 400px;
-    background: url(../img/icons/arrowleft.svg);
+    background: url(../../../img/icons/arrowleft.svg);
     background-repeat: no-repeat;
    color: aqua;
 }

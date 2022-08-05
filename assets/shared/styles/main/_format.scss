@@ -1,36 +1,9 @@
-// FONTS //
-.headeranduser .value{
-    font-family: 'Arya', sans-serif;
-    font-weight: bold;
-    font-size: 24px;
+// FORMATAGE
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.navtop{
-    font-family: 'Arya', sans-serif;    
-    text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 2px;
-}
-
-.banner .info h3{
-    color: white;
-    font-family: 'Arimo', sans-serif;
-    font-size: 2.5rem;
-}
-
-.banner .info p{
-    color: white;
-    font-family: 'Arimo', sans-serif;
-    font-size: 1.3rem;
-}
-
-.navbottom{
-    font-family: 'Arya', sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 16px;
-}
-
 
 // COLORS //
 

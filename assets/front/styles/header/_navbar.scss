@@ -1,30 +1,30 @@
-.navtop{    
+.navtop{
     width: 100%;
     height: 40px;
     background-color: $bleufonce;
     text-align: center;
-    
+    font-family: 'Arya', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 2px;
 }
 
 @media (max-width: 992px) {
     .navtop{    
         display: none;        
     }
-    }
-
+}
 
 .navtop ul li{
     display: inline;   
     position: relative;
     margin-right: 65px;    
-    margin-bottom: 0;  
-   
+    margin-bottom: 0;
 }
 
 .navtop ul{    
     display: inline;               
-    margin-bottom: 0;  
-
+    margin-bottom: 0;
 }
 
 .navtop ul li a{
@@ -38,7 +38,8 @@
     text-decoration: none;    
     color: white;
     display: inline-block;
-    padding-top:7px;
+    padding-top:10px;
+    cursor: pointer;
 }
 
 .navtop .arrow{
@@ -46,12 +47,11 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    background: url(../img/icons/arrowbottom.svg);
+    background: url(../../../img/icons/arrowbottom.svg);
     background-repeat: no-repeat;
     background-size: 10px;
     margin-left: 10px;
-    top: 15px;
-    
+    top: 6px;
 }
 
 .navbottom{    
@@ -65,19 +65,20 @@
     .navbottom{    
         display: none;    
     }
-    }
+}
 
 .navbottom ul{
     height: 40px;  
-    padding-top: 5px;
+    padding-top: 8px;
 }
 
 .navbottom ul li{
     display: inline;
-    margin-right: 25px;  
+    margin-right: 25px;
 }
 
 .navbottom ul li a{
+    font-size: 14px;
     text-decoration: none; 
     color: black;
 }
