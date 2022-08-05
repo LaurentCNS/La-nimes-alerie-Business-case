@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\front;
 
 use App\Repository\AnimalRepository;
 use App\Repository\CategorieRepository;
@@ -29,7 +29,7 @@ class HomeController extends AbstractController
 
 
         
-        return $this->render('home/index.html.twig', [
+        return $this->render('front/home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
