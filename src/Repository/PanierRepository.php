@@ -96,6 +96,6 @@ class PanierRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-   
+
 
 }

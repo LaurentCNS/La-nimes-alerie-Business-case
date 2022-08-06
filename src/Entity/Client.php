@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\NouveauxClientsController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
@@ -16,6 +17,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ApiResource(
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],
+        "get_nouveauxClient" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/nouveauxClients",
+            "defaults" => ["_format" => "json"],
+            "controller" => NouveauxClientsController::class,
+
+
+        ],
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],

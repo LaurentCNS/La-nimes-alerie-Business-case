@@ -4,9 +4,7 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\stats\NbCommandeController;
-use App\Controller\stats\NbPanierController;
-use App\Controller\stats\NbTotalVentesController;
+use App\Controller\stats\NbVisitesController;
 use App\Repository\NbVisitesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,11 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NbVisitesRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_STATS')"],
+        "get_nbVisites" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/nbVisites",
+            "defaults" => ["_format" => "json"],
+            "controller" => NbVisitesController::class,
+        ],
+
     ],
-    itemOperations: [
-        "get" => ["security" => "is_granted('ROLE_STATS')"],
-    ]
+    itemOperations: []
 )]
 class NbVisites
 {

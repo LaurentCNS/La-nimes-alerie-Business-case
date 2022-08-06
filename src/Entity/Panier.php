@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\PanierMoyenController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\stats\NbTotalVentesController;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
         "get" => ["security" => "is_granted('ROLE_STATS')"], 
         "get_nbTotalVentes" => ["security" => "is_granted('ROLE_STATS')",
             "method" => "GET",
-            "path" => "/panier/nbTotalVentes",
+            "path" => "/panier/MontantTotalVentes",
             "defaults" => ["_format" => "json"],
             "controller" => NbTotalVentesController::class,
         ],
@@ -35,6 +36,12 @@ use Doctrine\ORM\Mapping as ORM;
             "path" => "/panier/nbPaniers",
             "defaults" => ["_format" => "json"],
             "controller" => NbPanierController::class,
+        ],
+        "get_valeurPanierMoyen" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/valeurPanierMoyen",
+            "defaults" => ["_format" => "json"],
+            "controller" => PanierMoyenController::class
         ],
         
     ],

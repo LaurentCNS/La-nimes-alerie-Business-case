@@ -5,7 +5,7 @@ namespace App\Enum;
 Class EnumStatutPanier
 {
     const CREEE = 100;
-    const VALIDEE = 200;
+    const PAYEE = 200;
     const ABANDONNEE = 300;
     const PREPARATION = 400;
     const EXPEDIEE = 500;

@@ -63,4 +63,13 @@ class NbVisitesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    // Compter le nombre de visites
+    public function compteurVisite(): int
+    {
+        return $this->createQueryBuilder('n')
+            ->select('COUNT(n)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
