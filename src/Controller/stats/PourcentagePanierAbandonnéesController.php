@@ -16,7 +16,7 @@ class PourcentagePanierAbandonnéesController extends AbstractController
     public function __invoke(): JsonResponse{
         $panierValide = $this->panierRepository->nbCommandes();
         $panierAbandonnees = $this->panierRepository->nbPanierAnbandonnés();
-        $pourcentage = round( $panierAbandonnees / ($panierValide+$panierAbandonnees) * 100);
+        $pourcentage = round( $panierAbandonnees / ($panierValide+$panierAbandonnees) * 100,2);
         return new JsonResponse(json_encode(['data' => $pourcentage]));
     }
 }

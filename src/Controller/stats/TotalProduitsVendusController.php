@@ -2,13 +2,10 @@
 
 namespace App\Controller\stats;
 
-use App\Repository\PanierRepository;
-use App\Repository\LigneRepository;
+
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class TotalProduitsVendusController extends AbstractController
 {

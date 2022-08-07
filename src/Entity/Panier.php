@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\ConversionPaniersController;
 use App\Controller\stats\PanierMoyenController;
 use App\Controller\stats\PourcentagePanierAbandonnéesController;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,6 +50,12 @@ use Doctrine\ORM\Mapping as ORM;
             "path" => "/panier/pourcentagePanierAbandonnées",
             "defaults" => ["_format" => "json"],
             "controller" => PourcentagePanierAbandonnéesController::class
+        ],
+        "get_conversionPaniers" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/conversionPaniers",
+            "defaults" => ["_format" => "json"],
+            "controller" => ConversionPaniersController::class
         ],
 
         

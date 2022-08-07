@@ -97,12 +97,22 @@ class PanierRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    // Valeur du nombre de panier pour le controlleur du pourcantage de paniers non payées et abandonnées
+    // Valeur du nombre de panier pour le controlleur du pourcentage de paniers non payées et abandonnées
     public function nbPanierAnbandonnés(): float
     {
         return $this->createQueryBuilder('p')
             ->select('COUNT(p)')
             ->where('p.statut = 100 OR p.statut = 300')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    // Panier avec le statut 100 : panier créées
+    public function nbPanierCrees(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.statut = 100')
             ->getQuery()
             ->getSingleScalarResult();
     }
