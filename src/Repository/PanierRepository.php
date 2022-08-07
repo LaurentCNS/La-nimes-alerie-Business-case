@@ -70,7 +70,7 @@ class PanierRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('SUM(ligne.prix*ligne.quantite)')
             ->join('p.ligne', 'ligne')
-            ->where('p.statut = 200')
+            ->where('p.statut = 200 OR p.statut = 400 OR p.statut = 500')
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -107,7 +107,7 @@ class PanierRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    // Panier avec le statut 100 : panier créées
+    // Valeur du nombre de panier pour le controlleur  conversion commandes avec le statut 100 : panier créées
     public function nbPanierCrees(): int
     {
         return $this->createQueryBuilder('p')

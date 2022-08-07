@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\ConversionCommandesController;
 use App\Controller\stats\ConversionPaniersController;
 use App\Controller\stats\PanierMoyenController;
 use App\Controller\stats\PourcentagePanierAbandonnéesController;
@@ -56,6 +57,12 @@ use Doctrine\ORM\Mapping as ORM;
             "path" => "/panier/conversionPaniers",
             "defaults" => ["_format" => "json"],
             "controller" => ConversionPaniersController::class
+        ],
+        "get_conversionCommande" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/conversionCommande",
+            "defaults" => ["_format" => "json"],
+            "controller" => ConversionCommandesController::class
         ],
 
         
