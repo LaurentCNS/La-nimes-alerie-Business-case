@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\TotalProduitsVendusController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProduitRepository;
@@ -13,7 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_STATS')"], 
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
+        "get_TotalProduitsVendus" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/TotalProduitsVendus",
+            "defaults" => ["_format" => "json"],
+            "controller" => TotalProduitsVendusController::class
+        ],
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],

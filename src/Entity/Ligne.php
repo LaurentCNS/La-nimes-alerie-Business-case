@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\stats\TotalProduitsVendusController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LigneRepository;
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     collectionOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],
+
     ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],

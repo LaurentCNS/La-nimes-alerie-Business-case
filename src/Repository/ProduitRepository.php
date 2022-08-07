@@ -63,4 +63,18 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    // Retourner les produits produits les plus vendus par ordre décroissant avec le panier en statut 200 (payé)
+    public function findProduitsPlusVendus(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id, p.libelle, p.prixHt,panier.statut, SUM(l.quantite) as quantite')
+            ->leftjoin('p.ligne', 'l')
+            ->leftjoin('l.panier', 'panier')
+            ->where('panier.statut = 200')
+            ->groupBy('p.id')
+            ->orderBy('quantite', 'DESC');
+        return $qb->getQuery()->getResult();
+    }
+
 }
