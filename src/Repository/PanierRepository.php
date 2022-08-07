@@ -76,26 +76,35 @@ class PanierRepository extends ServiceEntityRepository
     }
 
 
-    // Nombre de commandes abouties (payées) : panier avec le statut 200
+    // Nombre de commandes abouties (payées, préparées et expédiées)
     public function nbCommandes(): int
     {
         return $this->createQueryBuilder('p')
             ->select('COUNT(p)')
-            ->where('p.statut = 200')
+            ->where('p.statut = 200 OR p.statut = 400 OR p.statut = 500')
             ->getQuery()
             ->getSingleScalarResult();
     }
 
 
-    // Nombre total de paniers : panier avec le statut 200,300 et 400
+    // Nombre total de paniers : panier avec le statut creees, payees, abandonnees, preparees, expediees.
     public function nbPaniers(): int
     {
         return $this->createQueryBuilder('p')
             ->select('COUNT(p)')
-            ->where('p.statut = 100 OR p.statut = 200 OR p.statut = 300')
+            ->where('p.statut = 100 OR p.statut = 200 OR p.statut = 300 OR p.statut = 400 OR p.statut = 500')
             ->getQuery()
             ->getSingleScalarResult();
     }
 
+    // Valeur du nombre de panier pour le controlleur du pourcantage de paniers non payées et abandonnées
+    public function nbPanierAnbandonnés(): float
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.statut = 100 OR p.statut = 300')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
 }

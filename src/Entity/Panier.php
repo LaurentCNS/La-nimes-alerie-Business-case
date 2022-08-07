@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Controller\stats\PanierMoyenController;
+use App\Controller\stats\PourcentagePanierAbandonnéesController;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\stats\NbTotalVentesController;
@@ -43,6 +44,13 @@ use Doctrine\ORM\Mapping as ORM;
             "defaults" => ["_format" => "json"],
             "controller" => PanierMoyenController::class
         ],
+        "get_pourcantagePanierAbandonnées" => ["security" => "is_granted('ROLE_STATS')",
+            "method" => "GET",
+            "path" => "/panier/pourcentagePanierAbandonnées",
+            "defaults" => ["_format" => "json"],
+            "controller" => PourcentagePanierAbandonnéesController::class
+        ],
+
         
     ],
     itemOperations: [
