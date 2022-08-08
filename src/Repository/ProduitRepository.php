@@ -65,13 +65,20 @@ class ProduitRepository extends ServiceEntityRepository
 //    }
 
     // Retourner les produits produits les plus vendus par ordre décroissant avec le panier en statut 200 (payé)
-    public function findProduitsPlusVendus(): array
+    public function findProduitsPlusVendus(?\DateTime $startDate = null, ?\DateTime $endDate = null): array
     {
+        if ($startDate === null || $endDate === null) {
+            $endDate = new \DateTime('now');
+            $startDate = new \DateTime('2000-01-01');
+        }
         $qb = $this->createQueryBuilder('p')
             ->select('p.id, p.libelle, p.prixHt,panier.statut, SUM(l.quantite) as quantite')
             ->leftjoin('p.ligne', 'l')
             ->leftjoin('l.panier', 'panier')
             ->where('panier.statut = 200')
+            ->andWhere('panier.dateCreation BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
             ->groupBy('p.id')
             ->orderBy('quantite', 'DESC');
         return $qb->getQuery()->getResult();

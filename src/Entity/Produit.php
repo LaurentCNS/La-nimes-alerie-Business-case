@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        "get" => ["security" => "is_granted('ROLE_STATS')"],
+        //"get" => ["security" => "is_granted('ROLE_STATS')"],
         "get_TotalProduitsVendus" => ["security" => "is_granted('ROLE_STATS')",
             "method" => "GET",
             "path" => "/TotalProduitsVendus",

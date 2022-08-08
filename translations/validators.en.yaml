@@ -59,9 +59,9 @@ client:
         invalid: "L'email n'est pas valide"
 
     username:
-        not_blank: 'Le nom d\'utilisateur est obligatoire'
-        min_length: 'Le nom d\'utilisateur doit contenir au moins 3 caractères'
-        max_length: 'Le nom d\'utilisateur ne doit pas dépasser 180 caractères'
+        not_blank: "Le nom d'utilisateur est obligatoire"
+        min_length: "Le nom d'utilisateur doit contenir au moins 3 caractères"
+        max_length: "Le nom d'utilisateur ne doit pas dépasser 180 caractères"
 
     password:
         not_blank: "Le mot de passe est obligatoire"
@@ -119,9 +119,9 @@ panier:
  
 photo:
     url:
-        not_blank: 'L\'url est obligatoire'
-        min_length: 'L\'url doit contenir au moins 1 caractères'
-        max_length: 'L\'url ne doit pas dépasser 100 caractères'
+        not_blank: "L'url est obligatoire"
+        min_length: "L'url doit contenir au moins 1 caractères"
+        max_length: "L'url ne doit pas dépasser 100 caractères"
 
 produit:
     libelle:
@@ -135,7 +135,7 @@ produit:
         max_length: 'La description ne doit pas dépasser 500 caractères'
 
     date_entree:
-        not_blank: 'La date d\'entrée est obligatoire'
+        not_blank: "La date d'entrée est obligatoire"
 
     prix:
         not_blank: 'Le prix HT est obligatoire'

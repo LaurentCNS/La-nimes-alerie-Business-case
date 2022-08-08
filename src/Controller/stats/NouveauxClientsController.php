@@ -16,9 +16,7 @@ class NouveauxClientsController extends AbstractController
 
 
     public function __invoke(): JsonResponse{
-        $dateDebut = new \DateTime('2000-01-01');
-        $dateFin = new \DateTime('now');
-        $nouveauxClients = $this->clientRepository->nbNouveauxClients($dateDebut, $dateFin);
+        $nouveauxClients = $this->clientRepository->nbNouveauxClients();
         return new JsonResponse(json_encode(['data' => $nouveauxClients]));
     }
 }

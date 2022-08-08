@@ -83,13 +83,17 @@ class ClientRepository extends ServiceEntityRepository implements PasswordUpgrad
 
 
     // Nombre de nouveaux clients entre deux dates
-    public function nbNouveauxClients($dateDebut, $dateFin): int
+    public function nbNouveauxClients(?\DateTime $startDate = null, ?\DateTime $endDate = null): int
     {
+        if ($startDate === null || $endDate === null) {
+            $endDate = new \DateTime('now');
+            $startDate = new \DateTime('2000-01-01');
+        }
             return $this->createQueryBuilder('c')
                 ->select('COUNT(c)')
-                ->where('c.dateInscription BETWEEN :date1 AND :date2')
-                ->setParameter('date1', $dateDebut)
-                ->setParameter('date2', $dateFin)
+                ->andWhere('c.dateInscription BETWEEN :startDate AND :endDate')
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate)
                 ->getQuery()
                 ->getSingleScalarResult();
 

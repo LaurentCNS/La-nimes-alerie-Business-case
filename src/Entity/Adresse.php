@@ -14,8 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
     collectionOperations: [],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],
-        // modification
-        "put" => ["security" => "is_granted('ROLE_STATS')"],
         ]
 )]
 class Adresse

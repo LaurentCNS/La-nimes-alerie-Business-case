@@ -65,10 +65,17 @@ class NbVisitesRepository extends ServiceEntityRepository
 //    }
 
     // Compter le nombre de visites
-    public function compteurVisite(): int
+    public function compteurVisite(?\DateTime $startDate = null, ?\DateTime $endDate = null): int
     {
+        if ($startDate === null || $endDate === null) {
+            $endDate = new \DateTime('now');
+            $startDate = new \DateTime('2000-01-01');
+        }
         return $this->createQueryBuilder('n')
             ->select('COUNT(n)')
+            ->andWhere('n.dateVisite BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
             ->getQuery()
             ->getSingleScalarResult();
     }
