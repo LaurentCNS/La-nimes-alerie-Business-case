@@ -70,9 +70,6 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[
-        Assert\NotBlank([
-            'message' => 'client.password.not_blank',
-        ]),
         Assert\Length([
             'min' => 6,
             'max' => 255,
@@ -82,44 +79,8 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     ]
     private ?string $password = null;
 
-    #[ORM\Column(length: 30)]
-    #[
-        Assert\NotBlank([
-            'message' => 'client.nom.not_blank',
-        ]),
-        Assert\Length([
-            'min' => 3,
-            'max' => 30,
-            'minMessage' => 'client.nom.min_length',
-            'maxMessage' => 'client.nom.max_length',
-        ]),     
-    ]
-    private ?string $nom = null;
 
-    #[ORM\Column(length: 30)]
-    #[
-        Assert\NotBlank([
-            'message' => 'client.prenom.not_blank',
-        ]),
-        Assert\Length([
-            'min' => 3,
-            'max' => 30,
-            'minMessage' => 'client.prenom.min_length',
-            'maxMessage' => 'client.prenom.max_length',
-        ]),     
-    ]
-    private ?string $prenom = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[
-        Assert\NotBlank([
-            'message' => 'client.date_naissance.not_blank',
-        ]),
-        Assert\LessThan([
-            'value' => '-16 years',
-            'message' => 'client.date_naissance.invalid',
-        ]),
-    ]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -128,23 +89,26 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'client')]
     private Collection $produits;
 
-    #[ORM\ManyToOne(inversedBy: 'clients')]
-    private ?Genre $genre = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Avis::class)]
     private Collection $avis;
 
-    #[ORM\ManyToOne(inversedBy: 'clients')]
-    private ?Adresse $adresse = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Panier::class)]
     private Collection $panier;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Adresse::class, orphanRemoval: true)]
+    private Collection $adresses;
+
+
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->panier = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -230,29 +194,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
 
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
 
     public function getDateNaissance(): ?\DateTimeInterface
     {
@@ -305,17 +247,11 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGenre(): ?Genre
+    public function isAdmin(): bool
     {
-        return $this->genre;
+        return in_array('ROLE_ADMIN', $this->getRoles());
     }
 
-    public function setGenre(?Genre $genre): self
-    {
-        $this->genre = $genre;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Avis>
@@ -347,17 +283,6 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdresse(): ?Adresse
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?Adresse $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Panier>
@@ -388,4 +313,36 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): self
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getClient() === $this) {
+                $adress->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

@@ -78,10 +78,6 @@ client:
         min_length: 'Le prénom doit contenir au moins 3 caractères'
         max_length: 'Le prénom ne doit pas dépasser 30 caractères'
 
-    date_naissance:
-        not_blank: 'La date de naissance est obligatoire'
-        invalid: 'Vous devez avoir 16 ans minimum pour pouvoir vous inscrire'
-
 genre:
     libelle:
         not_blank: 'Le libelle est obligatoire'

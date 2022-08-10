@@ -11,7 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdresseRepository::class)]
 #[ApiResource(
-    collectionOperations: [],
+    collectionOperations: [
+        "get" => ["security" => "is_granted('ROLE_STATS')"],
+    ],
     itemOperations: [
         "get" => ["security" => "is_granted('ROLE_STATS')"],
         ]
@@ -23,6 +25,34 @@ class Adresse
     #[ORM\Column()]
     private ?int $id = null;
 
+    #[ORM\Column(length: 30)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.nom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 30,
+            'minMessage' => 'client.nom.min_length',
+            'maxMessage' => 'client.nom.max_length',
+        ]),
+    ]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 30)]
+    #[
+        Assert\NotBlank([
+            'message' => 'client.prenom.not_blank',
+        ]),
+        Assert\Length([
+            'min' => 3,
+            'max' => 30,
+            'minMessage' => 'client.prenom.min_length',
+            'maxMessage' => 'client.prenom.max_length',
+        ]),
+    ]
+    private ?string $prenom = null;
+
     #[ORM\Column(length: 50)]
     #[
         Assert\NotBlank([
@@ -33,7 +63,7 @@ class Adresse
             'max' => 50,
             'minMessage' => 'adresse.ligne.min_length',
             'maxMessage' => 'adresse.ligne.max_length',
-        ]),     
+        ]),
     ]
     private ?string $ligne1 = null;
 
@@ -45,6 +75,7 @@ class Adresse
         ]),     
     ]
     private ?string $ligne2 = null;
+
 
     #[ORM\Column(length: 50, nullable: true)]
     #[
@@ -93,26 +124,62 @@ class Adresse
             'max' => 50,
             'minMessage' => 'adresse.pays.min_length',
             'maxMessage' => 'adresse.pays.max_length',
-        ]),     
+        ]),
     ]
     private ?string $pays = null;
 
-    #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Client::class)]
-    private Collection $clients;
 
     #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\ManyToOne(inversedBy: 'adresses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Genre $genre = null;
+
+    #[ORM\ManyToOne(inversedBy: 'adresses')]
+
+
+    #[ORM\Column(length: 10)]
+    private ?string $telephone = null;
+
+    #[ORM\ManyToOne(inversedBy: 'adresses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Client $client = null;
+
+
 
     public function __construct()
     {
-        $this->clients = new ArrayCollection();
         $this->paniers = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
     }
 
     public function getLigne1(): ?string
@@ -187,35 +254,8 @@ class Adresse
         return $this;
     }
 
-    /**
-     * @return Collection<int, Client>
-     */
-    public function getClients(): Collection
-    {
-        return $this->clients;
-    }
 
-    public function addClient(Client $client): self
-    {
-        if (!$this->clients->contains($client)) {
-            $this->clients[] = $client;
-            $client->setAdresse($this);
-        }
 
-        return $this;
-    }
-
-    public function removeClient(Client $client): self
-    {
-        if ($this->clients->removeElement($client)) {
-            // set the owning side to null (unless already changed)
-            if ($client->getAdresse() === $this) {
-                $client->setAdresse(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Panier>
@@ -243,6 +283,44 @@ class Adresse
                 $panier->setAdresse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

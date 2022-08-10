@@ -90,7 +90,7 @@ class ClientRepository extends ServiceEntityRepository implements PasswordUpgrad
             $startDate = new \DateTime('2000-01-01');
         }
             return $this->createQueryBuilder('c')
-                ->select('COUNT(c)')
+                ->select('COUNT(c)','c.adresse')
                 ->andWhere('c.dateInscription BETWEEN :startDate AND :endDate')
                 ->setParameter('startDate', $startDate)
                 ->setParameter('endDate', $endDate)

@@ -110,3 +110,17 @@ class Ligne
         return $this;
     }
 }
+
+
+//#[ORM\Column(length: 50)]
+//    #[
+//        Assert\NotBlank([
+//            'message' => 'adresse.pays.not_blank',
+//        ]),
+//        Assert\Length([
+//            'min' => 3,
+//            'max' => 50,
+//            'minMessage' => 'adresse.pays.min_length',
+//            'maxMessage' => 'adresse.pays.max_length',
+//        ]),
+//    ]

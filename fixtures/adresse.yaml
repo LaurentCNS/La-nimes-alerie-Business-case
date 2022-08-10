@@ -1,6 +1,11 @@
 App\Entity\Adresse:
     adresse{0..450}:
+        genre: '@genre*'
+        nom: '<firstName()>'
+        prenom: '<lastName()>'
         ligne1: '<streetAddress()>'
         code_postal: '<postcode()>'
         ville: '<city()>'
         pays: 'France'
+        client : '@client*'
+        telephone : '0600000000'

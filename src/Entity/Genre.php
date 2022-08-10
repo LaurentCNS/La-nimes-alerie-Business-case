@@ -37,12 +37,14 @@ class Genre
     ]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Client::class)]
-    private Collection $clients;
+    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Adresse::class)]
+    private Collection $adresses;
+
 
     public function __construct()
     {
         $this->clients = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,32 +65,34 @@ class Genre
     }
 
     /**
-     * @return Collection<int, Client>
+     * @return Collection<int, Adresse>
      */
-    public function getClients(): Collection
+    public function getAdresses(): Collection
     {
-        return $this->clients;
+        return $this->adresses;
     }
 
-    public function addClient(Client $client): self
+    public function addAdress(Adresse $adress): self
     {
-        if (!$this->clients->contains($client)) {
-            $this->clients[] = $client;
-            $client->setGenre($this);
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setGenre($this);
         }
 
         return $this;
     }
 
-    public function removeClient(Client $client): self
+    public function removeAdress(Adresse $adress): self
     {
-        if ($this->clients->removeElement($client)) {
+        if ($this->adresses->removeElement($adress)) {
             // set the owning side to null (unless already changed)
-            if ($client->getGenre() === $this) {
-                $client->setGenre(null);
+            if ($adress->getGenre() === $this) {
+                $adress->setGenre(null);
             }
         }
 
         return $this;
     }
+
+
 }

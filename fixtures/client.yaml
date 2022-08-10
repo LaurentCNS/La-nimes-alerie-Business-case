@@ -5,36 +5,24 @@ parameters:
 App\Entity\Client:
     client0:
         username: 'LaTerreEstPlate'
-        email (unique): 'admin@test.fr'
+        email (unique): 'capard@admin.fr'
         password: '<{passAdmin}>'
-        nom: 'Capard'
-        prenom: 'Régis'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        genre: '@genre*'
-        adresse: '@adresse*'
         roles: [ROLE_ADMIN]
 
     client1:
         username: 'LaFaceCachéeDeLaLune'
-        email (unique): 'stats@test.fr'
+        email (unique): 'nadege@stats.fr'
         password: '<{passAdmin}>'
-        nom: '<firstName()>'
-        prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        genre: '@genre*'
-        adresse: '@adresse*'
         roles: [ROLE_STATS]
 
     client{2..500}:
         username (unique): '<username()>'
         email (unique): '<safeEmail()>'
         password: '<{password}>'
-        nom: '<firstName()>'
-        prenom: '<lastName()>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-        genre: '@genre*'
-        adresse: '@adresse*'
         roles: [ROLE_USER]
