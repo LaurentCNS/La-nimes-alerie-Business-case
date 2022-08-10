@@ -1,0 +1,46 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Gestion catégories
+{% endblock %}
+
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Catégorie parent</th>
+                <th>Nom</th>
+                <th>Animal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{% if categorie.parent is not null %}
+                        {{ categorie.parent.nom }}
+                    {% else %}
+                        Catégorie parent de {{ categorie.animal.libelle }}
+                    {% endif %}</td>
+                <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.animal.libelle }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation d-flex justify-content-center mt-2">
+         {{ knp_pagination_render(categories) }}
+    </div>
+
+{% endblock %}
