@@ -6,13 +6,34 @@
 
 
 {% block body %}
-
-    <table class="table">
+<div class="container-fluid">
+    {{ form_start(filters) }}
+    <table class="table table-hover table-striped  mt-5">
         <thead>
             <tr>
-                <th>Catégorie parent</th>
-                <th>Nom</th>
-                <th>Animal</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        categories,
+                        'Catégorie',
+                        'categorie.nom'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.libelle) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        categories,
+                        'Nom',
+                        'categorie.nom'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.nom) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        categories,
+                        'Nom',
+                        'categorie.animal'
+                    )|raw
+                    }}</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,8 +48,8 @@
                 <td>{{ categorie.nom }}</td>
                 <td>{{ categorie.animal.libelle }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_categorie_show', {'id': categorie.id}) }}">show</a>
+                    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}"><i class="fa-solid fa-pen"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -38,9 +59,10 @@
         {% endfor %}
         </tbody>
     </table>
+    {{ form_end(filters) }}
 
     <div class="navigation d-flex justify-content-center mt-2">
          {{ knp_pagination_render(categories) }}
     </div>
-
+</div>
 {% endblock %}

@@ -65,6 +65,9 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
     },
+    "lexik/form-filter-bundle": {
+        "version": "v7.0.3"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.16",
         "recipe": {
