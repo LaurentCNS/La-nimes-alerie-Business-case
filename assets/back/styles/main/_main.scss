@@ -1,0 +1,89 @@
+.sortable,
+.asc,
+.desc {
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+    color: $orange;
+  }
+
+  &:after {
+    content: '⬍';
+    padding-left: 0.4rem;
+    font-weight: 900;
+  }
+
+  &.asc {
+    &:after {
+      padding-left: 0.4rem;
+      content: '▴';
+      position: relative;
+      top: -5px;
+    }
+  }
+
+  &.desc {
+    &:after {
+      padding-left: 0.4rem;
+      content: '▾';
+      position: relative;
+      top: 5px;
+    }
+  }
+}
+
+.filter-action {
+  border: none;
+  margin-right: 0.5rem;
+  font-size: 1.3rem;
+  background: unset;
+  color: black;
+  &:hover {
+    color: $orange;
+  }
+}
+
+.decoration{
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    color: $orange;
+  }
+}
+
+.pdfButton {
+  width: 180px;
+  height: 40px;
+  border: solid 1px lightgrey;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  color: black;
+  background-color: #EBEDEC;
+
+  &:hover {
+    border: solid 1px #1b1b1b;
+    background-color: lightgrey;
+  }
+
+  a{
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  i{
+    margin-top: 5px;
+    font-size: 1.5rem;
+  }
+}
+
+.formFa{
+  text-decoration: none;
+  color: $blue;
+
+  &:hover{
+    color: $orange;
+  }
+}

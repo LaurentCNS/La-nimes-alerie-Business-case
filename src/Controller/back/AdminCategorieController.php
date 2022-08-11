@@ -20,13 +20,13 @@ use function dump;
 class AdminCategorieController extends AbstractController
 {
 
-    public function __construct(
-        private EntityManagerInterface $entityManager
-    )
-    {}
 
     #[Route('/', name: 'app_admin_categorie_index', methods: ['GET'])]
-    public function index(CategorieRepository $categorieRepository,AnimalRepository $animalRepository, Request $request, PaginatorInterface $paginator, FilterBuilderUpdaterInterface $builderUpdater): Response
+    public function index(CategorieRepository $categorieRepository,
+                          Request $request,
+                          PaginatorInterface $paginator,
+                          FilterBuilderUpdaterInterface $builderUpdater
+    ): Response
     {
 
         $qb = $categorieRepository->getQbAll();
@@ -35,6 +35,7 @@ class AdminCategorieController extends AbstractController
         $filterForm = $this->createForm(CategorieFilterType::class, null, [
             'method' => 'GET',
         ]);
+
 
         if ($request->query->has($filterForm->getName())) {
             $filterForm->submit($request->query->all($filterForm->getName()));

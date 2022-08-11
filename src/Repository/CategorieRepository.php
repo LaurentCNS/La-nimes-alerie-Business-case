@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Categorie[]    findAll()
  * @method Categorie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategorieRepository extends ServiceEntityRepository
+class CategorieRepository extends AbstractLanimalerieRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -86,8 +86,12 @@ class CategorieRepository extends ServiceEntityRepository
     }
 
     //Fonction pour récuperer les infos du paginator
-    public function getQbAll(): QueryBuilder {
-        $entityName = explode('\\', $this->_entityName)[2];
-        return $this->createQueryBuilder(strtolower($entityName));
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('categorie','animal')
+            ->leftJoin('categorie.animal', 'animal')
+        ;
     }
+
 }

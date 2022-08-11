@@ -17,51 +17,6 @@
   }
 }
 
-.sortable,
-.asc,
-.desc {
-  text-decoration: none;
-  color: black;
-
-  &:hover {
-    text-decoration: none;
-    color: $orange;
-  }
-
-  &:after {
-    content: '⬍';
-    padding-left: 0.4rem;
-    font-weight: 900;
-  }
-
-  &.asc {
-    &:after {
-      padding-left: 0.4rem;
-      content: '▴';
-      position: relative;
-      top: -5px;
-    }
-  }
-
-  &.desc {
-    &:after {
-      padding-left: 0.4rem;
-      content: '▾';
-      position: relative;
-      top: 5px;
-    }
-  }
-}
-
-.filter-action {
-  border: none;
-  font-size: 1rem;
-  background: unset;
-  color: black;
-  &:hover {
-    color: $orange;
-  }
-}
 
 
 
