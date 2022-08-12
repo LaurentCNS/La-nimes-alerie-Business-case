@@ -7,7 +7,7 @@
 
 // COLORS //
 
-$bleutheme: #1A3663;
+$bleutheme: #1B3763;
 $bleufonce: #16315A;
 $orange: #FFC056;
 $beige: #DDD2BC;
@@ -32,3 +32,13 @@ $beige: #DDD2BC;
     background: #E19F30;
 }
 
+// OVERDRIVE BTN BOOTSTRAP //
+
+.btn-primary{
+    background-color: $orange;
+    border: none;
+
+    &:hover, &:focus, &:active {
+        background-color: #E19F30;
+    }
+}

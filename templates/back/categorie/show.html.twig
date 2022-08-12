@@ -1,5 +1,6 @@
 {% extends 'back/base.html.twig' %}
 
+
 {% block title %}
     Gestion catégories
 {% endblock %}
@@ -7,6 +8,17 @@
 
 {% block body %}
 
+<div class="container-fluid my-2">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1>{{ categorie.nom }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-4 mt-3">
+            <div class="mt-5 mb-3">
     <table class="table">
         <tbody>
             <tr>
@@ -19,11 +31,11 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_admin_categorie_index') }}">back to list</a>
-
-    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}">edit</a>
-
-    {{ include('back/categorie/_delete_form.html.twig') }}
+            </div>
+    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
+            <a href="{{ path('app_admin_categorie_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
