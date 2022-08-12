@@ -30,11 +30,10 @@ class CategorieFilterType extends AbstractType
                 'choice_label' => 'libelle', // qui correspond au titre ou chercher (categorie.animal.libelle)
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->orderBy('p.libelle', 'ASC')  // trier par ordre
+                        ->orderBy('p.libelle', 'ASC')  // trier par ordre dans le menu déroulant
                         ;
                 }
             ])
-
         ;
     }
 }

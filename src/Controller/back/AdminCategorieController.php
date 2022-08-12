@@ -118,7 +118,7 @@ class AdminCategorieController extends AbstractController
             // if it's a delete request the entity is removed from the repository else catch the exception
             try {
                 $categorieRepository->remove($categorie, true);
-                $this->addFlash('success', 'Opération correctement effectuée.');
+                $this->addFlash('success', 'La catégorie a bien été supprimée');
             } catch (\Exception $e) {
                 $this->addFlash('danger', 'Impossible de supprimer, une relation est présente avec d\'autres tables.');
             }

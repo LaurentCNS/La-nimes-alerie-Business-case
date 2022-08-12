@@ -91,6 +91,7 @@ class CategorieRepository extends AbstractLanimalerieRepository
         $qb = parent::getQbAll();
         return $qb->select('categorie','animal')
             ->leftJoin('categorie.animal', 'animal')
+            ->orderBy('categorie.nom', 'ASC')
         ;
     }
 

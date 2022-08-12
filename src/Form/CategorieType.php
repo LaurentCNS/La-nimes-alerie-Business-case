@@ -15,20 +15,18 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('parent' , EntityType::class , [
-                'class' => Categorie::class,
-                'choice_label' => 'nom',
-                'required' => false,
-                'placeholder' => 'Categorie parent'
-            ])
             ->add('animal' , EntityType::class , [
                 'class' => Animal::class,
                 'choice_label' => 'libelle',
                 'required' => true,
             ])
-
-
-
+            ->add('parent' , EntityType::class , [
+                'class' => Categorie::class,
+                'label' => 'Association',
+                'choice_label' => 'nom',
+                'required' => false,
+                'placeholder' => 'Categorie parent'
+            ])
         ;
     }
 
