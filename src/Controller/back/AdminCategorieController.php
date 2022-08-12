@@ -3,18 +3,15 @@
 namespace App\Controller\back;
 
 use App\Entity\Categorie;
-use App\Form\CategorieFilterType;
 use App\Form\CategorieType;
-use App\Repository\AnimalRepository;
+use App\Form\filter\CategorieFilterType;
 use App\Repository\CategorieRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function dump;
 
 #[Route('/admin/categorie')]
 class AdminCategorieController extends AbstractController

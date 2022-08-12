@@ -1,0 +1,61 @@
+{% extends 'back/base.html.twig' %}
+
+
+{% block title %}
+    Gestion produits
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid my-2">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1>{{ produit.libelle }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-4 mt-3">
+            <div class="mt-5 mb-3">
+                <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ produit.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produit.description }}</td>
+            </tr>
+            <tr>
+                <th>DateEntree</th>
+                <td>{{ produit.dateEntree ? produit.dateEntree|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PrixHt</th>
+                <td>{{ produit.prixHt }}</td>
+            </tr>
+            <tr>
+                <th>EstActif</th>
+                <td>{{ produit.estActif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Tva</th>
+                <td>{{ produit.tva }}</td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
+            <a href="{{ path('app_produit_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

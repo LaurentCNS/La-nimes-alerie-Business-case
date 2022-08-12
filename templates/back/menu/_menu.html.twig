@@ -24,15 +24,15 @@
     <h4>Produits</h4>
     <ul class="list-unstyled mt-3 mb-4">
         <li>
-            <a href=""
-               class=""
+            <a href="{{ path('app_produit_index') }}"
+               class="{% if app.request.pathinfo == path('app_produit_index') %}menu-active{% endif %}"
             >
                 Liste des produits
             </a>
         </li>
         <li>
-            <a href=""
-               class=""
+            <a href="{{ path('app_produit_new') }}"
+               class="{% if app.request.pathinfo == path('app_produit_new') %}menu-active{% endif %}"
             >
                 Ajouter un produit
             </a>
