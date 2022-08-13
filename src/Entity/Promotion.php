@@ -50,6 +50,13 @@ class Promotion
         return $this->pourcentage;
     }
 
+    public function getPourcentageCalcule(): ?string
+    {
+        // calcule avoir le pourcentage réelle
+        $valeur = $this->pourcentage * 100;
+        return 100 - $valeur;
+    }
+
     public function setPourcentage(string $pourcentage): self
     {
         $this->pourcentage = $pourcentage;

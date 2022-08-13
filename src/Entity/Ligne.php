@@ -57,6 +57,9 @@ class Ligne
     #[ORM\ManyToOne(inversedBy: 'ligne')]
     private ?Panier $panier = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    private ?string $tva = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,18 @@ class Ligne
     public function setPanier(?Panier $panier): self
     {
         $this->panier = $panier;
+
+        return $this;
+    }
+
+    public function getTva(): ?string
+    {
+        return $this->tva;
+    }
+
+    public function setTva(string $tva): self
+    {
+        $this->tva = $tva;
 
         return $this;
     }

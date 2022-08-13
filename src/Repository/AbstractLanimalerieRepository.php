@@ -15,7 +15,6 @@ abstract class AbstractLanimalerieRepository extends ServiceEntityRepository
     }
 
 
-
     public function getQbAll(): QueryBuilder {
         $entityName = explode('\\', $this->_entityName)[2];
         return $this->createQueryBuilder(strtolower($entityName));

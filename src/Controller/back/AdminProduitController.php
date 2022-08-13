@@ -3,8 +3,11 @@
 namespace App\Controller\back;
 
 use App\Entity\Produit;
+use App\Form\filter\ProduitFilterType;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +17,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, Request $request, PaginatorInterface $paginator,FilterBuilderUpdaterInterface $builderUpdater): Response
     {
+        $qb = $produitRepository->getQbAll();
+
+        // Lexik Filter
+        $filterForm = $this->createForm(ProduitFilterType::class, null, [
+            'method' => 'GET',
+        ]);
+
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->all($filterForm->getName()));
+            $builderUpdater->addFilterConditions($filterForm, $qb);
+        }
+
+
+        // Paginator
+        $produits = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page',1),18
+        );
+
+
+
         return $this->render('back/produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits,
+            'filters' => $filterForm->createView(),
         ]);
     }
 

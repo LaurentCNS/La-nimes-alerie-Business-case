@@ -29,7 +29,10 @@ class ProduitType extends AbstractType
             ])
             ->add('promotion',EntityType::class , [
                 'class' => Promotion::class,
-                'choice_label' => 'pourcentage',
+                // choixe la propriété à afficher dans la liste déroulante avec un calcule de promotion
+                'choice_label' => function (Promotion $promotion) {
+                    return $promotion->getPourcentageCalcule() . '%';
+                },
                 'required' => false,
                 'placeholder' => 'Aucune promotion'
             ])

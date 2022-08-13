@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Produit[]    findAll()
  * @method Produit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProduitRepository extends ServiceEntityRepository
+class ProduitRepository extends AbstractLanimalerieRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -82,6 +83,19 @@ class ProduitRepository extends ServiceEntityRepository
             ->groupBy('p.id')
             ->orderBy('quantite', 'DESC');
         return $qb->getQuery()->getResult();
+    }
+
+    //Fonction pour récuperer les infos du paginator
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('produit','promotion', 'marque', 'categorie','photo')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->leftJoin('produit.marque', 'marque')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.photo', 'photo')
+            ->orderBy('produit.libelle', 'ASC')
+            ;
     }
 
 }

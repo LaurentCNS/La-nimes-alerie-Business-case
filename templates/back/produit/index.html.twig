@@ -1,7 +1,7 @@
 {% extends 'back/base.html.twig' %}
 
 {% block title %}
-    Gestion catégories
+    Gestion produits
 {% endblock %}
 
 
@@ -31,16 +31,57 @@
             {% endfor %}
         </div>
     </div>
-
+    {{ form_start(filters) }}
     <table class="table table-hover">
         <thead class="table-primary">
             <tr>
-                <th>Libelle</th>
-                <th>Description</th>
-                <th>DateEntree</th>
-                <th>PrixHt</th>
-                <th>EstActif</th>
-                <th>Tva</th>
+                <th>{{
+                    knp_pagination_sortable(
+                    produits,
+                    'Nom',
+                    'produit.libelle'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.libelle) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        produits,
+                        'Categorie',
+                        'categorie.nom'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.categorie) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        produits,
+                        'Date entrée',
+                        'produit.dateEntree'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.dateEntree) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        produits,
+                        'Prix Ht',
+                        'produit.prixHt'
+                    )|raw
+                    }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        produits,
+                        'Quantite en stock',
+                        'produit.quantiteStock'
+                    )|raw
+                    }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        produits,
+                        'Est actif',
+                        'produit.estActif'
+                    )|raw
+                    }}</th>
+
+
                 <th>
                     <div>
                         <button type="submit" class="filter-action">
@@ -56,11 +97,12 @@
         {% for produit in produits %}
             <tr>
                 <td>{{ produit.libelle }}</td>
-                <td>{{ produit.description |slice(0, 100) }}...</td>
+                <td>{{ produit.categorie.nom }}</td>
                 <td>{{ produit.dateEntree ? produit.dateEntree|date('d-m-Y') : '' }}</td>
                 <td>{{ produit.prixHt }}€</td>
+
+                <td>{{ produit.quantiteStock }}</td>
                 <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
-                <td>{{ produit.tva }}</td>
                 <td>
                     <a class="pe-1" href="{{ path('app_produit_show', {'id': produit.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
                     <a class="pe-1" href="{{ path('app_produit_edit', {'id': produit.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
@@ -68,11 +110,14 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Désolé je n'ai rien trouvé :(</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+    {{ form_end(filters) }}
+    <div class="navigation d-flex justify-content-center mt-2">
+        {{ knp_pagination_render(produits) }}
+    </div>
 </div>
 {% endblock %}

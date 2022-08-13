@@ -4,3 +4,4 @@ App\Entity\Ligne:
         prix: 20
         panier: '@panier*'
         produit: '@produit*'
+        tva: 10

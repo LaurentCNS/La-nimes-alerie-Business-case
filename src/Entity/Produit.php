@@ -117,6 +117,9 @@ class Produit
     ]
     private ?string $tva = null;
 
+    #[ORM\Column]
+    private ?int $quantiteStock = null;
+
     public function __construct()
     {
         $this->photo = new ArrayCollection();
@@ -348,6 +351,18 @@ class Produit
     public function setTva(string $tva): self
     {
         $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getQuantiteStock(): ?int
+    {
+        return $this->quantiteStock;
+    }
+
+    public function setQuantiteStock(int $quantiteStock): self
+    {
+        $this->quantiteStock = $quantiteStock;
 
         return $this;
     }

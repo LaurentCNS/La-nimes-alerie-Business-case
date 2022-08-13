@@ -5,9 +5,10 @@ App\Entity\Produit:
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
         prix_ht: 20
         est_actif: true
-        tva: 0.10
+        tva: 10
         categorie: '@categorie*'
         marque: '@marque*'
+        quantiteStock: <numberBetween(1, 30)>
 
     produit{51..65}:
         libelle: '<word(3)>'
@@ -15,10 +16,11 @@ App\Entity\Produit:
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
         prix_ht: 20
         est_actif: true
-        tva: 0.10
+        tva: 10
         categorie: '@categorie*'
         marque: '@marque*'
         promotion: '@promotion*'
+        quantiteStock: <numberBetween(1, 30)>
 
     produit{66..75}:
         libelle: '<word(3)>'
@@ -26,6 +28,7 @@ App\Entity\Produit:
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
         prix_ht: 20
         est_actif: false
-        tva: 0.10
+        tva: 10
         categorie: '@categorie*'
         marque: '@marque*'
+        quantiteStock: 0

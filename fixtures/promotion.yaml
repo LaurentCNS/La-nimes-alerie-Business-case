@@ -28,3 +28,30 @@ App\Entity\Promotion:
 
     promotion9:
         pourcentage: 0.50
+
+    promotion10:
+        pourcentage: 0.45
+
+    promotion11:
+        pourcentage: 0.40
+
+    promotion12:
+        pourcentage: 0.35
+
+    promotion13:
+        pourcentage: 0.30
+
+    promotion14:
+        pourcentage: 0.25
+
+    promotion15:
+        pourcentage: 0.20
+
+    promotion16:
+        pourcentage: 0.15
+
+    promotion17:
+        pourcentage: 0.10
+
+    promotion18:
+        pourcentage: 0.05
