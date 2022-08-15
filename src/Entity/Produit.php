@@ -61,12 +61,7 @@ class Produit
     ]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[
-        Assert\NotBlank([
-            'message' => 'produit.date_entree.not_blank',
-        ]),   
-    ]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateEntree = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
@@ -119,6 +114,9 @@ class Produit
 
     #[ORM\Column]
     private ?int $quantiteStock = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -366,4 +364,18 @@ class Produit
 
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
 }

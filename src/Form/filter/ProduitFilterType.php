@@ -20,17 +20,17 @@ class ProduitFilterType extends AbstractType
         $builder
 
             // POUR UNE RECHERCHE
-            ->add('libelle', TextFilterType::class, [  // -> qui correspond au titre de la table ou trier (categorie.nom) et à rappeler dans le twig -> {{ form_widget(filters.nom) }}</th>
-                'condition_pattern' => FilterOperands::STRING_CONTAINS, // =>  en sql 'LIKE %xxxx%'
+            ->add('libelle', TextFilterType::class, [
+                'condition_pattern' => FilterOperands::STRING_CONTAINS,
             ])
 
             // POUR UNE LISTE
-            ->add('categorie', EntityFilterType::class, [ // -> qui correspond au titre de la table ou trier (categorie.animal) et à rappeler dans le twig -> {{ form_widget(filters.animal) }}</th>
-                'class' => Categorie::class,  // la class ou on va chercher la liste
-                'choice_label' => 'nom', // qui correspond au titre ou chercher (categorie.animal.libelle)
+            ->add('categorie', EntityFilterType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'nom',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->orderBy('c.nom', 'ASC')  // trier par ordre
+                        ->orderBy('c.nom', 'ASC')
                         ;
                 }
             ])

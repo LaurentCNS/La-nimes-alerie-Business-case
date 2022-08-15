@@ -8,8 +8,11 @@ use App\Entity\Produit;
 use App\Entity\Promotion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProduitType extends AbstractType
 {
@@ -17,10 +20,37 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('description')
-            ->add('dateEntree')
+            ->add('marque')
+            ->add('categorie')
+            ->add('description', TextareaType::class)
+            //ajouter une photo principale
+            ->add('photoPrincipale', FileType::class, [
+                'label' => 'Photo principale',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '2048k',
+                        mimeTypes: ['image/png', 'image/jpeg'],
+//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
+                    )
+                ]
+            ])
+            //ajouter une photo secondaire
+            ->add('photoSecondaire', FileType::class, [
+                'label' => 'Photo secondaire',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '2048k',
+                        mimeTypes: ['image/png', 'image/jpeg'],
+//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
+                    )
+                ]
+            ])
             ->add('prixHt')
-            ->add('estActif')
+            ->add('quantiteStock')
             ->add('tva')
             ->add('marque',EntityType::class , [
                 'class' => Marque::class,
@@ -41,7 +71,7 @@ class ProduitType extends AbstractType
                 'choice_label' => 'nom',
                 'required' => true,
             ])
-            //->add('client')
+            ->add('estActif')
         ;
     }
 

@@ -22,38 +22,81 @@
                 <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
                 <th>Libelle</th>
                 <td>{{ produit.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ produit.marque.nom }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ produit.categorie.nom }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ produit.description }}</td>
             </tr>
             <tr>
-                <th>DateEntree</th>
+                <th>Photo principale</th>
+                <td>
+                    {% for photo in produit.photo %}
+                        {% if photo.estPrincipale %}
+                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="{{ photo.url }}" width="100px" height="100px">
+                        {% endif %}
+                    {% endfor %}
+            </tr>
+            <tr>
+
+                <th>Photo secondaire</th>
+                <td>
+                    {% for photo in produit.photo %}
+                        {% if not photo.estPrincipale %}
+                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="{{ photo.url }}" width="100px" height="100px">
+                            {%  else %}
+                            Pas d'autre photo
+                        {% endif %}
+                    {% endfor %}
+            </tr>
+            <tr>
+                <th>Date d'entrée</th>
                 <td>{{ produit.dateEntree ? produit.dateEntree|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>PrixHt</th>
-                <td>{{ produit.prixHt }}</td>
+                <th>Prix HT</th>
+                <td>{{ produit.prixHt }}€ </td>
+            </tr>
+            <tr>
+                <th>Prix TTC</th>
+                <td>{{ produit.prixHt + ((produit.prixHt * produit.tva) / 100) | round(2) }}€</td>
+
             </tr>
             <tr>
                 <th>EstActif</th>
-                <td>{{ produit.estActif ? 'Yes' : 'No' }}</td>
+                <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Quantite en stock</th>
+                <td>{{ produit.quantiteStock }}</td>
+            </tr>
+            <tr>
+                <th>Promotion</th>
+                <td>{% if (produit.promotion) %}
+                    {{ produit.promotion.pourcentage }}%
+                {% else %}
+                    Aucune promotion
+                {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Tva</th>
-                <td>{{ produit.tva }}</td>
+                <td>{{ produit.tva }}%</td>
             </tr>
         </tbody>
     </table>
             </div>
-            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
-            <a href="{{ path('app_produit_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+            <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
+            <a href="{{ path('app_admin_produit_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
         </div>
     </div>
 </div>
