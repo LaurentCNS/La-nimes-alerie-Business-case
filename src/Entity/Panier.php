@@ -109,6 +109,9 @@ class Panier
     #[ORM\ManyToOne(inversedBy: 'paniers')]
     private ?MoyenPaiement $moyenPaiement = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $numeroCommande = null;
+
 
 
     public function __construct()
@@ -219,6 +222,18 @@ class Panier
     public function setMoyenPaiement(?MoyenPaiement $moyenPaiement): self
     {
         $this->moyenPaiement = $moyenPaiement;
+
+        return $this;
+    }
+
+    public function getNumeroCommande(): ?string
+    {
+        return $this->numeroCommande;
+    }
+
+    public function setNumeroCommande(?string $numeroCommande): self
+    {
+        $this->numeroCommande = $numeroCommande;
 
         return $this;
     }

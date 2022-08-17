@@ -9,15 +9,8 @@
 
 <div class="container-fluid">
 
-    <div class="row justify-content-end me-5">
-        <div class="pdfButton mt-3 mb-3">
-            <a class="d-flex text-center" href="index.html.twig">
-                <i class="col-md-2 fas fa-file-pdf"></i>
-                <p class="col-md-10 mt-2">Telecharger le PDF</p>
-            </a>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center">
+
+    <div class="d-flex justify-content-center mt-3">
         <div class="col-md-6 text-center">
             {% for message in app.flashes('danger') %}
                 <div class="alert alert-danger">

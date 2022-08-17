@@ -3,7 +3,7 @@ App\Entity\Produit:
         libelle: '<word(3)>'
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20
+        prix_ht: 20.49
         est_actif: true
         tva: 10
         categorie: '@categorie*'
@@ -14,7 +14,7 @@ App\Entity\Produit:
         libelle: '<word(3)>'
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20
+        prix_ht: 20.49
         est_actif: true
         tva: 10
         categorie: '@categorie*'
@@ -26,7 +26,7 @@ App\Entity\Produit:
         libelle: '<word(3)>'
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20
+        prix_ht: 20.49
         est_actif: false
         tva: 10
         categorie: '@categorie*'

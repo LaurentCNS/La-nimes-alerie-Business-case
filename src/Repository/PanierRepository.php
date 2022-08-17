@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Panier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Panier[]    findAll()
  * @method Panier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PanierRepository extends ServiceEntityRepository
+class PanierRepository extends AbstractLanimalerieRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -152,5 +153,34 @@ class PanierRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    // Fonction pour le back admin : liste des commandes
+    public function findCommande(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.statut = 200 OR p.statut = 400 OR p.statut = 500 OR p.statut = 600')
+            ->getQuery()
+              ->getResult();
+    }
+
+
+    //Fonction pour récuperer les infos du paginator
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('panier','ligne','produit','client','adresse','moyenPaiement')
+            ->leftJoin('panier.ligne', 'ligne')
+            ->leftJoin('ligne.produit', 'produit')
+            ->leftJoin('panier.client', 'client')
+            ->leftJoin('panier.adresse', 'adresse')
+            ->leftJoin('panier.moyenPaiement', 'moyenPaiement')
+            ->where('panier.statut = 200 OR panier.statut = 400 OR panier.statut = 500 OR panier.statut = 600 OR panier.statut = 700')
+            ->orderBy('panier.datePaiement', 'DESC')
+            ;
+    }
+
+    // Fonction pour le back admin : liste
+
 
 }

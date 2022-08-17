@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New Panier</title>
+
+{% block body %}
+    <h1>Create new Panier</h1>
+
+    {{ include('back/commande/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_commande_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'back/base.html.twig' %}
+
+
+{% block title %}
+    Gestion commande
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="row justify-content-end me-5">
+        <div class="pdfButton mt-3 mb-3">
+            <a class="d-flex text-center" href="index.html.twig">
+                <i class="col-md-2 fas fa-file-pdf"></i>
+                <p class="col-md-10 mt-2">Editer la facture</p>
+            </a>
+        </div>
+    </div>
+
+<div class="container-fluid my-2">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1>Commande numéro {{ panier.numeroCommande }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-4 mt-3">
+            <div class="mt-5 mb-3">
+                <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ panier.id }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ panier.dateCreation ? panier.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ panier.statut }}</td>
+            </tr>
+            <tr>
+                <th>DatePaiement</th>
+                <td>{{ panier.datePaiement ? panier.datePaiement|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+            </div>
+            <a href="{{ path('app_admin_commande_edit', {'id': panier.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier le statut') }}</button></a>
+            <a href="{{ path('app_admin_commande_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

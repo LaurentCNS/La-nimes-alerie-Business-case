@@ -10,4 +10,5 @@ Class EnumStatutPanier
     const PREPARATION = 400;
     const EXPEDIEE = 500;
     const REMBOURSEE = 600;
+    const ANNULEE = 700;
 }
