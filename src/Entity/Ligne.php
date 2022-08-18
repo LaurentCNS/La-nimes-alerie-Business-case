@@ -60,6 +60,9 @@ class Ligne
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $tva = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $libelle = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +124,18 @@ class Ligne
     public function setTva(string $tva): self
     {
         $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
 
         return $this;
     }

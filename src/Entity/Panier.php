@@ -92,6 +92,7 @@ class Panier
             'message' => 'panier.statut.not_blank',
         ]),
     ]
+
     private int $statut = EnumStatutPanier::CREEE;
 
     #[ORM\ManyToOne(inversedBy: 'panier')]

@@ -1,4 +1,45 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+<table class="table table-striped table-bordered mt-5">
+    <thead>
+    <tr>
+        <th>Code statut</th>
+        <th>Etat</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td>100</td>
+        <td>Panier créé</td>
+    </tr>
+    <tr>
+        <td>200</td>
+        <td>Commande payée</td>
+    </tr>
+    <tr>
+        <td>300</td>
+        <td>Panier abandonnée</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Commande en préparation</td>
+    </tr>
+    <tr>
+        <td>500</td>
+        <td>Commande expédiée</td>
+    </tr>
+    <tr>
+        <td>600</td>
+        <td>Commande remboursée</td>
+    </tr>
+    <tr>
+        <td>700</td>
+        <td>Commande annulée</td>
+    </tr>
+
+
+    </tbody>
+</table>
     <button class="btn btn-primary col-md-12 mt-5 mb-1">{{ button_label|default('Creer') }}</button>
 {{ form_end(form) }}

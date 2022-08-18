@@ -112,6 +112,7 @@ panier:
 
     statut:
         not_blank: 'Le statut est obligatoire'
+        invalid: 'Choisir un statut valide ci-dessous'
  
 photo:
     url:

@@ -11,4 +11,17 @@ Class EnumStatutPanier
     const EXPEDIEE = 500;
     const REMBOURSEE = 600;
     const ANNULEE = 700;
+
+    public static function getStatuts()
+    {
+        return [
+            self::CREEE => 'Créée',
+            self::PAYEE => 'Payée',
+            self::ABANDONNEE => 'Abandonnée',
+            self::PREPARATION => 'Préparée',
+            self::EXPEDIEE => 'Expédiée',
+            self::REMBOURSEE => 'Remboursée',
+            self::ANNULEE => 'Annulée',
+        ];
+    }
 }
