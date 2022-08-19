@@ -33,6 +33,7 @@ class AdresseType extends AbstractType
             ->add('ville')
             ->add('pays')
             ->add('telephone')
+            ->add('estPrincipale')
         ;
     }
 

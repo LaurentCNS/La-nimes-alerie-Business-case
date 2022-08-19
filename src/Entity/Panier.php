@@ -113,6 +113,9 @@ class Panier
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $numeroCommande = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $montantPaye = null;
+
 
 
     public function __construct()
@@ -235,6 +238,18 @@ class Panier
     public function setNumeroCommande(?string $numeroCommande): self
     {
         $this->numeroCommande = $numeroCommande;
+
+        return $this;
+    }
+
+    public function getMontantPaye(): ?string
+    {
+        return $this->montantPaye;
+    }
+
+    public function setMontantPaye(?string $montantPaye): self
+    {
+        $this->montantPaye = $montantPaye;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Client;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method Client[]    findAll()
  * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClientRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class ClientRepository extends AbstractLanimalerieRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -97,7 +98,18 @@ class ClientRepository extends ServiceEntityRepository implements PasswordUpgrad
                 ->getQuery()
                 ->getSingleScalarResult();
 
-}
+    }
+
+    //Fonction pour récuperer les infos du paginator
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('client','panier','ligne')
+            ->leftJoin('client.panier', 'panier')
+            ->leftJoin('panier.ligne', 'ligne')
+             ->orderBy('client.id', 'ASC');
+    }
+
 
 
 

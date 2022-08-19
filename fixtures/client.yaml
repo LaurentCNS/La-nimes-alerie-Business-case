@@ -7,7 +7,6 @@ App\Entity\Client:
         username: 'LaTerreEstPlate'
         email (unique): 'capard@admin.fr'
         password: '<{passAdmin}>'
-        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
         roles: [ROLE_ADMIN]
 
@@ -15,14 +14,20 @@ App\Entity\Client:
         username: 'LaFaceCachéeDeLaLune'
         email (unique): 'nadege@stats.fr'
         password: '<{passAdmin}>'
-        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
         roles: [ROLE_STATS]
 
-    client{2..500}:
+    client{2..300}:
         username (unique): '<username()>'
         email (unique): '<safeEmail()>'
         password: '<{password}>'
         date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        roles: [ROLE_USER]
+
+    client{301..400}:
+        username: '<username()>'
+        email (unique): '<safeEmail()>'
+        password: '<{password}>'
         date_inscription: '<dateTimeBetween("-3000 days", "now")>'
         roles: [ROLE_USER]
