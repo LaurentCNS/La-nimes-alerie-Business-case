@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Marque;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Marque[]    findAll()
  * @method Marque[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MarqueRepository extends ServiceEntityRepository
+class MarqueRepository extends AbstractLanimalerieRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -63,4 +64,13 @@ class MarqueRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    //Fonction pour récuperer les infos du paginator
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('marque')
+            ->orderBy('marque.nom', 'ASC')
+            ;
+    }
 }

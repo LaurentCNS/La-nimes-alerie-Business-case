@@ -180,7 +180,5 @@ class PanierRepository extends AbstractLanimalerieRepository
             ;
     }
 
-    // Fonction pour le back admin : liste
-
 
 }
