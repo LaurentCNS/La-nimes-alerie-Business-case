@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Adresse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Adresse[]    findAll()
  * @method Adresse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdresseRepository extends ServiceEntityRepository
+class AdresseRepository extends AbstractLanimalerieRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -63,4 +64,14 @@ class AdresseRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    //Fonction pour récuperer les infos du paginator
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('adresse','client','genre')
+            ->leftJoin('adresse.client', 'client')
+            ->leftJoin('adresse.genre', 'genre')
+            ->orderBy('adresse.nom', 'ASC');
+    }
 }

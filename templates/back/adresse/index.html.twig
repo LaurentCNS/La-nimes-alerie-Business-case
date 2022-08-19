@@ -1,0 +1,102 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Gestion clients
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+
+
+    <div class="d-flex justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {{ form_start(filters) }}
+    <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>{{
+                    knp_pagination_sortable(
+                        adresses,
+                        'Noms',
+                        'adresse.nom'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.nom) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        adresses,
+                        'Prénom',
+                        'adresse.prenom'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.prenom) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        adresses,
+                        'Client',
+                        'client.username'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.client) }}</th>
+                <th>{{
+                    knp_pagination_sortable(
+                        adresses,
+                        'Villes',
+                        'adresse.ville'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.ville) }}</th>
+                <th>Telephone</th>
+                <th>Adresse principale</th>
+                <th>
+                    <button type="submit" class="filter-action">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a class="filter-action" href="{{ path('app_admin_adresse_index') }}">
+                        <i class="fas fa-refresh"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adresse in adresses %}
+            <tr>
+                <td>{{ adresse.nom }}</td>
+                <td>{{ adresse.prenom }}</td>
+                <td>{{ adresse.client.username }}</td>
+                <td>{{ adresse.ville }}</td>
+                <td>{{ adresse.telephone }}</td>
+                <td>{{ adresse.estPrincipale ? 'Oui' : 'Non' }}</td>
+                <td>
+                    <a class="pe-1" href="{{ path('app_admin_adresse_show', {'id': adresse.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
+                    <a class="pe-1" href="{{ path('app_admin_adresse_edit', {'id': adresse.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">Désolé je n'ai rien trouvé :(</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ form_end(filters) }}
+
+    <div class="navigation d-flex justify-content-center mt-2">
+        {{ knp_pagination_render(adresses) }}
+    </div>
+</div>
+{% endblock %}
+

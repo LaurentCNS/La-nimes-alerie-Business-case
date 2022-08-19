@@ -47,10 +47,11 @@
                 <th>{{
                     knp_pagination_sortable(
                         paniers,
-                        'Utilisateur',
+                        'Client',
                         'client.username'
                     )|raw
                     }}
+                    {{ form_widget(filters.client) }}
                 </th>
                 <th>{{
                     knp_pagination_sortable(

@@ -1,0 +1,86 @@
+{% extends 'back/base.html.twig' %}
+
+
+{% block title %}
+    Gestion adresse
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid my-2">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1>{{ adresse.nom }} {{ adresse.prenom }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-4 mt-3">
+            <div class="mt-5 mb-3">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Client</th>
+                <td>{{ adresse.client.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ adresse.client.email }}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>{{ adresse.genre.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adresse.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ adresse.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Ligne1</th>
+                <td>{{ adresse.ligne1 }}</td>
+            </tr>
+            <tr>
+                <th>Ligne2</th>
+                <td>{{ adresse.ligne2 }}</td>
+            </tr>
+            <tr>
+                <th>Ligne3</th>
+                <td>{{ adresse.ligne3 }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ adresse.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ adresse.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ adresse.pays }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ adresse.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Adresse principale</th>
+                <td>{{ adresse.estPrincipale ? 'oui' : 'non' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+            </div>
+            <a href="{{ path('app_admin_adresse_edit', {'id': adresse.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
+            <a href="{{ path('app_admin_adresse_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

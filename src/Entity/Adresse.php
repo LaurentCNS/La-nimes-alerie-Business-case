@@ -146,6 +146,9 @@ class Adresse
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    #[ORM\Column]
+    private ?bool $estPrincipale = null;
+
 
 
     public function __construct()
@@ -321,6 +324,18 @@ class Adresse
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function isEstPrincipale(): ?bool
+    {
+        return $this->estPrincipale;
+    }
+
+    public function setEstPrincipale(bool $estPrincipale): self
+    {
+        $this->estPrincipale = $estPrincipale;
 
         return $this;
     }
