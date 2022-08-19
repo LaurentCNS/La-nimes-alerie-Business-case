@@ -1,0 +1,57 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Gestion des animaux
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+
+
+    <div class="d-flex justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{#    {{ form_start(filters) }}#}
+    <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ animal.libelle }}</td>
+                <td>
+                    <a class="pe-1" href="{{ path('app_admin_animal_show', {'id': animal.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
+                    <a class="pe-1" href="{{ path('app_admin_animal_edit', {'id': animal.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    {{ form_end(filters) }}#}
+
+{#    <div class="navigation d-flex justify-content-center mt-2">#}
+{#        {{ knp_pagination_render(categories) }}#}
+{#    </div>#}
+</div>
+{% endblock %}

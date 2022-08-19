@@ -2,7 +2,7 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}
-    Gestion marques
+    Gestion des animaux
 {% endblock %}
 
 {% block body %}
@@ -11,7 +11,7 @@
     <div class="row mt-5">
         <div class="d-flex justify-content-center">
             <div class="col-md-6 text-center">
-                <h1>Modifier une marque</h1>
+                <h1>Modifier un animal</h1>
             </div>
         </div>
     </div>
@@ -19,13 +19,13 @@
     <div class="row d-flex justify-content-center">
         <div class="col-4 mt-3">
             <div class="mt-5 mb-3">
-    {{ include('back/marque/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+    {{ include('back/animal/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
             </div>
-            {{ include('back/marque/_delete_form.html.twig') }}
-
-                <a href="{{ path('app_admin_marque_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
-            </div>
+            {{ include('back/animal/_delete_form.html.twig') }}
+            <a href="{{ path('app_admin_animal_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
         </div>
-
     </div>
-    {% endblock %}
+
+</div>
+{% endblock %}
+
