@@ -65,7 +65,7 @@
                 {% set montantTotal = 0 %}
                 {% for commande in client.panier %}
                     {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
-                        {% set montantTotal = montantTotal + commande.montantPaye %}
+                        {% set montantTotal = montantTotal + commande.montantTotal %}
                     {% endif %}
                 {% endfor %}
                 <th>Montant total dépensé TTC</th>

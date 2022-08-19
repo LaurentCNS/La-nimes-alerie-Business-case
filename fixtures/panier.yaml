@@ -18,7 +18,7 @@ App\Entity\Panier:
         numero_commande (unique): <numberBetween(10000, 100000)>
         client: '@client*'
         adresse: '@adresse*'
-        montant_paye: '<numberBetween(20, 300)>'
+        montant_total: '<numberBetween(20, 300)>'
 
     panier{801..899}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
@@ -41,7 +41,7 @@ App\Entity\Panier:
         numero_commande (unique): <numberBetween(10000, 100000)>
         client: '@client*'
         adresse: '@adresse*'
-        montant_paye: '<numberBetween(20, 300)>'
+        montant_total: '<numberBetween(20, 300)>'
 
     panier{1201..1350}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
@@ -51,7 +51,7 @@ App\Entity\Panier:
         numero_commande (unique): <numberBetween(10000, 100000)>
         client: '@client*'
         adresse: '@adresse*'
-        montant_paye: '<numberBetween(20, 300)>'
+        montant_total: '<numberBetween(20, 300)>'
 
     panier{1381..1499}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
@@ -61,7 +61,7 @@ App\Entity\Panier:
         numero_commande (unique): <numberBetween(10000, 100000)>
         client: '@client*'
         adresse: '@adresse*'
-        montant_paye: '<numberBetween(20, 300)>'
+        montant_total: '<numberBetween(20, 300)>'
 
     panier{1500..1600}:
         date_creation: '<dateTimeBetween("-3000 days", "now")>'
@@ -71,4 +71,4 @@ App\Entity\Panier:
         numero_commande (unique): <numberBetween(10000, 100000)>
         client: '@client*'
         adresse: '@adresse*'
-        montant_paye: '<numberBetween(20, 300)>'
+        montant_total: '<numberBetween(20, 300)>'

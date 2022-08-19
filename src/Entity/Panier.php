@@ -113,8 +113,9 @@ class Panier
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $numeroCommande = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $montantPaye = null;
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $montantTotal = null;
+
 
 
 
@@ -242,14 +243,14 @@ class Panier
         return $this;
     }
 
-    public function getMontantPaye(): ?string
+    public function getMontantTotal(): ?string
     {
-        return $this->montantPaye;
+        return $this->montantTotal;
     }
 
-    public function setMontantPaye(?string $montantPaye): self
+    public function setMontantTotal(?string $montantTotal): self
     {
-        $this->montantPaye = $montantPaye;
+        $this->montantTotal = $montantTotal;
 
         return $this;
     }

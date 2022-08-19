@@ -43,7 +43,7 @@ class AdminCategorieController extends AbstractController
         // Paginator
         $categories = $paginator->paginate(
             $qb,
-            $request->query->getInt('page',1),18
+            $request->query->getInt('page',1),19
         );
 
         // Retour dans le twig
