@@ -19,6 +19,11 @@ class AdminClientController extends AbstractController
     #[Route('/', name: 'app_admin_client_index', methods: ['GET'])]
     public function index(ClientRepository $clientRepository, Request $request, PaginatorInterface $paginator, FilterBuilderUpdaterInterface $builderUpdater): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $qb = $clientRepository->getQbAll();
 
         // Lexik Filter
@@ -47,6 +52,11 @@ class AdminClientController extends AbstractController
     #[Route('/new', name: 'app_admin_client_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ClientRepository $clientRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
@@ -66,6 +76,11 @@ class AdminClientController extends AbstractController
     #[Route('/{id}', name: 'app_admin_client_show', methods: ['GET'])]
     public function show(Client $client): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/client/show.html.twig', [
             'client' => $client,
         ]);
@@ -92,6 +107,11 @@ class AdminClientController extends AbstractController
     #[Route('/{id}', name: 'app_admin_client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client, ClientRepository $clientRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
             try {
             $clientRepository->remove($client, true);

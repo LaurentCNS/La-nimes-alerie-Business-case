@@ -19,6 +19,11 @@ class AdminAdresseController extends AbstractController
     #[Route('/', name: 'app_admin_adresse_index', methods: ['GET'])]
     public function index(AdresseRepository $adresseRepository, Request $request,PaginatorInterface $paginator, FilterBuilderUpdaterInterface $builderUpdater): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $qb = $adresseRepository->getQbAll();
 
         // Lexik Filter
@@ -67,6 +72,11 @@ class AdminAdresseController extends AbstractController
     #[Route('/{id}', name: 'app_admin_adresse_show', methods: ['GET'])]
     public function show(Adresse $adresse): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/adresse/show.html.twig', [
             'adresse' => $adresse,
         ]);
@@ -75,6 +85,11 @@ class AdminAdresseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_adresse_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Adresse $adresse, AdresseRepository $adresseRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(AdresseType::class, $adresse);
         $form->handleRequest($request);
 

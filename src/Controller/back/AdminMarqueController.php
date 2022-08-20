@@ -20,6 +20,11 @@ class AdminMarqueController extends AbstractController
     public function index(MarqueRepository $marqueRepository, Request $request, PaginatorInterface $paginator, FilterBuilderUpdaterInterface $builderUpdater): Response
     {
 
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $qb = $marqueRepository->getQbAll();
 
         // Lexik Filter
@@ -48,6 +53,11 @@ class AdminMarqueController extends AbstractController
     #[Route('/new', name: 'app_admin_marque_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MarqueRepository $marqueRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $marque = new Marque();
         $form = $this->createForm(MarqueType::class, $marque);
         $form->handleRequest($request);
@@ -67,6 +77,11 @@ class AdminMarqueController extends AbstractController
     #[Route('/{id}', name: 'app_admin_marque_show', methods: ['GET'])]
     public function show(Marque $marque): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/marque/show.html.twig', [
             'marque' => $marque,
         ]);
@@ -75,6 +90,11 @@ class AdminMarqueController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_marque_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Marque $marque, MarqueRepository $marqueRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(MarqueType::class, $marque);
         $form->handleRequest($request);
 
@@ -93,6 +113,11 @@ class AdminMarqueController extends AbstractController
     #[Route('/{id}', name: 'app_admin_marque_delete', methods: ['POST'])]
     public function delete(Request $request, Marque $marque, MarqueRepository $marqueRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$marque->getId(), $request->request->get('_token'))) {
             try {
                 $marqueRepository->remove($marque, true);

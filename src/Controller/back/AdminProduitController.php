@@ -24,6 +24,11 @@ class AdminProduitController extends AbstractController
     #[Route('/', name: 'app_admin_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository, Request $request, PaginatorInterface $paginator,FilterBuilderUpdaterInterface $builderUpdater): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $qb = $produitRepository->getQbAll();
 
         // Lexik Filter
@@ -54,6 +59,11 @@ class AdminProduitController extends AbstractController
     #[Route('/new', name: 'app_admin_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
@@ -96,6 +106,11 @@ class AdminProduitController extends AbstractController
     #[Route('/{id}', name: 'app_admin_produit_show', methods: ['GET'])]
     public function show(Produit $produit): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/produit/show.html.twig', [
             'produit' => $produit,
         ]);
@@ -104,6 +119,11 @@ class AdminProduitController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -127,6 +147,11 @@ class AdminProduitController extends AbstractController
     #[Route('/{id}', name: 'app_admin_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
             try{
             $produitRepository->remove($produit, true);

@@ -16,6 +16,11 @@ class AdminAnimalController extends AbstractController
     #[Route('/', name: 'app_admin_animal_index', methods: ['GET'])]
     public function index(AnimalRepository $animalRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/animal/index.html.twig', [
             'animals' => $animalRepository->findAll(),
         ]);
@@ -24,6 +29,11 @@ class AdminAnimalController extends AbstractController
     #[Route('/new', name: 'app_admin_animal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, AnimalRepository $animalRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $animal = new Animal();
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
@@ -43,6 +53,11 @@ class AdminAnimalController extends AbstractController
     #[Route('/{id}', name: 'app_admin_animal_show', methods: ['GET'])]
     public function show(Animal $animal): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/animal/show.html.twig', [
             'animal' => $animal,
         ]);
@@ -51,6 +66,11 @@ class AdminAnimalController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_animal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
 
@@ -69,6 +89,11 @@ class AdminAnimalController extends AbstractController
     #[Route('/{id}', name: 'app_admin_animal_delete', methods: ['POST'])]
     public function delete(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$animal->getId(), $request->request->get('_token'))) {
             try{
                 $animalRepository->remove($animal, true);

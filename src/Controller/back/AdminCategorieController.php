@@ -25,6 +25,10 @@ class AdminCategorieController extends AbstractController
                           FilterBuilderUpdaterInterface $builderUpdater
     ): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
 
         $qb = $categorieRepository->getQbAll();
 
@@ -56,6 +60,11 @@ class AdminCategorieController extends AbstractController
     #[Route('/new', name: 'app_admin_categorie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategorieRepository $categorieRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
@@ -80,6 +89,11 @@ class AdminCategorieController extends AbstractController
     #[Route('/{id}', name: 'app_admin_categorie_show', methods: ['GET'])]
     public function show(Categorie $categorie): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/categorie/show.html.twig', [
             'categorie' => $categorie,
         ]);
@@ -88,6 +102,11 @@ class AdminCategorieController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_categorie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
@@ -111,6 +130,11 @@ class AdminCategorieController extends AbstractController
     #[Route('/{id}', name: 'app_admin_categorie_delete', methods: ['POST'])]
     public function delete(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
             // if it's a delete request the entity is removed from the repository else catch the exception
             try {

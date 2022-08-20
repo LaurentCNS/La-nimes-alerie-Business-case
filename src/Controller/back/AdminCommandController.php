@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/admin/commande')]
 class AdminCommandController extends AbstractController
 {
@@ -20,6 +21,10 @@ class AdminCommandController extends AbstractController
     public function index(PanierRepository $panierRepository, Request $request, PaginatorInterface $paginator, FilterBuilderUpdaterInterface $builderUpdater): Response
     {
 
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
 
         $qb = $panierRepository->getQbAll();
 
@@ -67,6 +72,11 @@ class AdminCommandController extends AbstractController
     #[Route('/{id}', name: 'app_admin_commande_show', methods: ['GET'])]
     public function show(Panier $panier): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('back/commande/show.html.twig', [
             'panier' => $panier,
         ]);
@@ -75,6 +85,11 @@ class AdminCommandController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_commande_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Panier $panier, PanierRepository $panierRepository): Response
     {
+        // Si l'utilisateur n'est pas admin, on redirige vers la page d'accueil
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(PanierType::class, $panier);
         $form->handleRequest($request);
 
