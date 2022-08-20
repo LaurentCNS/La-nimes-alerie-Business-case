@@ -7,3 +7,27 @@
   font-size: 12px;
   color: grey;
 }
+
+.cardUser{
+  box-shadow: 0 3px 10px #E7E7E6;
+  padding: 20px;
+  transition: transform .1s;
+
+  a{
+    text-decoration: none;
+    color: $bleutheme;
+  }
+
+  i{
+    font-size: 50px;
+    color: $orange;
+  }
+
+  &:hover{
+    transform: scale(1.05);
+  }
+
+  .admin{
+    color: $red
+  }
+}

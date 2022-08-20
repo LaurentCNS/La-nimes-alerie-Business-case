@@ -1,4 +1,5 @@
 {% extends 'front/base.html.twig' %}
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
 
 
 {% block title %}Inscription{% endblock %}
@@ -10,21 +11,32 @@
         <div class='row d-flex justify-content-center'>
             <div class='col-md-8 col-lg-5'>
                 <div class="cardLogin ">
-                <h5 class="h3 mb-3 font-weight-normal">S'enregistrer</h5>
+                    <h5 class="h3 mb-3 font-weight-normal">Nouveau client?</h5>
 
-                {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.username) }}
-                {{ form_row(registrationForm.password, {
-                    label: 'Password'
-                }) }}
-                {{ form_row(registrationForm.agreeTerms) }}
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.username, {
+                        label: 'Nom d\'utilisateur'
+                    }) }}
+                    {{ form_row(registrationForm.email, {
+                        label: 'Email'
+                    }) }}
+                    {{ form_row(registrationForm.password, {
+                        label: 'Mot de passe'
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
 
                     <button class="btn btn-lg btn-success" style="width: 100%" type="submit">
-                       Valider
+                        Valider
                     </button>
-                {{ form_end(registrationForm) }}
+                    {{ form_end(registrationForm) }}
+                    <h5 class="h3 mb-3 mt-5 font-weight-normal">Déja client?</h5>
+                    <a href="{{ path('app_login') }}" class="btn btn-lg btnyellow" style="width: 100%">
+                        Retour à l'espace de connexion
+                    </a>
                 </div>
+                <p class="infoClient">La Nimes'alerie, en tant que responsable de traitement, traite les
+                    données recueillies à des fins de gestion de la relation client, gestion des commandes
+                    et des livraisons, personnalisation des services, prévention de la fraude, marketing et publicité ciblée.</p>
             </div>
         </div>
     </div>

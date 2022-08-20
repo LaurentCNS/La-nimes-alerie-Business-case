@@ -2,6 +2,7 @@
 
 namespace App\Controller\front;
 
+use App\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,18 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('front/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        // declarer un nouveau client
+        $user = new Client();
+
+        //si le client est connecté on récupère toutes les infos
+        if($this->getUser()){
+            $user = $this->getUser();
+            dump($user);
+        }
+
+
+
+        return $this->render('front/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'user' => $user]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
