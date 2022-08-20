@@ -5,25 +5,26 @@
     Gestion produits
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid my-2">
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>Creer une nouveau produit</h1>
+    <div class="container-fluid my-2">
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h5>Creer une nouveau produit</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-4 mt-3">
+                <div class="mt-5 mb-3">
+                    {{ include('back/produit/_form.html.twig') }}
+                    <a href="{{ path('app_admin_produit_index') }}"><i
+                                class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-4 mt-3">
-            <div class="mt-5 mb-3">
 
-    {{ include('back/produit/_form.html.twig') }}
-
-                <a href="{{ path('app_admin_produit_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
-            </div>
-        </div>
-    </div>
 {% endblock %}

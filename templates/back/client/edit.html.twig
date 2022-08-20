@@ -6,28 +6,31 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid my-2">
+    <div class="container-fluid my-2">
 
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>Modifier un client</h1>
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h5>Modifier un client</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-4 mt-3">
+                <div class="mt-5 mb-3">
+                    {{ include('back/client/_form.html.twig', {'button_label': 'Update'}) }}
+                </div>
+                <a href="{{ path('app_admin_client_index') }}">back to list</a>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4 mt-3">
+                        <div class="mt-5 mb-3">
+                            {{ include('back/client/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="row d-flex justify-content-center">
-        <div class="col-4 mt-3">
-            <div class="mt-5 mb-3">
-    {{ include('back/client/_form.html.twig', {'button_label': 'Update'}) }}
-            </div>
-    <a href="{{ path('app_admin_client_index') }}">back to list</a>
-
-<div class="row d-flex justify-content-center">
-    <div class="col-4 mt-3">
-        <div class="mt-5 mb-3">
-    {{ include('back/client/_delete_form.html.twig') }}
-        </div>
-    </div>
-</div>
 {% endblock %}

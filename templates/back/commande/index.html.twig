@@ -4,62 +4,53 @@
     Gestion catégories
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-
-    <div class="d-flex justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="col-md-6 text-center">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {{ form_start(filters) }}
-    <table class="table table-hover">
-        <thead class="table-primary">
+
+        {{ form_start(filters) }}
+        <table class="table table-hover">
+            <thead class="table-primary">
             <tr>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         paniers,
                         'Numéro de la commande',
                         'panier.numeroCommande'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.numeroCommande) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         paniers,
                         'Date de paiement',
                         'panier.datePaiement'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.datePaiement) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         paniers,
                         'Client',
                         'client.username'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.client) }}
                 </th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         paniers,
                         'Statut',
                         'panier.statut'
-                    )|raw
-                    }}</th>
+                    )|raw }}</th>
                 <th>Montant TTC</th>
                 <th>Moyen de paiement</th>
                 <th>
@@ -72,51 +63,54 @@
                     </div>
                 </th>
             </tr>
-        </thead>
-        <tbody>
-        {% for panier in paniers %}
-            <tr>
-                <td>{{ panier.numeroCommande }}</td>
-                <td>{{ panier.datePaiement ? panier.datePaiement|date('Y-m-d') : '' }}</td>
-                <td>{{ panier.client.username }}</td>
-                <td>
-                    {% if panier.statut == 200 %}
-                        Payée
-                    {% elseif panier.statut == 400 %}
-                        En préparation
-                    {% elseif panier.statut == 500 %}
-                        Expédiée
-                    {% elseif panier.statut == 600 %}
-                        Remboursée
-                    {% elseif panier.statut == 700 %}
-                        Annulée
-                    {% endif %}
-                </td>
-                <td>
-                {% set prixTotal = 0 %}
-                {% for ligne in panier.ligne %}
-                    {% set prixTotal = prixTotal + ((ligne.prix + (ligne.prix * ligne.tva / 100 )) * ligne.quantite ) %}
-                {% endfor %}
-                    {{ prixTotal | round(2) }}€
-                </td>
-                <td>
-                    {{ panier.moyenPaiement.type }}
-                <td>
-                    <a class="pe-1" href="{{ path('app_admin_commande_show', {'id': panier.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
-                    <a class="pe-1" href="{{ path('app_admin_commande_edit', {'id': panier.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Désolé je n'ai rien trouvé :(</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ form_end(filters) }}
+            </thead>
+            <tbody>
+            {% for panier in paniers %}
+                <tr>
+                    <td>{{ panier.numeroCommande }}</td>
+                    <td>{{ panier.datePaiement ? panier.datePaiement|date('Y-m-d') : '' }}</td>
+                    <td>{{ panier.client.username }}</td>
+                    <td>
+                        {% if panier.statut == 200 %}
+                            Payée
+                        {% elseif panier.statut == 400 %}
+                            En préparation
+                        {% elseif panier.statut == 500 %}
+                            Expédiée
+                        {% elseif panier.statut == 600 %}
+                            Remboursée
+                        {% elseif panier.statut == 700 %}
+                            Annulée
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set prixTotal = 0 %}
+                        {% for ligne in panier.ligne %}
+                            {% set prixTotal = prixTotal + ((ligne.prix + (ligne.prix * ligne.tva / 100 )) * ligne.quantite ) %}
+                        {% endfor %}
+                        {{ prixTotal | round(2) }}€
+                    </td>
+                    <td>
+                        {{ panier.moyenPaiement.type }}
+                    <td>
+                        <a class="pe-1" href="{{ path('app_admin_commande_show', {'id': panier.id}) }}"><i
+                                    class="formFa fa-solid fa-eye ms-1"></i></a>
+                        <a class="pe-1" href="{{ path('app_admin_commande_edit', {'id': panier.id}) }}"><i
+                                    class="formFa fa-solid fa-pen"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Désolé je n'ai rien trouvé :(</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <div class="navigation d-flex justify-content-center mt-2">
-        {{ knp_pagination_render(paniers) }}
+        {{ form_end(filters) }}
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(paniers) }}
+        </div>
     </div>
-</div>
+
 {% endblock %}

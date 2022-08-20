@@ -1,95 +1,98 @@
 {% extends 'back/base.html.twig' %}
 
-
 {% block title %}
     Gestion clients
 {% endblock %}
 
-
 {% block body %}
-<div class="container-fluid my-2">
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>{{ client.username }}</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-4 mt-3">
-            <div class="mt-5 mb-3">
-        <table class="table">
-        <tbody>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ client.username }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ client.email }}</td>
-            </tr>
-            <tr>
-                <th>Date de naissance</th>
-                <td>{% if client.dateNaissance %}
-                    {{ client.dateNaissance ? client.dateNaissance|date('d-m-Y') : '' }}
-                    {% else %}
-                    Non renseigné
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Date d'inscription</th>
-                <td>{{ client.dateInscription ? client.dateInscription|date('d-m-Y H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                {% set nbCommandes = 0 %}
-                {% for commande in client.panier %}
-                    {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
-                        {% set nbCommandes = nbCommandes + 1 %}
-                    {% endif %}
-                {% endfor %}
-                <th>{% if nbCommandes == 1 %}
-                    Nombre de commande passée
-                    {% else %}
-                    Nombre de commandes passées
-                    {% endif %}
-                </th>
-                <td>{% if nbCommandes > 0 %}
-                    {{ nbCommandes }}
-                    {% else %}
-                    Aucune commande
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                {% set montantTotal = 0 %}
-                {% for commande in client.panier %}
-                    {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
-                        {% set montantTotal = montantTotal + commande.montantTotal %}
-                    {% endif %}
-                {% endfor %}
-                <th>Montant total dépensé TTC</th>
-                <td>{% if montantTotal > 0 %}
-                    {{ montantTotal }}€
-                    {% else %}
-                    Aucune commande
-                    {% endif %}
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ client.roles ? client.roles|json_encode : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container-fluid my-2">
 
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h1>{{ client.username }}</h1>
+                </div>
             </div>
-            {% if client.roles == ['ROLE_ADMIN','ROLE_USER'] or client.roles == ['ROLE_STATS','ROLE_USER']  %}
-                <button class="btn btn-danger col-md-12 mt-5 mb-4" disabled>{{ button_label|default('Supprimer') }}</button>
-            {% else %}
-                {{ include('back/client/_delete_form.html.twig') }}
-            {% endif %}
-            <a href="{{ path('app_admin_client_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-4 mt-3">
+                <div class="mt-5 mb-3">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Pseudo</th>
+                            <td>{{ client.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ client.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de naissance</th>
+                            <td>{% if client.dateNaissance %}
+                                    {{ client.dateNaissance ? client.dateNaissance|date('d-m-Y') : '' }}
+                                {% else %}
+                                    Non renseigné
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Date d'inscription</th>
+                            <td>{{ client.dateInscription ? client.dateInscription|date('d-m-Y H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            {% set nbCommandes = 0 %}
+                            {% for commande in client.panier %}
+                                {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
+                                    {% set nbCommandes = nbCommandes + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <th>{% if nbCommandes == 1 %}
+                                    Nombre de commande passée
+                                {% else %}
+                                    Nombre de commandes passées
+                                {% endif %}
+                            </th>
+                            <td>{% if nbCommandes > 0 %}
+                                    {{ nbCommandes }}
+                                {% else %}
+                                    Aucune commande
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            {% set montantTotal = 0 %}
+                            {% for commande in client.panier %}
+                                {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
+                                    {% set montantTotal = montantTotal + commande.montantTotal %}
+                                {% endif %}
+                            {% endfor %}
+                            <th>Montant total dépensé TTC</th>
+                            <td>{% if montantTotal > 0 %}
+                                    {{ montantTotal }}€
+                                {% else %}
+                                    Aucune commande
+                                {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Roles</th>
+                            <td>{{ client.roles ? client.roles|json_encode : '' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                {% if client.roles == ['ROLE_ADMIN','ROLE_USER'] or client.roles == ['ROLE_STATS','ROLE_USER'] %}
+                    <button class="btn btn-danger col-md-12 mt-5 mb-4"
+                            disabled>{{ button_label|default('Supprimer') }}</button>
+                {% else %}
+                    {{ include('back/client/_delete_form.html.twig') }}
+                {% endif %}
+                <a href="{{ path('app_admin_client_index') }}"><i
+                            class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i>
+                </a>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

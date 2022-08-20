@@ -4,37 +4,34 @@
     Gestion marques
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-
-    <div class="d-flex justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="col-md-6 text-center">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {{ form_start(filters) }}
-    <table class="table table-hover">
-        <thead class="table-primary">
+
+        {{ form_start(filters) }}
+        <table class="table table-hover">
+            <thead class="table-primary">
             <tr>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         marques,
                         'Nom de la marque',
                         'marque.nom'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.nom) }}</th>
                 <th>
                     <button type="submit" class="filter-action">
@@ -44,27 +41,29 @@
                         <i class="fas fa-refresh"></i></a>
                 </th>
             </tr>
-        </thead>
-        <tbody>
-        {% for marque in marques %}
-            <tr>
-                <td>{{ marque.nom }}</td>
-                <td>
-                    <a class="pe-1" href="{{ path('app_admin_marque_show', {'id': marque.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
-                    <a class="pe-1" href="{{ path('app_admin_marque_edit', {'id': marque.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ form_end(filters) }}
+            </thead>
+            <tbody>
+            {% for marque in marques %}
+                <tr>
+                    <td>{{ marque.nom }}</td>
+                    <td>
+                        <a class="pe-1" href="{{ path('app_admin_marque_show', {'id': marque.id}) }}"><i
+                                    class="formFa fa-solid fa-eye ms-1"></i></a>
+                        <a class="pe-1" href="{{ path('app_admin_marque_edit', {'id': marque.id}) }}"><i
+                                    class="formFa fa-solid fa-pen"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(filters) }}
 
-    <div class="navigation d-flex justify-content-center mt-2">
-        {{ knp_pagination_render(marques) }}
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(marques) }}
+        </div>
     </div>
-</div>
 {% endblock %}

@@ -4,53 +4,46 @@
     Gestion clients
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-
-    <div class="d-flex justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="col-md-6 text-center">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {{ form_start(filters) }}
-    <table class="table table-hover">
-        <thead class="table-primary">
+
+        {{ form_start(filters) }}
+        <table class="table table-hover">
+            <thead class="table-primary">
             <tr>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         clients,
                         'Username',
                         'client.username'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.username) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         clients,
                         'Email',
                         'client.email'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.email) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         clients,
                         'Date inscription',
                         'client.dateInscription'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.dateInscription) }}</th>
                 <th>Nb commandes</th>
                 <th>Montant dépensé</th>
@@ -62,48 +55,48 @@
                     <a class="filter-action" href="{{ path('app_admin_client_index') }}">
                         <i class="fas fa-refresh"></i></a></th>
             </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.username }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.dateInscription ? client.dateInscription|date('d-m-Y H:i:s') : '' }}</td>
-                <td>
-                    {% set nbCommandes = 0 %}
-                    {% for commande in client.panier %}
-                        {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
-                            {% set nbCommandes = nbCommandes + 1 %}
-                        {% endif %}
-                    {% endfor %}
-                    {{ nbCommandes }}
-                </td>
-                <td>
-                    {% set montantTotal = 0 %}
-                    {% for commande in client.panier %}
-                        {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
-                            {% set montantTotal = montantTotal + commande.montantTotal %}
-                        {% endif %}
-                    {% endfor %}
-                    {{ montantTotal }}€
-                </td>
-                <td>{{ client.roles ? client.roles|json_encode : '' }}</td>
-                <td>
-                    <a class="pe-1" href="{{ path('app_admin_client_show', {'id': client.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.username }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.dateInscription ? client.dateInscription|date('d-m-Y H:i:s') : '' }}</td>
+                    <td>
+                        {% set nbCommandes = 0 %}
+                        {% for commande in client.panier %}
+                            {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
+                                {% set nbCommandes = nbCommandes + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ nbCommandes }}
+                    </td>
+                    <td>
+                        {% set montantTotal = 0 %}
+                        {% for commande in client.panier %}
+                            {% if commande.statut == 200 or commande.statut == 400 or commande.statut == 500 %}
+                                {% set montantTotal = montantTotal + commande.montantTotal %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ montantTotal }}€
+                    </td>
+                    <td>{{ client.roles ? client.roles|json_encode : '' }}</td>
+                    <td>
+                        <a class="pe-1" href="{{ path('app_admin_client_show', {'id': client.id}) }}"><i
+                                    class="formFa fa-solid fa-eye ms-1"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(filters) }}
 
-    {{ form_end(filters) }}
-
-    <div class="navigation d-flex justify-content-center mt-2">
-        {{ knp_pagination_render(clients) }}
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(clients) }}
+        </div>
     </div>
-</div>
 {% endblock %}

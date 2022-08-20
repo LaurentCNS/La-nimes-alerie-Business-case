@@ -41,6 +41,8 @@ Installer les dépandances symfony  :
 
 ```symfony composer install```
 
+```yarn install```
+
 Verifier la version de php installée sur votre machine (8.0 ou +) :  
 
 ```php -v```
@@ -57,11 +59,13 @@ Envoyer les données de test des fixtures :
 
 ```symfony console doctrine:fixtures:load --purge-with-truncate```
 
-Generer la clé public et privée pour le token du dossier config/jwt (prochainement) :  
+Generer la clé public et privée pour le token du dossier config/jwt :  
 
 ## Lancer le projet
 
 Lancer le serveur symfony :  
+
+```yarn watch```
 
 ```symfony serve```
 

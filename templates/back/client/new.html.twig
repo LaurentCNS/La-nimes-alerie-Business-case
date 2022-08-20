@@ -3,9 +3,7 @@
 <title>New Client</title>
 
 {% block body %}
-    <h1>Create new Client</h1>
-
+    <h5>Create new Client</h5>
     {{ include('back/client/_form.html.twig') }}
-
     <a href="{{ path('app_admin_client_index') }}">back to list</a>
 {% endblock %}

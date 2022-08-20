@@ -1,10 +1,8 @@
 {% extends 'back/base.html.twig' %}
 
-
 {% block title %}
     Gestion commande
 {% endblock %}
-
 
 {% block body %}
 
@@ -17,114 +15,124 @@
         </div>
     </div>
 
-<div class="container-fluid my-2">
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>Commande numéro {{ panier.numeroCommande }}</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-12 mt-3">
-            <div class="mt-5 mb-3">
-                <table class="table">
-        <tbody>
-            <tr>
-                <th>Commande numéro</th>
-                <td>{{ panier.numeroCommande }}</td>
-            </tr>
-            <tr>
-                <th>du</th>
-                <td>{{ panier.datePaiement ? panier.datePaiement|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Adresse de facturation</th>
-                <td>{% if panier.adresse.genre.libelle == 'Madame' %} Mme {% endif%} {% if panier.adresse.genre.libelle == 'Monsieur' %} M. {% endif%}{{ panier.adresse.nom }} {{ panier.adresse.prenom }} <br>
-                    {{ panier.adresse.ligne1 }} <br>
-                    {% if panier.adresse.ligne2 %}
-                        {{ panier.adresse.ligne2 }} <br>
-                    {% endif %}
-                    {% if panier.adresse.ligne3 %}
-                        {{ panier.adresse.ligne3 }} <br>
-                    {% endif %}
-                    {{ panier.adresse.codePostal }} {{ panier.adresse.ville }} <br>
-                    {{ panier.adresse.pays }}<br>
-                    Tel {{ panier.adresse.telephone }}
-                </td>
-
-            </tr>
-            <tr>
-                <th>Adresse de livraison</th>
-                <td>{% if panier.adresse.genre.libelle == 'Madame' %} Mme {% endif%} {% if panier.adresse.genre.libelle == 'Monsieur' %} M. {% endif%}{{ panier.adresse.nom }} {{ panier.adresse.prenom }} <br>
-                {{ panier.adresse.ligne1 }} <br>
-                    {% if panier.adresse.ligne2 %}
-                {{ panier.adresse.ligne2 }} <br>
-                    {% endif %}
-                    {% if panier.adresse.ligne3 %}
-                {{ panier.adresse.ligne3 }} <br>
-                    {% endif %}
-                {{ panier.adresse.codePostal }} {{ panier.adresse.ville }} <br>
-                {{ panier.adresse.pays }}<br>
-                    Tel {{ panier.adresse.telephone }}
-                </td>
-
-            </tr>
-            <tr>
-                <th>Moyen de paiement</th>
-                <td>{{ panier.moyenPaiement.type }}</td>
-            </tr>
-            <tr>
-                <th>Compte client</th>
-                <td>{{ panier.client.username }}</td>
-            </tr>
-        <tr>
-            <th>Adresse Email</th>
-            <td>{{ panier.client.email }}</td>
-        </tr>
-        <tr>
-            <th>Votre commande</th>
-            <td>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                        </tr>
-                    </thead>
-                      <tbody>
-                            {% for ligne in panier.ligne %}
-                             <tr>
-                                  <td>LIBELLE: {{ ligne.libelle }} QTE: {{ ligne.quantite }} PUHT: {{ ligne.prix }}€
-                                      PRUTTC : {{ ligne.prix + ((ligne.prix * ligne.tva) / 100)|round(2) }}€ PVTTC : {{ ((ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite) |round(2) }}€ TVA: {{ ligne.tva }}%
-                                  </td>
-                             </tr>
-                            {% endfor %}
-                      </tbody>
-                    <thead>
-                    <tr>
-                        <th>Total TTC</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% set montant = 0 %}
-                            {% for ligne in panier.ligne %}
-                            {% set montant = montant + (ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite %}
-                                {% endfor %}
-                            <td>{{ montant | round(2) }}€</td>
-                        </tr>
-                    </tbody>
-                </table>
-        </tr>
-    </table>
-            </div>
+    <div class="container-fluid my-2">
+        <div class="row mt-5">
             <div class="d-flex justify-content-center">
-            <div class="col-4 mt-3">
-            <a href="{{ path('app_admin_commande_edit', {'id': panier.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier le statut') }}</button></a>
-            <a href="{{ path('app_admin_commande_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+                <div class="col-md-6 text-center">
+                    <h1>Commande numéro {{ panier.numeroCommande }}</h1>
+                </div>
             </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 mt-3">
+                <div class="mt-5 mb-3">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Commande numéro</th>
+                            <td>{{ panier.numeroCommande }}</td>
+                        </tr>
+                        <tr>
+                            <th>du</th>
+                            <td>{{ panier.datePaiement ? panier.datePaiement|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse de facturation</th>
+                            <td>{% if panier.adresse.genre.libelle == 'Madame' %} Mme {% endif %} {% if panier.adresse.genre.libelle == 'Monsieur' %} M. {% endif %}{{ panier.adresse.nom }} {{ panier.adresse.prenom }}
+                                <br>
+                                {{ panier.adresse.ligne1 }} <br>
+                                {% if panier.adresse.ligne2 %}
+                                    {{ panier.adresse.ligne2 }} <br>
+                                {% endif %}
+                                {% if panier.adresse.ligne3 %}
+                                    {{ panier.adresse.ligne3 }} <br>
+                                {% endif %}
+                                {{ panier.adresse.codePostal }} {{ panier.adresse.ville }} <br>
+                                {{ panier.adresse.pays }}<br>
+                                Tel {{ panier.adresse.telephone }}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>Adresse de livraison</th>
+                            <td>{% if panier.adresse.genre.libelle == 'Madame' %} Mme {% endif %} {% if panier.adresse.genre.libelle == 'Monsieur' %} M. {% endif %}{{ panier.adresse.nom }} {{ panier.adresse.prenom }}
+                                <br>
+                                {{ panier.adresse.ligne1 }} <br>
+                                {% if panier.adresse.ligne2 %}
+                                    {{ panier.adresse.ligne2 }} <br>
+                                {% endif %}
+                                {% if panier.adresse.ligne3 %}
+                                    {{ panier.adresse.ligne3 }} <br>
+                                {% endif %}
+                                {{ panier.adresse.codePostal }} {{ panier.adresse.ville }} <br>
+                                {{ panier.adresse.pays }}<br>
+                                Tel {{ panier.adresse.telephone }}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>Moyen de paiement</th>
+                            <td>{{ panier.moyenPaiement.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Compte client</th>
+                            <td>{{ panier.client.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse Email</th>
+                            <td>{{ panier.client.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Votre commande</th>
+                            <td>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ligne in panier.ligne %}
+                                        <tr>
+                                            <td>LIBELLE: {{ ligne.libelle }} QTE: {{ ligne.quantite }}
+                                                PUHT: {{ ligne.prix }}€
+                                                PRUTTC : {{ ligne.prix + ((ligne.prix * ligne.tva) / 100)|round(2) }}€
+                                                PVTTC
+                                                : {{ ((ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite) |round(2) }}
+                                                € TVA: {{ ligne.tva }}%
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <thead>
+                                    <tr>
+                                        <th>Total TTC</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        {% set montant = 0 %}
+                                        {% for ligne in panier.ligne %}
+                                            {% set montant = montant + (ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite %}
+                                        {% endfor %}
+                                        <td>{{ montant | round(2) }}€</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="col-4 mt-3">
+                        <a href="{{ path('app_admin_commande_edit', {'id': panier.id}) }}">
+                            <button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier le statut') }}</button>
+                        </a>
+                        <a href="{{ path('app_admin_commande_index') }}"><i
+                                    class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

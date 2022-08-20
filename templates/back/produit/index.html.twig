@@ -4,89 +4,76 @@
     Gestion produits
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
+        <div class="d-flex justify-content-center mt-3">
+            <div class="col-md-6 text-center">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 text-center">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-    <div class="d-flex justify-content-center mt-3">
-        <div class="col-md-6 text-center">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <div class="col-md-6 text-center">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    {{ form_start(filters) }}
-    <table class="table table-hover">
-        <thead class="table-primary">
+        {{ form_start(filters) }}
+        <table class="table table-hover">
+            <thead class="table-primary">
             <tr>
-                <th>{{
-                    knp_pagination_sortable(
-                    produits,
-                    'Nom',
-                    'produit.libelle'
-                    )|raw
-                    }}
+                <th>{{ knp_pagination_sortable(
+                        produits,
+                        'Nom',
+                        'produit.libelle'
+                    )|raw }}
                     {{ form_widget(filters.libelle) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         produits,
                         'Categorie',
                         'categorie.nom'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.categorie) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         produits,
                         'Date entrée',
                         'produit.dateEntree'
-                    )|raw
-                    }}
+                    )|raw }}
                     {{ form_widget(filters.dateEntree) }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                <th>{{ knp_pagination_sortable(
                         produits,
                         'Prix Ht',
                         'produit.prixHt'
-                    )|raw
-                    }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                    )|raw }}</th>
+                <th>{{ knp_pagination_sortable(
                         produits,
                         'Quantite en stock',
                         'produit.quantiteStock'
-                    )|raw
-                    }}</th>
-                <th>{{
-                    knp_pagination_sortable(
+                    )|raw }}</th>
+                <th>{{ knp_pagination_sortable(
                         produits,
                         'Est actif',
                         'produit.estActif'
-                    )|raw
-                    }}</th>
+                    )|raw }}</th>
                 <th>
                     <div>
                         <button type="submit" class="filter-action">
@@ -97,32 +84,35 @@
                     </div>
                 </th>
             </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.libelle }}</td>
-                <td>{{ produit.categorie.nom }}</td>
-                <td>{{ produit.dateEntree ? produit.dateEntree|date('d-m-Y') : '' }}</td>
-                <td>{{ produit.prixHt }}€</td>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.libelle }}</td>
+                    <td>{{ produit.categorie.nom }}</td>
+                    <td>{{ produit.dateEntree ? produit.dateEntree|date('d-m-Y') : '' }}</td>
+                    <td>{{ produit.prixHt }}€</td>
 
-                <td>{{ produit.quantiteStock }}</td>
-                <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
-                <td>
-                    <a class="pe-1" href="{{ path('app_admin_produit_show', {'id': produit.id}) }}"><i class="formFa fa-solid fa-eye ms-1"></i></a>
-                    <a class="pe-1" href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><i class="formFa fa-solid fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Désolé je n'ai rien trouvé :(</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ form_end(filters) }}
-    <div class="navigation d-flex justify-content-center mt-2">
-        {{ knp_pagination_render(produits) }}
+                    <td>{{ produit.quantiteStock }}</td>
+                    <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        <a class="pe-1" href="{{ path('app_admin_produit_show', {'id': produit.id}) }}"><i
+                                    class="formFa fa-solid fa-eye ms-1"></i></a>
+                        <a class="pe-1" href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><i
+                                    class="formFa fa-solid fa-pen"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Désolé je n'ai rien trouvé :(</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(filters) }}
+
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(produits) }}
+        </div>
     </div>
-</div>
 {% endblock %}

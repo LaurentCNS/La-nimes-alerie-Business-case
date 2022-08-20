@@ -1,104 +1,110 @@
 {% extends 'back/base.html.twig' %}
 
-
 {% block title %}
     Gestion produits
 {% endblock %}
 
-
 {% block body %}
 
-<div class="container-fluid my-2">
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>{{ produit.libelle }}</h1>
+    <div class="container-fluid my-2">
+
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h1>{{ produit.libelle }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-4 mt-3">
+                <div class="mt-5 mb-3">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Libelle</th>
+                            <td>{{ produit.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Marque</th>
+                            <td>{{ produit.marque.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Categorie</th>
+                            <td>{{ produit.categorie.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ produit.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo principale</th>
+                            <td>
+                                {% for photo in produit.photo %}
+                                    {% if photo.estPrincipale %}
+                                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
+                                             alt="{{ photo.url }}" width="100px" height="100px">
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Photo secondaire</th>
+                            <td>
+                                {% for photo in produit.photo %}
+                                    {% if not photo.estPrincipale %}
+                                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
+                                             alt="{{ photo.url }}" width="100px" height="100px">
+                                    {% else %}
+                                        Pas d'autre photo
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Date d'entrée</th>
+                            <td>{{ produit.dateEntree ? produit.dateEntree|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix HT</th>
+                            <td>{{ produit.prixHt }}€</td>
+                        </tr>
+                        <tr>
+                            <th>Prix TTC</th>
+                            <td>{{ produit.prixHt + ((produit.prixHt * produit.tva) / 100) | round(2) }}€</td>
+
+                        </tr>
+                        <tr>
+                            <th>EstActif</th>
+                            <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Quantite en stock</th>
+                            <td>{{ produit.quantiteStock }}</td>
+                        </tr>
+                        <tr>
+                            <th>Promotion</th>
+                            <td>{% if (produit.promotion) %}
+                                    {{ 100 - (produit.promotion.pourcentage * 100) }}%
+                                {% else %}
+                                    Aucune promotion
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Tva</th>
+                            <td>{{ produit.tva }}%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">
+                    <button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button>
+                </a>
+                <a href="{{ path('app_admin_produit_index') }}"><i
+                            class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i>
+                </a>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-4 mt-3">
-            <div class="mt-5 mb-3">
-                <table class="table">
-        <tbody>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ produit.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Marque</th>
-                <td>{{ produit.marque.nom }}</td>
-            </tr>
-            <tr>
-                <th>Categorie</th>
-                <td>{{ produit.categorie.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>Photo principale</th>
-                <td>
-                    {% for photo in produit.photo %}
-                        {% if photo.estPrincipale %}
-                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="{{ photo.url }}" width="100px" height="100px">
-                        {% endif %}
-                    {% endfor %}
-            </tr>
-            <tr>
-
-                <th>Photo secondaire</th>
-                <td>
-                    {% for photo in produit.photo %}
-                        {% if not photo.estPrincipale %}
-                        <img src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="{{ photo.url }}" width="100px" height="100px">
-                            {%  else %}
-                            Pas d'autre photo
-                        {% endif %}
-                    {% endfor %}
-            </tr>
-            <tr>
-                <th>Date d'entrée</th>
-                <td>{{ produit.dateEntree ? produit.dateEntree|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Prix HT</th>
-                <td>{{ produit.prixHt }}€ </td>
-            </tr>
-            <tr>
-                <th>Prix TTC</th>
-                <td>{{ produit.prixHt + ((produit.prixHt * produit.tva) / 100) | round(2) }}€</td>
-
-            </tr>
-            <tr>
-                <th>EstActif</th>
-                <td>{{ produit.estActif ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
-                <th>Quantite en stock</th>
-                <td>{{ produit.quantiteStock }}</td>
-            </tr>
-            <tr>
-                <th>Promotion</th>
-                <td>{% if (produit.promotion) %}
-                    {{ 100 - (produit.promotion.pourcentage * 100) }}%
-                {% else %}
-                    Aucune promotion
-                {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Tva</th>
-                <td>{{ produit.tva }}%</td>
-            </tr>
-        </tbody>
-    </table>
-            </div>
-            <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
-            <a href="{{ path('app_admin_produit_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

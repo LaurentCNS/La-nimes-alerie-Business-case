@@ -2,40 +2,44 @@
 
 
 {% block title %}
-    Gestion catégories
+	Gestion catégories
 {% endblock %}
 
 
 {% block body %}
 
-<div class="container-fluid my-2">
-    <div class="row mt-5">
-        <div class="d-flex justify-content-center">
-            <div class="col-md-6 text-center">
-                <h1>{{ categorie.nom }}</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-4 mt-3">
-            <div class="mt-5 mb-3">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ categorie.nom }}</td>
-            </tr>
-            <tr>
-                <th>Animal</th>
-                <td>{{ categorie.animal.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
-            </div>
-    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}"><button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button></a>
-            <a href="{{ path('app_admin_categorie_index') }}"><i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i></a>
-        </div>
-    </div>
-</div>
+	<div class="container-fluid my-2">
+		<div class="row mt-5">
+			<div class="d-flex justify-content-center">
+				<div class="col-md-6 text-center">
+					<h1>{{ categorie.nom }}</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center">
+			<div class="col-4 mt-3">
+				<div class="mt-5 mb-3">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Nom</th>
+								<td>{{ categorie.nom }}</td>
+							</tr>
+							<tr>
+								<th>Animal</th>
+								<td>{{ categorie.animal.libelle }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}">
+					<button class="btn btn-primary col-md-12 mt-5 mb-4">{{ button_label|default('Modifier') }}</button>
+				</a>
+				<a href="{{ path('app_admin_categorie_index') }}">
+					<i class="arrowMenu mt-5 fas fa-arrow-alt-circle-left"></i>
+				</a>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
