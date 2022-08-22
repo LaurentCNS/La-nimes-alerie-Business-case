@@ -1,0 +1,38 @@
+
+.infoCarousel{
+  padding-top: 100px;
+  width: 400px;
+}
+
+.carousel-caption{
+  position: absolute;
+  height: 100%;
+  width: 600px;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  color: white;
+  text-align: center;
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+
+  h5{
+    color: white;
+    font-size: 25px;
+    padding-top: 50px;
+  }
+
+  p{
+    color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+.carousel-control-prev{
+  padding-top: 250px;
+}
+
+.carousel-control-next{
+  padding-top: 250px;
+}

@@ -1,0 +1,41 @@
+<div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="{{ asset('build/img/main/catspace.png') }}" class="d-block w-100" alt="spaceX">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Nouveauté</h5>
+                <p>Grâce à notre partenariat inédit avec le géant américain SpaceX, envoyez votre animal préféré dans l’espace.</p>
+                <button type="button" class="btn btn-primary">En savoir plus</button>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+            <img src="{{ asset('build/img/main/dogcaroussel.png') }}" class="d-block w-100" alt="croquette pour chien">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Gage Qualité</h5>
+                <p>Nous sélectionnons chaque année les meilleurs croquettes du marché dont votre animal a besoin pour être en bonne santé.</p>
+                <button type="button" class="btn btn-primary">Voir produits</button>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+            <img src="{{ asset('build/img/main/promocaroussel.png') }}" class="d-block w-100" alt="promotion">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Promotions</h5>
+                <p>Découvrez les produits en promotions sur le site de 10% à 50%.</p>
+                <button type="button" class="btn btn-primary">Voir produits</button>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

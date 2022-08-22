@@ -3,7 +3,7 @@
 {% block title %}Accueil | La Nimes'alerie{% endblock %}
 
 {% block body %}
-  <!--NAV DE CHEMIN-->
+
   <div class="navbottom">
     <ul>
       <li><a href="#best">Meilleurs ventes</a></li>
@@ -13,4 +13,7 @@
       <li><a href="#review">Avis clients</a></li>
     </ul>
   </div>
+
+  {% include 'front/partials/_carousel.html.twig' %}
+
 {% endblock %}
