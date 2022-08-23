@@ -3,6 +3,7 @@
 namespace App\Controller\front;
 
 use App\Entity\NbVisites;
+use App\Repository\AnimalRepository;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,13 +15,12 @@ class HomeController extends AbstractController
 {
     public function __construct(        
         private EntityManagerInterface $entityManager,
-        private PanierRepository $panierRepository,
       )
   {}
 
 
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(AnimalRepository $animalRepository): Response
     {
 
         // Ajouter une ligne date dans la table nbVisites
@@ -32,6 +32,7 @@ class HomeController extends AbstractController
         
         return $this->render('front/home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'animals' => $animalRepository->findAll(),
         ]);
     }
     

@@ -1,0 +1,179 @@
+.cardAnimal{
+  width: 100%;
+  height: 150px;
+  cursor: pointer;
+
+  .picture{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    > img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5%;
+      object-fit: cover;
+      object-position: top center;
+      background-repeat: no-repeat;
+      transition: transform .1s;
+      filter: brightness(0.5);
+    }
+  }
+
+  .card-animal-description{
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    font-size: 27px;
+    transition: transform .1s;
+    > p {
+      position: relative;
+    }
+  }
+  &:hover{
+    transform: scale(1.05);
+    .picture{
+      > img {
+        filter: brightness(1);
+      }
+    }
+    .card-animal-description{
+      > p {
+        display: none;
+      }
+    }
+  }
+}
+
+#best{
+
+  a{
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  h3{
+    color: grey;
+    font-weight: bold;
+  }
+
+  .cardBest{
+    border-radius: 5%;
+    box-shadow: 0 3px 10px #E7E7E6;
+    transition: transform .1s;
+    cursor: pointer;
+
+    .picture{
+      width: 100%;
+      height: 100%;
+      > img {
+        width: 90%;
+        height: 90%;
+        margin-left: 10px;
+        object-fit: cover;
+        object-position: top center;
+        background-repeat: no-repeat;
+      }
+    }
+    .price{
+      color: #B25245 ;
+    }
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}
+
+#brandnew{
+
+  a{
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  h3{
+    color: grey;
+    font-weight: bold;
+  }
+
+  .cardBest{
+    border-radius: 5%;
+    box-shadow: 0 3px 10px #E7E7E6;
+    transition: transform .1s;
+    cursor: pointer;
+
+    .picture{
+      width: 100%;
+      height: 100%;
+      > img {
+        width: 90%;
+        height: 90%;
+        margin-left: 10px;
+        object-fit: cover;
+        object-position: top center;
+        background-repeat: no-repeat;
+      }
+    }
+    .price{
+      color: #B25245 ;
+    }
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}
+
+
+#promo{
+
+  a{
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  h3{
+    color: grey;
+    font-weight: bold;
+  }
+
+  .cardPromo{
+    border-radius: 5%;
+    box-shadow: 0 3px 10px #E7E7E6;
+    transition: transform .1s;
+    cursor: pointer;
+
+    .picture{
+      width: 100%;
+      height: 100%;
+      > img {
+        width: 90%;
+        height: 90%;
+        margin-left: 10px;
+        object-fit: cover;
+        object-position: top center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .price{
+      color: #B25245 ;
+    }
+
+    .container-promo{
+        margin-top: 22px;
+        width: 60px;
+        border-radius: 0.5rem;
+        padding: 0.3rem 0.7rem;
+        background-color: $bleutheme;
+        color: $orange;
+        font-weight: 700;
+    }
+
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}
