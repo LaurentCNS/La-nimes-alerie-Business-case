@@ -89,7 +89,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6 mt-5">
                         <div class="row d-flex justify-content-center">
-                            <p class="mb-0 fw-bolder">Inscrivez-vous à notre newsletter pour ne rien manquer de nos nouveautés</p>
+                            <p class="mb-0 fw-bolder">Inscrivez-vous à notre newsletter pour ne rien manquer de nos
+                                nouveautés</p>
                             <hr>
                         </div>
                         <div class="row d-flex justify-content-center mt-2 mb-3">
@@ -104,16 +105,22 @@
         </div>
     </div>
 
-{#    <div id="review" class="mt-5 mb-5">#}
-{#        <div class="container">#}
-{#            <div class="col-md-12">#}
-{#                <div class="row d-flex justify-content-center">#}
-{#                    <h3>Avis client</h3>#}
-{#                    <hr>#}
-{#                    #}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    <div id="review" class="mt-5 mb-5">
+        <div class="container">
+            <div class="col-md-12">
+                <h3>Avis client</h3>
+                <hr>
+                <div class="row d-flex justify-content-around">
+                    {% include 'front/partials/_review.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <a href="#header"><button  type="button" class="btn btn-primary mt-5">Haut de page</button></a>
+        </div>
+    </div>
 
 {% endblock %}

@@ -201,3 +201,32 @@
         color: #1b1b1b;
     }
 }
+
+#review{
+
+  h3{
+    color: grey;
+    font-weight: bold;
+  }
+
+  .cardReview{
+    border-radius: 5%;
+    box-shadow: 0 3px 10px #E7E7E6;
+
+    .picture{
+
+      > img {
+        width: 115px;
+        height: 115px;
+        object-fit: cover;
+        object-position: top center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+      }
+    }
+
+    .starReview{
+      color: #e5b90d;
+    }
+  }
+}
