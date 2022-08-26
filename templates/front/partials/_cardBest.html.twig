@@ -1,15 +1,36 @@
-<div class="col-6 col-sm-4 col-md-4 col-xl-2 mt-4 mb-5">
-    <div class="cardBest">
-        <a href="">
-            <div class="picture">
-                <img class="mt-3" src="{{ asset('build/img/home/dog.png') }}" alt="chien">
+{# boucle sur 'meilleurProduits' avec une limite à 6 #}
+
+    {% for produit in meilleursProduits|slice(0, 6) %}
+        <div class="col-12 col-sm-6 col-md-4 col-xl-2 mt-4 mb-5 test">
+            <div class="cardBest">
+                <a href="">
+                    <div class="picture">
+                        {% for photo in produit.photo %}
+                            <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
+                                 alt="{{ produit.libelle }}">
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <h5 class="title-best mt-1 mb-3 mx-3">{{ produit.libelle |slice(0,30) }}</h5>
+                        <p class="resume-best mx-3 lh-1">{{ produit.resume | slice(0,43) }}</p>
+                        {# Gestion des notes #}
+                        {% if produit.avis is not empty %}
+                            {% set count = 0 %}
+                            {% set totalNote = 0 %}
+                            {% for avis in produit.getAvis %}
+                                {% set count = count + 1 %}
+                                {% set totalNote = totalNote + avis.note %}
+                            {% endfor %}
+                            {% set star = totalNote / count %}
+                        {% else %}
+                            {% set star = 'empty' %}
+                        {% endif %}
+                        {% include 'front/partials/_notes.html.twig' %}
+                        <p class="price mx-3 pb-3 fw-bolder">{{ produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2) }}
+                            €</p>
+                    </div>
+                </a>
             </div>
-            <div>
-                <h5 class="mt-1 mb-3 mx-3">Titre</h5>
-                <p class="mx-3 lh-1">Low grain, faible teneur en cereales 12kg</p>
-                <p class="mx-3">note produit</p>
-                <p class="price mx-3 pb-3 fw-bolder">25,80€</p>
-            </div>
-        </a>
-    </div>
-</div>
+        </div>
+    {% endfor %}
+

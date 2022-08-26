@@ -1,11 +1,71 @@
 App\Entity\Photo:
-    photo{0..50}:
-        url: 'https://media.croqlavie.fr/596-medium_default/croquettes-pour-petit-chien-pure-serenite.jpg'
+    photo0:
+        url: 'ultrapremium_croquettes_chiens.png'
         est_principale: true
-        produit: '@produit*'
+        produit: '@produit0'
 
-    photo{0..20}:
-        url: 'https://www.croquettesdefrance.fr/wp-content/uploads/2018/10/etiquette-25105kg.jpg'
+    photo1:
+        url: 'ultrapremium_croquettes_chiens_2.png'
         est_principale: false
-        produit: '@produit*'
+        produit: '@produit0'
+
+    photo2:
+        url: 'animalis_nourriture_poissons.png'
+        est_principale: true
+        produit: '@produit1'
+
+    photo3:
+        url: 'animalis_nourriture_poissons_2.png'
+        est_principale: false
+        produit: '@produit1'
+
+    photo4:
+        url: 'dodog_niche_chiens.png'
+        est_principale: true
+        produit: '@produit2'
+
+    photo5:
+        url: 'dodog_niche_chiens_2.png'
+        est_principale: false
+        produit: '@produit2'
+
+    photo6:
+        url: 'orijen_nourriture_chat.png'
+        est_principale: true
+        produit: '@produit3'
+
+    photo7:
+        url: 'orijen_nourriture_chat_2.png'
+        est_principale: false
+        produit: '@produit3'
+
+    photo8:
+        url: 'surflap_chatiere.png'
+        est_principale: true
+        produit: '@produit4'
+
+    photo9:
+        url: 'surflap_chatiere_2.png'
+        est_principale: false
+        produit: '@produit4'
+
+    photo10:
+        url: 'gourmet_nourriture_chats.png'
+        est_principale: true
+        produit: '@produit5'
+
+    photo11:
+        url: 'gourmet_nourriture_chats_2.png'
+        est_principale: false
+        produit: '@produit5'
+
+    photo12:
+        url: 'gravier_dennerle_poisson.png'
+        est_principale: false
+        produit: '@produit5'
+
+    photo13:
+        url: 'gravier_dennerle_poisson_2.png'
+        est_principale: false
+        produit: '@produit5'
         

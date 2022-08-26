@@ -114,13 +114,13 @@ App\Entity\Categorie:
         animal: '@animal5'
 
     categorie23:
-        nom: 'Croquettes'
+        nom: 'Croquettes chiens'
         animal: '@animal0'
         parent: '@categorie0'
         
 
     categorie24:
-        nom: 'Croquettes bio'
+        nom: 'Croquettes bio chiens'
         animal: '@animal0'
         parent: '@categorie0'
 

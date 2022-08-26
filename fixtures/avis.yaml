@@ -1,7 +1,42 @@
 App\Entity\Avis:
-    avis{0..250}:
+    avis{0..10}:
         date_avis: '<dateTimeBetween("-3000 days", "now")>'
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
-        note: '<numberBetween(0, 10)>'
-        produit: '@produit*'
+        note: '5'
+        produit: '@produit0'
+        client: '@client*'
+
+    avis{11..20}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '5'
+        produit: '@produit1'
+        client: '@client*'
+
+    avis{21..30}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '5'
+        produit: '@produit2'
+        client: '@client*'
+
+    avis{31..40}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '5'
+        produit: '@produit3'
+        client: '@client*'
+
+    avis{41..50}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '5'
+        produit: '@produit4'
+        client: '@client*'
+
+    avis{51..60}:
+        date_avis: '<dateTimeBetween("-3000 days", "now")>'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+        note: '5'
+        produit: '@produit5'
         client: '@client*'

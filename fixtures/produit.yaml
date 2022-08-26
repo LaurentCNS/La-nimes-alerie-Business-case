@@ -1,34 +1,91 @@
 App\Entity\Produit:
-    produit{0..50}:
-        libelle: '<word(3)>'
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+    produit0:
+        libelle: 'Ultra premium croquettes chiens'
+        description: "Nos croquettes Super Premium pour chien de grande taille (>30Kg) sont adaptées aux grands gabarits grâce à leur dimension (16mm). Riches en ingrédients d'origine animale, elles sont fabriquées sans blé et sans gluten pour offrir à votre chien une alimentation adaptée à ses vrais besoins."
+        resume: 'Chien adulte grande taille (>30Kg)'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20.49
+        prix_ht: 40.99
         est_actif: true
-        tva: 10
-        categorie: '@categorie*'
-        marque: '@marque*'
-        quantiteStock: <numberBetween(1, 30)>
+        tva: 20
+        categorie: '@categorie23'
+        marque: '@marque10'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'ultra-premium-croquettes-chiens'
 
-    produit{51..65}:
-        libelle: '<word(3)>'
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+    produit1:
+        libelle: 'Animalis'
+        description: "L'aliment en flocons Animalis pour poissons rouges est un aliment complet, enrichi en Vitamines C, E, A et D3 et en Omégas 3 et 6 pour donner le meilleur à vos poissons d'eau froide."
+        resume: 'Granulés haute qualité pour poissons rouges'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20.49
+        prix_ht: 6.99
         est_actif: true
-        tva: 10
-        categorie: '@categorie*'
-        marque: '@marque*'
-        promotion: '@promotion*'
-        quantiteStock: <numberBetween(1, 30)>
+        tva: 20
+        categorie: '@categorie70'
+        marque: '@marque11'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'animalis'
 
-    produit{66..75}:
-        libelle: '<word(3)>'
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+    produit2:
+        libelle: 'Dodog'
+        description: "La grotte douillette grise séduit par son design sobre et élégant qui s’adapte parfaitement aux styles d‘installation les plus variés. La housse extérieure et une face du coussin ont un aspect velours surpiqué en forme de diamant."
+        resume: 'Niche pour chien type grotte'
         date_entree: '<dateTimeBetween("-6000 days", "now")>'
-        prix_ht: 20.49
-        est_actif: false
-        tva: 10
-        categorie: '@categorie*'
-        marque: '@marque*'
-        quantiteStock: 0
+        prix_ht: 25.99
+        est_actif: true
+        tva: 20
+        categorie: '@categorie30'
+        marque: '@marque12'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'dodog'
+
+    produit3:
+        libelle: 'Orijen croquettes chat'
+        description: "Orijen est une marque de croquettes pour chats et chiens qui propose des aliments riches en viande et en poissons. Les croquettes Orijen sont fabriquées à partir d’ingrédients frais et de qualité supérieure."
+        resume: 'Croquettes pour chat'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 20.99
+        est_actif: true
+        tva: 20
+        categorie: '@categorie42'
+        marque: '@marque13'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'orijen-croquettes-chat'
+
+    produit4:
+        libelle: 'Surflap chatière'
+        description: "La chatière Surflap est une chatière qui permet à votre chat de sortir et rentrer à sa guise. Elle est équipée d'un système de fermeture automatique qui permet à votre chat de sortir et rentrer à sa guise."
+        resume: 'Chatière pour chat'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 60.99
+        est_actif: true
+        tva: 20
+        categorie: '@categorie49'
+        marque: '@marque14'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'surflap-chatiere'
+
+    produit5:
+        libelle: 'Gourmet gold'
+        description: "Votre chat aime les pâtés particulièrement fins et vous souhaitez gâter votre gourmet avec une large sélection de saveurs ? C’est pour cette raison que GOURMET Gold a créé des pâtés fins."
+        resume: 'Pâté pour chat x96'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 40.99
+        est_actif: true
+        tva: 20
+        categorie: '@categorie45'
+        marque: '@marque15'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'gourmet-gold'
+
+    produit6:
+        libelle: 'Dennerle Gravier quartz'
+        description: "Le gravier quartz Dennerle est un gravier de qualité. Il est idéal pour les aquariums d'eau douce et d'eau de mer. Il est très décoratif et permet de créer des paysages aquatiques très variés."
+        resume: 'Gravier pour aquarium'
+        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        prix_ht: 22.43
+        est_actif: true
+        tva: 20
+        categorie: '@categorie72'
+        marque: '@marque16'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'dennerle-gravier-quartz'

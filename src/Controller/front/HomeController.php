@@ -5,6 +5,7 @@ namespace App\Controller\front;
 use App\Entity\NbVisites;
 use App\Repository\AnimalRepository;
 use App\Repository\PanierRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class HomeController extends AbstractController
 
 
     #[Route('/', name: 'app_home')]
-    public function index(AnimalRepository $animalRepository): Response
+    public function index(AnimalRepository $animalRepository, ProduitRepository $produitRepository): Response
     {
 
         // Ajouter une ligne date dans la table nbVisites
@@ -29,10 +30,14 @@ class HomeController extends AbstractController
         $this->entityManager->persist($nbVisites);
         $this->entityManager->flush();
 
+        // Recuperer les meilleurs produits
+        $meilleursProduits = $produitRepository->getBestProducts();
+
         
         return $this->render('front/home/index.html.twig', [
             'controller_name' => 'HomeController',
             'animals' => $animalRepository->findAll(),
+            'meilleursProduits' => $meilleursProduits,
         ]);
     }
     

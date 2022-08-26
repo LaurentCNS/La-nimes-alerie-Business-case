@@ -118,6 +118,9 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $resume = null;
+
     public function __construct()
     {
         $this->photo = new ArrayCollection();
@@ -373,6 +376,18 @@ class Produit
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getResume(): ?string
+    {
+        return $this->resume;
+    }
+
+    public function setResume(string $resume): self
+    {
+        $this->resume = $resume;
 
         return $this;
     }

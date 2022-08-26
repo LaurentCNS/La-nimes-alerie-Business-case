@@ -98,4 +98,21 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ;
     }
 
+    //Recuperer les meilleurs produits qui ont une note egale à 5 pour la page home
+    public function getBestProducts(): array
+    {
+        $qb = $this->createQueryBuilder('produit')
+            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->leftJoin('produit.marque', 'marque')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('avis.note = 5' )
+            ->orderBy('produit.dateEntree', 'ASC')
+            ;
+        return $qb->getQuery()->getResult();
+    }
+
 }

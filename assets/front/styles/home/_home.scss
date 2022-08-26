@@ -97,9 +97,10 @@
   h3{
     color: grey;
     font-weight: bold;
+    height: 30px;
   }
 
-  .cardBest{
+  .cardNew{
     border-radius: 5%;
     box-shadow: 0 3px 10px #E7E7E6;
     transition: transform .1s;
@@ -124,6 +125,14 @@
       transform: scale(1.05);
     }
   }
+}
+
+.title-best{
+  height: 60px;
+}
+
+.resume-best{
+  height: 48px;
 }
 
 

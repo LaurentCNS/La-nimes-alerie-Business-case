@@ -27,9 +27,29 @@ App\Entity\Marque:
         nom: 'Applaws'  
 
     marque9: 
-        nom: 'Cats love' 
+        nom: 'Cats love'
 
     marque10:
-        nom: 'Catslab' 
+        nom: 'Ultra premium'
+
+    marque11:
+        nom: 'Animalis'
+
+    marque12:
+        nom: 'Dodog'
+
+    marque13:
+        nom: 'Orijen'
+
+    marque14:
+        nom: 'Surflap'
+
+    marque15:
+        nom: 'Gourmet'
+
+    marque16:
+        nom: 'Dennerle'
+
+
     
         
