@@ -84,4 +84,18 @@
   }
 }
 
+#userReview{
+  margin-top: 120px;
+  margin-bottom: 120px;
 
+  .topReview {
+    background-color: #f4f4f4;
+  }
+  .star{
+    font-size: 1.4rem;
+  }
+  .tableReview{
+    font-size: 0.8rem;
+    background-color: white;
+  }
+}

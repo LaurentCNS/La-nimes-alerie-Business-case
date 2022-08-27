@@ -1,0 +1,17 @@
+<div class="tableReview">
+    <table class="table table-hover">
+        <tbody>
+        {% for avis in avisProduit %}
+            <tr>
+                <td>Publié par {{ avis.client.userName }}</td>
+                <td>{{ avis.note }}/5</td>
+                <td>{{ avis.description }}</td>
+                <td>{{ avis.dateAvis | date('d/m/Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="navigation d-flex justify-content-center mt-2 mb-3">
+    {{ knp_pagination_render(avisProduit) }}
+</div>
