@@ -1,6 +1,6 @@
 
 .footer {
-  margin-top: 300px;
+    margin-top: 300px;
     height: 320px;
     background-color: $bleutheme;
     background-image: radial-gradient(circle at 62% 38%, $bleutheme 0, $bleufonce 100%);
@@ -115,6 +115,9 @@
       }
     }
   }
+  .polygon{
+    display: none;
+  }
 }
 
 @media (max-width: 580px) {
@@ -144,6 +147,12 @@
         margin-left: 95px;
       }
     }
+  }
+}
+
+@media (min-width: 2500px) {
+  .polygon{
+    display: none;
   }
 }
 

@@ -59,32 +59,6 @@
     color: grey;
     font-weight: bold;
   }
-
-  .cardBest{
-    border-radius: 5%;
-    box-shadow: 0 3px 10px #E7E7E6;
-    transition: transform .1s;
-    cursor: pointer;
-
-    .picture{
-      width: 100%;
-      height: 100%;
-      > img {
-        width: 90%;
-        height: 90%;
-        margin-left: 10px;
-        object-fit: cover;
-        object-position: top center;
-        background-repeat: no-repeat;
-      }
-    }
-    .price{
-      color: #B25245 ;
-    }
-    &:hover{
-      transform: scale(1.05);
-    }
-  }
 }
 
 #brandnew{
@@ -98,32 +72,6 @@
     color: grey;
     font-weight: bold;
     height: 30px;
-  }
-
-  .cardNew{
-    border-radius: 5%;
-    box-shadow: 0 3px 10px #E7E7E6;
-    transition: transform .1s;
-    cursor: pointer;
-
-    .picture{
-      width: 100%;
-      height: 100%;
-      > img {
-        width: 90%;
-        height: 90%;
-        margin-left: 10px;
-        object-fit: cover;
-        object-position: top center;
-        background-repeat: no-repeat;
-      }
-    }
-    .price{
-      color: #B25245 ;
-    }
-    &:hover{
-      transform: scale(1.05);
-    }
   }
 }
 
@@ -146,44 +94,6 @@
   h3{
     color: grey;
     font-weight: bold;
-  }
-
-  .cardPromo{
-    border-radius: 5%;
-    box-shadow: 0 3px 10px #E7E7E6;
-    transition: transform .1s;
-    cursor: pointer;
-
-    .picture{
-      width: 100%;
-      height: 100%;
-      > img {
-        width: 90%;
-        height: 90%;
-        margin-left: 10px;
-        object-fit: cover;
-        object-position: top center;
-        background-repeat: no-repeat;
-      }
-    }
-
-    .price{
-      color: #B25245 ;
-    }
-
-    .container-promo{
-        margin-top: 22px;
-        width: 60px;
-        border-radius: 0.5rem;
-        padding: 0.3rem 0.7rem;
-        background-color: $bleutheme;
-        color: $orange;
-        font-weight: 700;
-    }
-
-    &:hover{
-      transform: scale(1.05);
-    }
   }
 }
 

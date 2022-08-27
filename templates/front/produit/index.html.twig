@@ -81,7 +81,7 @@
                             {% include 'front/partials/_notes.html.twig' %}
                         </div>
                         <div class="col-8 ps-0">
-                            nb avis ({{ count }})
+                            <a href="#review">nb avis ({{ count }})</a>
                         </div>
                     </div>
                     <p>{{ produit.description }}</p>
@@ -102,14 +102,23 @@
                             </div>
                         {% endif %}
                     </div>
-                    <div class="row d-flex mt-5">
+                    <div class="price mt-3 ms-3">
+                        {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
+                        {% if produit.promotion is null %}
+                            {{ price }}€
+                        {% else %}
+                            {% set promo = produit.promotion.pourcentage %}
+                            <div class="oldPrice">{{ price }}€</div>
+                            {{ (price*promo) | round(2,'floor') }}€
+                        {% endif %}
+                    </div>
+                    <div class="row d-flex mt-3">
                         {% if app.user %}
                         <div class="col-1 pe-0 text-center">
                             <i class="fas fa-heart"></i>
                         </div>
                         <div class="ms-3 col-8 ps-0">
-{#                            <a href="{{ path('app_add_favorite', {'id': produit.id}) }}">Ajouter aux favoris</a>#}
-                            <a href="">Ajouter aux favoris</a>
+                            <a href="{{ path('app_add_favorite', {'slug': produit.slug}) }}">Ajouter aux favoris</a>
                         </div>
                         {% else %}
                         <div class="col-1 pe-0 text-center">
@@ -163,5 +172,67 @@
     </div>
 </div>
 
+    <div id="associate" class="mt-5">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row d-flex justify-content-center">
+                    <h3>Les clients ont également acheté</h3>
+                    <hr>
+                    {% include 'front/partials/_associate.html.twig' %}
+                    {% include 'front/partials/_associate.html.twig' %}
+                    {% include 'front/partials/_associate.html.twig' %}
+                    {% include 'front/partials/_associate.html.twig' %}
+                    {% include 'front/partials/_associate.html.twig' %}
+                    {% include 'front/partials/_associate.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="review">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row d-flex justify-content-center">
+                    <div class="topReview">
+                        <div class="star mt-3">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="mb-1">Avis sur le produit:</p>
+                                </div>
+                                <div class="col-12 p-0 text-center">
+                            {% include 'front/partials/_notes.html.twig' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="recommendation" class="mt-5">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row d-flex justify-content-center">
+                    <h3>Ces produits pourraient vous plaire</h3>
+                    <hr>
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                    {% include 'front/partials/_recommendation.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <a href="#header"><button  type="button" class="btn btn-primary mt-5">Haut de page</button></a>
+        </div>
+    </div>
 
     {% endblock %}
