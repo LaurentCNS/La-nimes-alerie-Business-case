@@ -3,7 +3,7 @@
     {% for produit in meilleursProduits|slice(0, 6) %}
         <div class="col-12 col-sm-6 col-md-4 col-xl-2 mt-4 mb-5 test">
             <div class="cardBest">
-                <a href="">
+                <a href="{{ path('app_produit', {'slug': produit.slug}) }}">
                     <div class="picture">
                         {% for photo in produit.photo %}
                             <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"

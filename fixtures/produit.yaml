@@ -9,7 +9,7 @@ App\Entity\Produit:
         tva: 20
         categorie: '@categorie23'
         marque: '@marque10'
-        quantiteStock: <numberBetween(5, 30)>
+        quantiteStock: '0'
         slug: 'ultra-premium-croquettes-chiens'
 
     produit1:

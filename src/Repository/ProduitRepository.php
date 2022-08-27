@@ -115,4 +115,23 @@ class ProduitRepository extends AbstractLanimalerieRepository
         return $qb->getQuery()->getResult();
     }
 
+    //Recuperer un produit avec un slug en parametre pour la page produit (avec photo principale)
+    public function getProductBySlug(string $slug): ?Produit
+    {
+        $qb = $this->createQueryBuilder('produit')
+            ->select('produit','promotion', 'marque', 'categorie','photo','animal')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->leftJoin('produit.marque', 'marque')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.photo', 'photo')
+            ->leftJoin('categorie.animal', 'animal')
+            ->where('produit.slug = :slug')
+            ->setParameter('slug', $slug)
+            ;
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+
+
+
 }

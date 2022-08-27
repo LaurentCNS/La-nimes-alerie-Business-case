@@ -214,6 +214,7 @@ class Produit
         return $this->photo;
     }
 
+
     public function addPhoto(Photo $photo): self
     {
         if (!$this->photo->contains($photo)) {

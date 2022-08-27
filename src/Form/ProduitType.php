@@ -25,7 +25,7 @@ class ProduitType extends AbstractType
             ->add('description', TextareaType::class)
             //ajouter une photo principale
             ->add('photoPrincipale', FileType::class, [
-                'label' => 'Photo principale',
+                'label' => 'Photo principale (obligatoire)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -39,6 +39,32 @@ class ProduitType extends AbstractType
             //ajouter une photo secondaire
             ->add('photoSecondaire', FileType::class, [
                 'label' => 'Photo secondaire',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '2048k',
+                        mimeTypes: ['image/png', 'image/jpeg'],
+//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
+                    )
+                ]
+            ])
+            //ajouter une 3eme secondaire
+            ->add('troisiemePhoto', FileType::class, [
+                'label' => 'Troisème photo',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '2048k',
+                        mimeTypes: ['image/png', 'image/jpeg'],
+//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
+                    )
+                ]
+            ])
+            //ajouter une 4eme secondaire
+            ->add('quatriemePhoto', FileType::class, [
+                'label' => 'Quatrième photo',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

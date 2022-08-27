@@ -41,6 +41,10 @@ $beige: #DDD2BC;
     &:hover, &:focus, &:active {
         background-color: #E19F30;
     }
+
+    &:disabled {
+        background-color: grey;
+    }
 }
 
 // SYSTEME DE NOTATION //

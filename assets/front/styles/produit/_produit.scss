@@ -1,0 +1,41 @@
+#fastIndex{
+    a{
+    text-decoration: none;
+    color: black;
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+#productDetail{
+  .cardLeft{
+    .cardProduct{
+      height: 95%;
+      width: 95%;
+      box-shadow: 0 3px 10px #E7E7E6;
+    }
+    .miniature{
+      border: 1px solid #E7E7E6;
+      transition: transform .1s;
+      cursor: pointer;
+
+        &:hover{
+          transform: scale(1.05);
+        }
+    }
+
+  }
+
+  .cardRight{
+    .formQt{
+      width: 58px;
+    }
+    .button{
+      width: 38px;
+    }
+    .addCard{
+      width: 168px;
+    }
+  }
+}
