@@ -31,11 +31,21 @@ class HomeController extends AbstractController
         $this->entityManager->flush();
 
         // Récupérer les meilleurs produits
-        $meilleursProduits = $produitRepository->getBestProducts();
+        $produits = $produitRepository->getProducts();
+
+        // Ajouter dans un tableau d'objet les produits ayant une moyenne de note supérieure à 4.5
+        $meilleursProduits = [];
+        foreach ($produits as $produit) {
+            if ($produit->getMoyenne() > 4.5) {
+                $meilleursProduits[] = $produit;
+            }
+        }
+        // Renvoyer seulement les 6 premiers produits
+        $meilleursProduits = array_slice($meilleursProduits, 0, 6);
+
 
         // Récupérer les nouveaux produits
         $nouveauxProduits = $produitRepository->getNewProducts();
-        dump($nouveauxProduits);
 
         // Récupérer les produits en promotions
         $promoProduits = $produitRepository->getPromoProducts();

@@ -269,6 +269,21 @@ class Produit
         return $this->avis;
     }
 
+    // récuperer la moyenne des notes des avis
+    public function getMoyenne(): ?float
+    {
+        $moyenne = 0;
+        $nbAvis = 0;
+        foreach ($this->avis as $avis) {
+            $moyenne += $avis->getNote();
+            $nbAvis++;
+        }
+        if ($nbAvis > 0) {
+            $moyenne /= $nbAvis;
+        }
+        return $moyenne;
+    }
+
     public function addAvi(Avis $avi): self
     {
         if (!$this->avis->contains($avi)) {

@@ -98,8 +98,8 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ;
     }
 
-    //Recuperer les meilleurs produits qui ont une note egale à 5 et les plus anciens pour la page home
-    public function getBestProducts(): array
+    //Récupérer les produits actifs avec la photo principale triés par les plus anciens pour la page home
+    public function getProducts(): array
     {
         $qb = $this->createQueryBuilder('produit')
             ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
@@ -109,18 +109,18 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->leftJoin('produit.photo', 'photo')
             ->leftJoin('produit.avis', 'avis')
             ->where('photo.estPrincipale = 1')
-            ->andWhere('avis.note = 5' )
             ->andWhere('produit.estActif = 1')
             ->orderBy('produit.dateEntree', 'ASC')
+
             ;
         return $qb->getQuery()->getResult();
     }
 
-    //Recuperer les nouveaux produits, date ordre décroissant, pour la page home
+    //Recuperer les produits par la date la plus récente, pour la page home
     public function getNewProducts(): array
     {
         $qb = $this->createQueryBuilder('produit')
-            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+                ->select('produit','promotion', 'marque', 'categorie','photo')
             ->leftJoin('produit.promotion', 'promotion')
             ->leftJoin('produit.marque', 'marque')
             ->leftJoin('produit.categorie', 'categorie')
