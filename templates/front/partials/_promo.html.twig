@@ -1,20 +1,25 @@
-<div class="col-6 col-sm-4 col-md-4 col-xl-2 mt-4 mb-5">
-    <div class="cardPromo">
-        <a href="">
-            <div class="picture">
-                <img class="mt-3" src="{{ asset('build/img/home/dog.png') }}" alt="chien">
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <p class="mb-0 mx-3 mt-3 fw-bolder"><s>30,19€</s></p>
-                    <p class="price mx-3 pb-2 fw-bolder">25,80€</p>
+{% for produit in promoProduit|slice(0, 6) %}
+    <div class="col-6 col-sm-4 col-md-4 col-xl-2 mt-4 mb-5">
+        <div class="cardPromo">
+            <a href="{{ path('app_produit', {'slug': produit.slug}) }}">
+                <div class="picture">
+                    {% for photo in produit.photo %}
+                    <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="{{ produit.libelle }}">
+                    {% endfor %}
                 </div>
-                <div class="col-6">
-                    <div class="container-promo">
-                        -20%
+                <div class="row">
+                    <div class="col-6">
+                        {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
+                        <p class="mb-0 mx-3 mt-3 fw-bolder"><s>{{ price }}€</s></p>
+                        <p class="price mx-3 pb-2 fw-bolder">{{ (price * produit.promotion.pourcentage) | round(2,'floor') }}€</p>
+                    </div>
+                    <div class="col-6">
+                        <div class="container-promo">
+                            -{{ 100-(produit.promotion.pourcentage * 100) }}%
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
-</div>
+{% endfor %}

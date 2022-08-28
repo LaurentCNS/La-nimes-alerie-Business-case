@@ -30,14 +30,23 @@ class HomeController extends AbstractController
         $this->entityManager->persist($nbVisites);
         $this->entityManager->flush();
 
-        // Recuperer les meilleurs produits
+        // Récupérer les meilleurs produits
         $meilleursProduits = $produitRepository->getBestProducts();
+
+        // Récupérer les nouveaux produits
+        $nouveauxProduits = $produitRepository->getNewProducts();
+        dump($nouveauxProduits);
+
+        // Récupérer les produits en promotions
+        $promoProduits = $produitRepository->getPromoProducts();
 
         
         return $this->render('front/home/index.html.twig', [
             'controller_name' => 'HomeController',
             'animals' => $animalRepository->findAll(),
             'meilleursProduits' => $meilleursProduits,
+            'nouveauxProduits' => $nouveauxProduits,
+            'promoProduit' => $promoProduits,
         ]);
     }
     

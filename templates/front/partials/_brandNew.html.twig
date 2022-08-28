@@ -1,18 +1,41 @@
-<div class="col-6 col-sm-4 col-md-4 col-xl-2 mt-4 mb-3">
-    <div class="cardMini">
-        <a href="">
-            <div class="picture">
-                <img class="mt-3" src="{{ asset('build/img/home/dog.png') }}" alt="chien">
-            </div>
-            <div>
+{% for produit in nouveauxProduits|slice(0, 12) %}
+    <div class="col-6 col-sm-4 col-md-4 col-xl-2 mt-4 mb-3">
+        <div class="cardMini">
+            <a href="{{ path('app_produit', {'slug': produit.slug}) }}">
+                <div class="picture">
+                    {% for photo in produit.photo %}
+                    <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}" alt="chien">
+                    {% endfor %}
+                </div>
+                <div>
                     <div class="col-12 mt-3">
-                        <p class="price fw-bolder mb-0 mx-3">25,80€</p>
+                        <div class="price fw-bolder mb-0 mx-3">
+                            {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
+                            {% if produit.promotion is null %}
+                                {{ price }}€
+                            {% else %}
+                                {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
+                            {% endif %}
+                        </div>
                         {% set star = 'empty' %}
                         <div class="pb-1">
-                        {% include 'front/partials/_notes.html.twig' %}
+                            {# Gestion des notes #}
+                            {% if produit.avis is not empty %}
+                                {% set count = 0 %}
+                                {% set totalNote = 0 %}
+                                {% for avis in produit.getAvis %}
+                                    {% set count = count + 1 %}
+                                    {% set totalNote = totalNote + avis.note %}
+                                {% endfor %}
+                                {% set star = totalNote / count %}
+                            {% else %}
+                                {% set star = 'empty' %}
+                            {% endif %}
+                            {% include 'front/partials/_notes.html.twig' %}
                         </div>
                     </div>
-            </div>
-        </a>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
+{% endfor %}

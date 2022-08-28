@@ -31,9 +31,7 @@
                             {% if produit.promotion is null %}
                                 {{ price }}€
                             {% else %}
-                                {% set promo = produit.promotion.pourcentage %}
-                                <div class="oldPrice">{{ price }}€</div>
-                                {{ (price*promo) | round(2,'floor') }}€
+                                {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
                             {% endif %}
                         </div>
                     </div>

@@ -3,7 +3,7 @@ App\Entity\Produit:
         libelle: 'Ultra premium croquettes chiens'
         description: "Nos croquettes Super Premium pour chien de grande taille (>30Kg) sont adaptées aux grands gabarits grâce à leur dimension (16mm). Riches en ingrédients d'origine animale, elles sont fabriquées sans blé et sans gluten pour offrir à votre chien une alimentation adaptée à ses vrais besoins."
         resume: 'Chien adulte grande taille (>30Kg)'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 40.99
         est_actif: true
         tva: 20
@@ -16,7 +16,7 @@ App\Entity\Produit:
         libelle: 'Animalis'
         description: "L'aliment en flocons Animalis pour poissons rouges est un aliment complet, enrichi en Vitamines C, E, A et D3 et en Omégas 3 et 6 pour donner le meilleur à vos poissons d'eau froide."
         resume: 'Granulés haute qualité pour poissons rouges'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 6.99
         est_actif: true
         tva: 20
@@ -29,7 +29,7 @@ App\Entity\Produit:
         libelle: 'Dodog'
         description: "La grotte douillette grise séduit par son design sobre et élégant qui s’adapte parfaitement aux styles d‘installation les plus variés. La housse extérieure et une face du coussin ont un aspect velours surpiqué en forme de diamant."
         resume: 'Niche pour chien type grotte'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 25.99
         est_actif: true
         tva: 20
@@ -42,7 +42,7 @@ App\Entity\Produit:
         libelle: 'Orijen croquettes chat'
         description: "Orijen est une marque de croquettes pour chats et chiens qui propose des aliments riches en viande et en poissons. Les croquettes Orijen sont fabriquées à partir d’ingrédients frais et de qualité supérieure."
         resume: 'Croquettes pour chat'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 20.99
         est_actif: true
         tva: 20
@@ -55,7 +55,7 @@ App\Entity\Produit:
         libelle: 'Surflap chatière'
         description: "La chatière Surflap est une chatière qui permet à votre chat de sortir et rentrer à sa guise. Elle est équipée d'un système de fermeture automatique qui permet à votre chat de sortir et rentrer à sa guise."
         resume: 'Chatière pour chat'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 60.99
         est_actif: true
         tva: 20
@@ -68,7 +68,7 @@ App\Entity\Produit:
         libelle: 'Gourmet gold'
         description: "Votre chat aime les pâtés particulièrement fins et vous souhaitez gâter votre gourmet avec une large sélection de saveurs ? C’est pour cette raison que GOURMET Gold a créé des pâtés fins."
         resume: 'Pâté pour chat x96'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-6000 days", "-30 days")>'
         prix_ht: 40.99
         est_actif: true
         tva: 20
@@ -81,11 +81,84 @@ App\Entity\Produit:
         libelle: 'Dennerle Gravier quartz'
         description: "Le gravier quartz Dennerle est un gravier de qualité. Il est idéal pour les aquariums d'eau douce et d'eau de mer. Il est très décoratif et permet de créer des paysages aquatiques très variés."
         resume: 'Gravier pour aquarium'
-        date_entree: '<dateTimeBetween("-6000 days", "now")>'
+        date_entree: '<dateTimeBetween("-10 days", "now")>'
         prix_ht: 22.43
         est_actif: true
         tva: 20
+        promotion: '@promotion0'
         categorie: '@categorie72'
         marque: '@marque16'
         quantiteStock: <numberBetween(5, 30)>
         slug: 'dennerle-gravier-quartz'
+
+    produit7:
+        libelle: 'Purina One croquettes chats'
+        description: "Développée par les vétérinaires et les nutritionnistes de premier plan de PURINA, la nourriture pour chat renferme en plus des bactéries fonctionnelles bénéfiques traitées à chaud, tous les nutriments essentiels dont votre chat a besoin, à savoir les acides gras oméga-6. "
+        resume: 'Croquettes pour chat'
+        date_entree: '<dateTimeBetween("-8000 days", "-6000 days")>'
+        prix_ht: 15.22
+        est_actif: true
+        tva: 20
+        promotion: '@promotion3'
+        categorie: '@categorie42'
+        marque: '@marque17'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'Purina-One-croquettes-chats'
+
+    produit8:
+        libelle: 'Premiere compléments alimentaires'
+        description: "Flocons de pommes de terre aux égumes variés est un composant (module 2) du système de modules B.A.R.F.* PREMIERE Raw Kitchen. Sa formule est exempte de céréales, contient 60 % de flocons de pomme de terre et est fabriquée sans adjonction de conservateurs et d’arômes artificiels."
+        resume: 'Flocons de Pomme de terre aux légumes 7,5 kg'
+        date_entree: '<dateTimeBetween("-8000 days", "-6000 days")>'
+        prix_ht: 50.47
+        est_actif: true
+        tva: 20
+        promotion: '@promotion5'
+        categorie: '@categorie27'
+        marque: '@marque18'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'Premiere-Compléments-alimentaires'
+
+    produit9:
+        libelle: 'Bozta gelée au renne'
+        description: "Délicieuses bouchées en gelée au renne provenant de la Laponie suédoise. Depuis des siècles, les rennes se déplacent librement dans le pays sous forme de troupeaux des Samis. Aliment complets pour chats."
+        resume: 'Gelée au renne pour chats'
+        date_entree: '<dateTimeBetween("-8000 days", "-6000 days")>'
+        prix_ht: 11.87
+        est_actif: true
+        tva: 20
+        promotion: '@promotion16'
+        categorie: '@categorie45'
+        marque: '@marque19'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'Bozta-gelée-au-renne'
+
+    produit10:
+        libelle: 'Almo nature HFC'
+        description: "Almo Nature HFC s’engage pour des ingrédients certifiés, destinés initialement à la chaîne alimentaire humaine. Cuit dans son propre jus ou dans une savoureuse gelée pour un goût exceptionnel. Sans additifs et conservateurs artificiels."
+        resume: '3 sortes de poulet - 6 x 55 g'
+        date_entree: '<dateTimeBetween("-8000 days", "-6000 days")>'
+        prix_ht: 6.10
+        est_actif: true
+        tva: 20
+        promotion: '@promotion5'
+        categorie: '@categorie45'
+        marque: '@marque20'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'Almo-nature-HFC'
+
+    produit11:
+        libelle: 'Creek collier rouge'
+        description: "Avec les produits OUTDOOR GEAR de Dogs Creek, les expéditions par la forêt, les randonnées dans les montagnes ou les excursions avec le kayak et le canoë font des aventures passionnantes avec votre chien."
+        resume: 'Collier pour chiens'
+        date_entree: '<dateTimeBetween("-8000 days", "-6000 days")>'
+        prix_ht: 15.60
+        est_actif: true
+        tva: 20
+        promotion: '@promotion1'
+        categorie: '@categorie29'
+        marque: '@marque21'
+        quantiteStock: <numberBetween(5, 30)>
+        slug: 'Creek-collier-rouge'
+
+

@@ -61,11 +61,40 @@ App\Entity\Photo:
 
     photo12:
         url: 'gravier_dennerle_poisson.png'
-        est_principale: false
-        produit: '@produit5'
+        est_principale: true
+        produit: '@produit6'
 
     photo13:
         url: 'gravier_dennerle_poisson_2.png'
         est_principale: false
-        produit: '@produit5'
-        
+        produit: '@produit6'
+
+    photo14:
+        url: 'purina_croquettes_chats.png'
+        est_principale: true
+        produit: '@produit7'
+
+    photo15:
+        url: 'premiere_complement_chiens.png'
+        est_principale: true
+        produit: '@produit8'
+
+    photo16:
+        url: 'premiere_complement_chiens_2.png'
+        est_principale: false
+        produit: '@produit8'
+
+    photo17:
+        url: 'bozita_gelee_chats.png'
+        est_principale: true
+        produit: '@produit9'
+
+    photo18:
+        url: 'almo_pate_chats.png'
+        est_principale: true
+        produit: '@produit10'
+
+    photo19:
+        url: 'creek_colier_chiens.png'
+        est_principale: true
+        produit: '@produit11'

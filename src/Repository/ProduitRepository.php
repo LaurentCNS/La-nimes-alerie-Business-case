@@ -98,7 +98,7 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ;
     }
 
-    //Recuperer les meilleurs produits qui ont une note egale à 5 pour la page home
+    //Recuperer les meilleurs produits qui ont une note egale à 5 et les plus anciens pour la page home
     public function getBestProducts(): array
     {
         $qb = $this->createQueryBuilder('produit')
@@ -110,8 +110,44 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->leftJoin('produit.avis', 'avis')
             ->where('photo.estPrincipale = 1')
             ->andWhere('avis.note = 5' )
+            ->andWhere('produit.estActif = 1')
             ->orderBy('produit.dateEntree', 'ASC')
             ;
+        return $qb->getQuery()->getResult();
+    }
+
+    //Recuperer les nouveaux produits, date ordre décroissant, pour la page home
+    public function getNewProducts(): array
+    {
+        $qb = $this->createQueryBuilder('produit')
+            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->leftJoin('produit.marque', 'marque')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('produit.estActif = 1')
+            ->orderBy('produit.dateEntree', 'DESC')
+        ;
+        return $qb->getQuery()->getResult();
+    }
+
+    //Recuperer les produits en promotion par ordre de la plus forte promotion pour la page home
+    public function getPromoProducts(): array
+    {
+        $qb = $this->createQueryBuilder('produit')
+            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->leftJoin('produit.marque', 'marque')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('produit.estActif = 1')
+            ->andWhere('produit.promotion is not null')
+            ->orderBy('promotion.pourcentage', 'ASC')
+        ;
         return $qb->getQuery()->getResult();
     }
 
@@ -127,6 +163,7 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->leftJoin('categorie.animal', 'animal')
             ->leftJoin('produit.avis', 'avis')
             ->where('produit.slug = :slug')
+            ->andWhere('produit.estActif = 1')
             ->orderBy('avis.dateAvis', 'DESC')
             ->setParameter('slug', $slug)
             ;

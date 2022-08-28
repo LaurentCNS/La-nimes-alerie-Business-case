@@ -50,6 +50,21 @@ App\Entity\Marque:
     marque16:
         nom: 'Dennerle'
 
+    marque17:
+        nom: 'Purina'
+
+    marque18:
+        nom: 'Premiere raw kitchen'
+
+    marque19:
+        nom: 'Bozta'
+
+    marque20:
+        nom: 'Alma'
+
+    marque21:
+        nom: 'Creek'
+
 
     
         
