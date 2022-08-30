@@ -3,35 +3,30 @@
     {% for produit in meilleursProduits|slice(0, 6) %}
         <div class="col-12 col-sm-6 col-md-4 col-xl-2 mt-4 mb-5 test">
             <div class="cardFull">
-                <a href="{{ path('app_produit', {'slug': produit.slug}) }}">
+                <a href="{{ path('app_produit', {'slug': produit[0].slug}) }}">
                     <div class="picture">
-                        {% for photo in produit.photo %}
+                        {% for photo in produit[0].photo %}
                             <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
-                                 alt="{{ produit.libelle }}">
+                                 alt="{{ produit[0].libelle }}">
                         {% endfor %}
                     </div>
                     <div>
-                        <h5 class="title-best mt-1 mb-3 mx-3">{{ produit.libelle |slice(0,30) }}</h5>
-                        <p class="resume-best mx-3 lh-1">{{ produit.resume | slice(0,43) }}</p>
+                        <h5 class="title-best mt-1 mb-3 mx-3">{{ produit[0].libelle |slice(0,30) }}</h5>
+                        <p class="resume-best mx-3 lh-1">{{ produit[0].resume | slice(0,43) }}</p>
                         {# Gestion des notes #}
-                        {% if produit.avis is not empty %}
-                            {% set count = 0 %}
-                            {% set totalNote = 0 %}
-                            {% for avis in produit.getAvis %}
-                                {% set count = count + 1 %}
-                                {% set totalNote = totalNote + avis.note %}
-                            {% endfor %}
-                            {% set star = totalNote / count %}
+                        {% if produit[0].avis is not empty %}
+                            {% set star = produit['note'] %}
                         {% else %}
                             {% set star = 'empty' %}
                         {% endif %}
                         {% include 'front/partials/_notes.html.twig' %}
                         <div class="price mx-3 pb-3 fw-bolder">
-                            {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
-                            {% if produit.promotion is null %}
+                            {# gestion du prix #}
+                            {% set price = produit[0].prixHt + ((produit[0].prixHt * produit[0].tva) /100) | round(2,'floor') %}
+                            {% if produit[0].promotion is null %}
                                 {{ price }}€
                             {% else %}
-                                {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
+                                {{ (price*produit[0].promotion.pourcentage) | round(2,'floor') }}€
                             {% endif %}
                         </div>
                     </div>

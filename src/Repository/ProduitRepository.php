@@ -65,8 +65,10 @@ class ProduitRepository extends AbstractLanimalerieRepository
 //        ;
 //    }
 
-    // Retourner les produits produits les plus vendus par ordre décroissant avec le panier en statut 200 (payé)
-    public function findProduitsPlusVendus(?\DateTime $startDate = null, ?\DateTime $endDate = null): array
+    // API PLATEFORME
+
+    // Les produits les plus vendus par ordre décroissant avec le panier en statut 200 (payé)
+    public function findProduitsBestSelling(?\DateTime $startDate = null, ?\DateTime $endDate = null): array
     {
         if ($startDate === null || $endDate === null) {
             $endDate = new \DateTime('now');
@@ -85,77 +87,83 @@ class ProduitRepository extends AbstractLanimalerieRepository
         return $qb->getQuery()->getResult();
     }
 
-    //Fonction pour récuperer les infos du paginator
+    // BACK ADMIN
+
+    // Les produits pour la pagination
     public function getQbAll(): QueryBuilder
     {
         $qb = parent::getQbAll();
-        return $qb->select('produit','promotion', 'marque', 'categorie','photo')
+        return $qb->select('produit', 'promotion', 'marque', 'categorie', 'photo')
             ->leftJoin('produit.promotion', 'promotion')
             ->leftJoin('produit.marque', 'marque')
             ->leftJoin('produit.categorie', 'categorie')
             ->leftJoin('produit.photo', 'photo')
-            ->orderBy('produit.libelle', 'ASC')
-            ;
+            ->orderBy('produit.libelle', 'ASC');
     }
 
-    //Récupérer les produits actifs avec la photo principale triés par les plus anciens pour la page home
-    public function getProducts(): array
+    //PAGE HOME
+
+    // Les meilleurs produits actifs avec la photo principale triés par les notes les plus hautes
+    public function getBestProducts(): array
     {
-        $qb = $this->createQueryBuilder('produit')
-            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion','photo', 'AVG(avis.note) as note')
             ->leftJoin('produit.promotion', 'promotion')
-            ->leftJoin('produit.marque', 'marque')
-            ->leftJoin('produit.categorie', 'categorie')
-            ->leftJoin('produit.photo', 'photo')
+            ->join('produit.photo', 'photo')
             ->leftJoin('produit.avis', 'avis')
             ->where('photo.estPrincipale = 1')
             ->andWhere('produit.estActif = 1')
-            ->orderBy('produit.dateEntree', 'ASC')
-
-            ;
-        return $qb->getQuery()->getResult();
+            ->groupBy('produit')
+            ->orderBy('note','DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult();
     }
 
-    //Recuperer les produits par la date la plus récente, pour la page home
+    // Les nouveaux produits, par la date la plus récente, pour la page home
     public function getNewProducts(): array
     {
-        $qb = $this->createQueryBuilder('produit')
-                ->select('produit','promotion', 'marque', 'categorie','photo')
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'photo', 'AVG(avis.note) as note')
             ->leftJoin('produit.promotion', 'promotion')
-            ->leftJoin('produit.marque', 'marque')
-            ->leftJoin('produit.categorie', 'categorie')
-            ->leftJoin('produit.photo', 'photo')
+            ->join('produit.photo', 'photo')
             ->leftJoin('produit.avis', 'avis')
             ->where('photo.estPrincipale = 1')
             ->andWhere('produit.estActif = 1')
+            ->groupBy('produit')
             ->orderBy('produit.dateEntree', 'DESC')
-        ;
-        return $qb->getQuery()->getResult();
+            ->setMaxResults(12)
+            ->getQuery()
+            ->getResult();
+
+
     }
 
-    //Recuperer les produits en promotion par ordre de la plus forte promotion pour la page home
+    // Les produits en promotion par ordre de la plus forte promotion pour la page home
     public function getPromoProducts(): array
     {
-        $qb = $this->createQueryBuilder('produit')
-            ->select('produit','promotion', 'marque', 'categorie','photo', 'avis')
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'photo', 'AVG(avis.note) as note')
             ->leftJoin('produit.promotion', 'promotion')
-            ->leftJoin('produit.marque', 'marque')
-            ->leftJoin('produit.categorie', 'categorie')
-            ->leftJoin('produit.photo', 'photo')
+            ->join('produit.photo', 'photo')
             ->leftJoin('produit.avis', 'avis')
             ->where('photo.estPrincipale = 1')
             ->andWhere('produit.estActif = 1')
             ->andWhere('produit.promotion is not null')
+            ->groupBy('produit')
             ->orderBy('promotion.pourcentage', 'ASC')
-        ;
-        return $qb->getQuery()->getResult();
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult();
     }
 
-    //Recuperer un produit avec un slug en parametre pour la page produit (avec photo principale)
+    // PAGE PRODUIT
+
+    // Produit sélectionné avec un slug en paramètre
     public function getProductBySlug(string $slug): ?Produit
     {
-        $qb = $this->createQueryBuilder('produit')
-            ->select('produit','promotion', 'marque', 'categorie','photo','animal','avis')
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'marque', 'categorie', 'photo', 'animal', 'avis')
             ->leftJoin('produit.promotion', 'promotion')
             ->leftJoin('produit.marque', 'marque')
             ->leftJoin('produit.categorie', 'categorie')
@@ -166,11 +174,9 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->andWhere('produit.estActif = 1')
             ->orderBy('avis.dateAvis', 'DESC')
             ->setParameter('slug', $slug)
-            ;
-        return $qb->getQuery()->getOneOrNullResult();
+            ->getQuery()
+            ->getOneOrNullResult();
     }
-
-
 
 
 }
