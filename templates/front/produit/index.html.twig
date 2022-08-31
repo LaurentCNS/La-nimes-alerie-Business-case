@@ -141,7 +141,7 @@
                                     </button>
                                 </div>
                                 <div class="formQt p-0 ms-3 me-3">
-                                    <input type="number" class="form-control" readonly="readonly" id="quantity"
+                                    <input type="number" data-input-add-produit="{{ produit.id }}" class="form-control" readonly="readonly" id="quantity"
                                            name="quantity" min="1" max="{{ produit.quantiteStock }}" value="1">
                                 </div>
                                 <div class="button p-0 me-5 mb-3">
@@ -150,7 +150,7 @@
                                     </button>
                                 </div>
                                 <div class="col-6 ms-3 p-0">
-                                    <button type="button" class="btn btn-primary addCard">Ajouter au panier</button>
+                                    <button type="button" data-produit-id="{{ produit.id }}" class="btn btn-primary addCard">Ajouter au panier</button>
                                 </div>
                             {% elseif produit.quantiteStock == 0 %}
                                 <div class="button ms-3 p-0">
