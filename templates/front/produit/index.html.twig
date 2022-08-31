@@ -150,7 +150,7 @@
                                     </button>
                                 </div>
                                 <div class="col-6 ms-3 p-0">
-                                    <button type="button" data-produit-id="{{ produit.id }}" class="btn btn-primary addCard">Ajouter au panier</button>
+                                   <a href="{{ path('app_produit', {'slug': produit.slug}) }}"> <button type="button" data-produit-id="{{ produit.id }}" class="btn btn-primary addCard">Ajouter au panier</button></a>
                                 </div>
                             {% elseif produit.quantiteStock == 0 %}
                                 <div class="button ms-3 p-0">

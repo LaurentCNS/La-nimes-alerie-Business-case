@@ -2,10 +2,6 @@
 
 namespace App\Controller\front;
 
-use App\Entity\Panier;
-use App\Entity\Ligne;
-use App\Repository\ProduitRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,54 +21,47 @@ class AjaxController extends AbstractController
     public function index(
         Request $request,
         SessionInterface $session,
-        EntityManagerInterface $em,
-        ProduitRepository $produitRepository,
     ): Response
     {
-//        $currentSession = [];
-//        $cart = null;
-//        if (!$session->has(self::$CART)) {
-//            $cart = new Panier();
-//            $em->persist($cart);
-//        } else {
-//            $cart = $session->get(self::$CART);
-//        }
-//
-//
-//        $datas = json_decode($request->get('datas'), true);
-//
-//        $product = $produitRepository->findOneBy(['id' => 4]);
-////        $datas = json_decode($request->get('datas'), true);
-//        if (!isset($currentSession[$datas['produitId']])) {
-//              $lineProduct = $currentSession[$datas['produitId']];
-//              $lineProduct->setQuantity($lineProduct->getQuantity() + $datas['qty']);
-//         } else {
-//              $datas = new Ligne();
-//              $datas->setProduit($product);
-//              $datas->setQuantite($datas['qty']);
-//         }
+
+        // On récupère les données envoyées en fetch dans le fichier ts
         $datas = json_decode($request->get('datas'), true);
+
+        // On crée un tableau vide pour stocker les données du produit dans la session
         $currentSession = [];
+
+        // Si la session existe
         if ($session->has(self::$CART)) {
+            // On récupère les données de la session
             $currentSession = $session->get(self::$CART);
         }
+
+        // Si le produit n'existe pas dans la session
         if (!isset($currentSession[$datas['produitId']])) {
+            // On ajoute le produit et la quantité dans le tableau
             $currentSession[$datas['produitId']] = $datas['qty'];
         } else {
+            // Sinon on ajoute la quantité au produit existant
             $currentSession[$datas['produitId']] += $datas['qty'];
         }
+
+        // On enregistre le tableau CART dans la session
         $session->set(self::$CART, $currentSession);
 
+        // On crée une variable pour stocker la quantité totale
         $qtyTotal = 0;
+
+        // On parcourt le tableau pour récupérer la quantité totale
         foreach ($currentSession as $item) {
             $qtyTotal += $item;
         }
+
+        // On enregistre la quantité totale dans la session
         $session->set(self::$QTY, $qtyTotal);
 
+        // On retourne vers le ts un json avec la quantité totale pour l'affichage dans le panier
         return new JsonResponse(['qtyTotale' => $qtyTotal]);
-
     }
-
 
     /**
      * @throws Exception

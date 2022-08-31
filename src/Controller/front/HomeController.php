@@ -9,6 +9,7 @@ use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -21,10 +22,10 @@ class HomeController extends AbstractController
 
 
     #[Route('/', name: 'app_home')]
-    public function index(AnimalRepository $animalRepository, ProduitRepository $produitRepository): Response
+    public function index(AnimalRepository $animalRepository, ProduitRepository $produitRepository, SessionInterface $session): Response
     {
 
-        // Ajouter une ligne date dans la table nbVisites
+         // Ajouter une ligne date dans la table nbVisites
         $nbVisites = new NbVisites();
         $nbVisites->setDateVisite(new \DateTime());
         $this->entityManager->persist($nbVisites);
@@ -40,7 +41,7 @@ class HomeController extends AbstractController
         // Récupérer les produits en promotions
         $promoProduits = $produitRepository->getPromoProducts();
 
-        
+
         return $this->render('front/home/index.html.twig', [
             'controller_name' => 'HomeController',
             'animals' => $animalRepository->findAll(),

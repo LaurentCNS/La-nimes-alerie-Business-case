@@ -1,68 +1,82 @@
 <header>
-	<!--LOGO/RECHERCHE/PANIER-->
-	<div id="header" class="headeranduser">
-		<div class="box">
+    <!--LOGO/RECHERCHE/PANIER-->
+    <div id="header" class="headeranduser">
+        <div class="box">
 
-			<a href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/img/logos/logo.png') }}" alt="logo lanimesalerie"></a>
-			<h1>LA NIMES ALERIE</h1>
-			<div class="absolute">
-				<div class="search-container">
-					<form action="envoi.php" method="post">
-						<label for="search">recherche</label>
-						<div class="search">
-							<input type="text" name="search" id="search" placeholder="RECHERCHER" class="round">
-							<input type="submit" value="" class="glass">
-						</div>
-					</form>
-				</div>
-				<div class="user-space">
-					<a href="" class="wishlist"></a>
-					<a href="" class="order"></a>
-					<a href="{{ path('app_login') }}" class="user"></a>
-					<a href="" class="basketround"></a>
-				</div>
-				<div class="basket">
-					<a href="" class="picture"></a>
-					<p class="value">00</p>
-				</div>
-				<div class="menuburger">
-					<a href="" class="burger"></a>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!--NAVBAR-->
-	<div class="navtop">
-		<ul>
-			{% for animaux in functionTwigGetAnimaux() %}
-				<li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ animaux.id }}" aria-controls="offcanvasTop">
-					<p>{{ animaux.libelle }}<span class="arrow"></span>
-					</p>
-				</li>
-				<!--OFFCANVAS-->
-				<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animaux.id }}" aria-labelledby="offcanvasTopLabel">
-					<div class="offcanvas-header">
-						<h5 id="offcanvasTopLabel">Menu</h5>
-						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-					</div>
-					<div class="offcanvas-body">
-						{% for categories in functionTwigGetCategories() %}
-							{% if categories.animal.id == animaux.id %}
-								<div class="row">
-								{{ categories.nom }} |
+            <a href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/img/logos/logo.png') }}"
+                                                  alt="logo lanimesalerie"></a>
+            <h1>LA NIMES ALERIE</h1>
+            <div class="absolute">
+                <div class="search-container">
+                    <form action="envoi.php" method="post">
+                        <label for="search">recherche</label>
+                        <div class="search">
+                            <input type="text" name="search" id="search" placeholder="RECHERCHER" class="round">
+                            <input type="submit" value="" class="glass">
+                        </div>
+                    </form>
+                </div>
+                <div class="user-space">
+                    <a href="" class="wishlist"></a>
+                    <a href="" class="order"></a>
+                    <a href="{{ path('app_login') }}" class="user"></a>
+                    <a href="{{ path('app_panier') }}" class="basketround"></a>
+                </div>
+                <div class="basket">
+                    <a href="{{ path('app_panier') }}">
+                        <div class="picture"></div>
+                        {% if app.session.get('QTY') == 0 %}
+                            <p class="value">0 article</p>
+                        {% elseif app.session.get('QTY') < 2 %}
+                            <p class="values" data-cart-item>{{ app.session.get('QTY') }} article</p>
+                        {% elseif app.session.get('QTY') < 10 %}
+                            <p class="values" data-cart-item>{{ app.session.get('QTY') }} articles</p>
+                        {% else %}
+                            <p class="valuesDouble" data-cart-item>{{ app.session.get('QTY') }} articles</p>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="menuburger">
+                    <a href="" class="burger"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--NAVBAR-->
+<div class="navtop">
+    <ul>
+        {% for animaux in functionTwigGetAnimaux() %}
+            <li data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop{{ animaux.id }}" aria-controls="offcanvasTop">
+                <p>{{ animaux.libelle }}<span class="arrow"></span>
+                </p>
+            </li>
+            <!--OFFCANVAS-->
+            <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animaux.id }}"
+                 aria-labelledby="offcanvasTopLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasTopLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {% for categories in functionTwigGetCategories() %}
+                        {% if categories.animal.id == animaux.id %}
+                            <div class="row">
+                                {{ categories.nom }} |
 
-									{% for sousCategories in functionTwigGetSousCategories() %}
-										{% if sousCategories.animal.id == animaux.id and sousCategories.parent.id == categories.id %}
-											{{ sousCategories.nom }}
-										{% endif %}
-									{% endfor %}
-								</br>
-								</div>
-							{% endif %}
-						{% endfor %}
-					</div>
-				</div>
-			{% endfor %}
-		</ul>
-	</div>
+                                {% for sousCategories in functionTwigGetSousCategories() %}
+                                    {% if sousCategories.animal.id == animaux.id and sousCategories.parent.id == categories.id %}
+                                        {{ sousCategories.nom }}
+                                    {% endif %}
+                                {% endfor %}
+                                </br>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+</div>
 

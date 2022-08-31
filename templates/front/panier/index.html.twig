@@ -1,0 +1,59 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Mon panier</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Produit
+                </th>
+                <th>
+                    Prix/u
+                </th>
+                <th>
+                    Quantité
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in produitSession %}
+                <tr>
+                    <td>
+                        {{ item['produit'].libelle }}
+                    </td>
+                    <td>
+                        {{ item['produit'].prixHt }}€
+                    </td>
+                    <td>
+                        {{ item['qty'] }}
+                    </td>
+                    <td>
+                        {{ item['qty'] * item['produit'].prixHt }}€
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if produitSession|length > 0 %}
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-danger" href="{{ path('app_delete_cart') }}">
+                    Vider mon panier
+                </a>
+                <a class="btn btn-primary" href="">
+                    Payer
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
