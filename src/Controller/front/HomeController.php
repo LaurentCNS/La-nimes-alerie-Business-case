@@ -36,8 +36,7 @@ class HomeController extends AbstractController
 
         // Récupérer les nouveaux produits
         $nouveauxProduits = $produitRepository->getNewProducts();
-
-
+        
         // Récupérer les produits en promotions
         $promoProduits = $produitRepository->getPromoProducts();
 

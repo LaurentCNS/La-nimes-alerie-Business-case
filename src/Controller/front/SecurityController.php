@@ -31,8 +31,6 @@ class SecurityController extends AbstractController
             dump($user);
         }
 
-
-
         return $this->render('front/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'user' => $user]);
     }
 

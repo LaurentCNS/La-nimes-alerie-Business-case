@@ -270,7 +270,7 @@ class Produit
     }
 
     // récuperer la moyenne des notes des avis
-    public function getMoyenne(): ?float
+    public function getAverageNote($avis): ?float
     {
         $moyenne = 0;
         $nbAvis = 0;

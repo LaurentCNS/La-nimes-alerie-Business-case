@@ -64,25 +64,13 @@
                     <div class="cardDescription mx-auto mt-2">
                         <h3 class="mt-5">{{ produit.marque.nom | upper }}</h3>
                         <h5>{{ produit.libelle }}</h5>
-                        {# Gestion des notes #}
-                        {% if produit.avis is not empty %}
-                            {% set count = 0 %}
-                            {% set totalNote = 0 %}
-                            {% for avis in produit.getAvis %}
-                                {% set count = count + 1 %}
-                                {% set totalNote = totalNote + avis.note %}
-                            {% endfor %}
-                            {% set star = totalNote / count %}
-                        {% else %}
-                            {% set star = 'empty' %}
-                        {% endif %}
                         <div class="row d-flex mt-4 mb-3">
                             <div class="col-4 pe-0 text-center">
-                                {% include 'front/partials/_notes.html.twig' %}
+                                {{  moyenne | notes }}
                             </div>
                             <div class="col-8 ps-0">
-                                {% if produit.avis is not empty %}
-                                <a href="#userReview">nb avis ({{ count }})</a>
+                                {% if nbTotalNote > 0 %}
+                                <a href="#userReview">nb avis ({{ nbTotalNote }})</a>
                                 {% else %}
                                 Aucun avis
                                 {% endif %}
@@ -136,16 +124,17 @@
                         <div class="row d-flex mt-3">
                             {% if produit.quantiteStock > 0 %}
                                 <div class="button ms-3 p-0">
-                                    <button type="button" class="btn btn-primary">
+                                    <button id="minus" type="button" class="btn btn-primary">
                                         <i class="fas fa-minus"></i>
                                     </button>
                                 </div>
                                 <div class="formQt p-0 ms-3 me-3">
+                                    {% set value = 1 %}
                                     <input type="number" data-input-add-produit="{{ produit.id }}" class="form-control" readonly="readonly" id="quantity"
-                                           name="quantity" min="1" max="{{ produit.quantiteStock }}" value="1">
+                                           name="quantity" min="1" max="{{ produit.quantiteStock }}" value="{{ value }}">
                                 </div>
                                 <div class="button p-0 me-5 mb-3">
-                                    <button type="button" class="btn btn-primary">
+                                    <button id="plus" type="button" class="btn btn-primary">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -211,7 +200,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-12 p-0 text-center">
-                                    {% include 'front/partials/_notes.html.twig' %}
+                                    {{ moyenne | notes }}
                                 </div>
                             </div>
                             {% if produit.avis is not empty  %}

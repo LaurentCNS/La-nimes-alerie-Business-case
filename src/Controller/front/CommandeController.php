@@ -12,9 +12,9 @@ class CommandeController extends AbstractController
     public function index(): Response
     {
 
-        // recupère les infos du client
+        // récupère les infos du client
         $client = $this->getUser();
-        return $this->render('back/commande/index.html.twig', [
+        return $this->render('front/commande/index.html.twig', [
             'controller_name' => 'CommandeController',
         ]);
     }

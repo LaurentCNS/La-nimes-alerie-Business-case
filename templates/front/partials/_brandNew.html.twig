@@ -18,15 +18,8 @@
                                 {{ (price*produit[0].promotion.pourcentage) | round(2,'floor') }}€
                             {% endif %}
                         </div>
-                        {% set star = 'empty' %}
                         <div class="pb-1">
-                            {# Gestion des notes #}
-                            {% if produit[0].avis is not empty %}
-                                {% set star = produit['note'] %}
-                            {% else %}
-                                {% set star = 'empty' %}
-                            {% endif %}
-                            {% include 'front/partials/_notes.html.twig' %}
+                            {{ produit['note'] | notes }}
                         </div>
                     </div>
                 </div>

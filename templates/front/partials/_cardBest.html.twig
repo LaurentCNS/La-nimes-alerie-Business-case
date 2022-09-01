@@ -14,12 +14,7 @@
                         <h5 class="title-best mt-1 mb-3 mx-3">{{ produit[0].libelle |slice(0,30) }}</h5>
                         <p class="resume-best mx-3 lh-1">{{ produit[0].resume | slice(0,43) }}</p>
                         {# Gestion des notes #}
-                        {% if produit[0].avis is not empty %}
-                            {% set star = produit['note'] %}
-                        {% else %}
-                            {% set star = 'empty' %}
-                        {% endif %}
-                        {% include 'front/partials/_notes.html.twig' %}
+                        {{ produit['note'] | notes }}
                         <div class="price mx-3 pb-3 fw-bolder">
                             {# gestion du prix #}
                             {% set price = produit[0].prixHt + ((produit[0].prixHt * produit[0].tva) /100) | round(2,'floor') %}

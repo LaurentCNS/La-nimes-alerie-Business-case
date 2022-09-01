@@ -7,9 +7,9 @@
             <div>
                 <div class="col-12 mt-3">
                     <p class="price fw-bolder mb-0 mx-3">25,80€</p>
-                    {% set star = 'empty' %}
+                    {% set moyenne = 'empty' %}
                     <div class="pb-1">
-                        {% include 'front/partials/_notes.html.twig' %}
+                        {{ moyenne | notes }}
                     </div>
                 </div>
             </div>

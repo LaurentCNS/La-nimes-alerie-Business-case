@@ -9,8 +9,8 @@
                         <h5 class="title-best mt-1 mb-3 mx-3">Titre</h5>
                         <p class="resume-best mx-3 lh-1">Description du produit</p>
                         {# Gestion des notes #}
-                        {% set star = 'empty' %}
-                        {% include 'front/partials/_notes.html.twig' %}
+                        {% set moyenne = 'empty' %}
+                        {{ moyenne | notes }}
                         <p class="price mx-3 pb-3 fw-bolder">29.90€</p>
                     </div>
                 </a>

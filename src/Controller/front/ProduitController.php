@@ -3,6 +3,7 @@
 namespace App\Controller\front;
 
 use App\Entity\Avis;
+use App\Entity\Produit;
 use App\Repository\AvisRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
@@ -19,29 +20,45 @@ class ProduitController extends AbstractController
 
     #[Route('/produit/{slug}', name: 'app_produit')]
     public function index($slug, ProduitRepository $produitRepository, CategorieRepository $categorieRepository,
-                          PaginatorInterface $paginator, Request $request): Response
+                         Produit $produit, PaginatorInterface $paginator, Request $request): Response
     {
-        $produit = $produitRepository->getProductBySlug($slug);
+
+        // Récupération des catégories pour le menu
         $categories = $categorieRepository->findCategorie();
 
-        // creation d'un tableau d'avis pour le produit
-        $avisArray = [];
-        foreach ($produit->getAvis() as $avis) {
-            $avisArray[] = $avis;
-        }
+        // Récupération du produit sélectionné par le slug envoyer en paramètre
+        $produitSelect = $produitRepository->getProductBySlug($slug);
 
-        // Paginator
-        $avis = $paginator->paginate(
-            $avisArray,
-            $request->query->getInt('page',1),8
-        );
+
+            // Post-Traitement
+            // Moyenne des notes pour produit.avis.note
+            $moyenne = $produit->getAverageNote($produitSelect);
+
+            // creation d'un tableau d'avis pour le paginator et d'un compteur pour le nombre d'avis
+            $avisArray = [];
+            $nbTotalNote = 0;
+
+            foreach ($produitSelect->getAvis() as $nb => $avis) {
+                if ($avis) {
+                    $avisArray[] = $avis;
+                    // Compteur d'avis
+                    $nbTotalNote = $nb + 1;
+                }
+            }
+
+            $avisPaginate = $paginator->paginate(
+                $avisArray,
+                $request->query->getInt('page',1),8
+            );
 
 
         return $this->render('front/produit/index.html.twig', [
             'controller_name' => 'ProduitController',
-            'produit' => $produit,
+            'produit' => $produitSelect,
             'categories' => $categories,
-            'avisProduit' => $avis,
+            'avisProduit' => $avisPaginate,
+            'moyenne' => $moyenne,
+            'nbTotalNote' => $nbTotalNote,
         ]);
     }
 }

@@ -44,7 +44,7 @@ class PanierController extends AbstractController
         ]);
     }
 
-    // La quantité d'un produit est stockée dans la session pour le delete
+    // La quantité d'un produit stockée dans la session pour le delete
     public static string $QTY = 'QTY';
 
     #[Route('/delete', name: 'app_delete_cart')]
