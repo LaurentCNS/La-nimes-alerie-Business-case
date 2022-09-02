@@ -31,8 +31,10 @@
                             <p class="values" data-cart-item>{{ app.session.get('QTY') }} article</p>
                         {% elseif app.session.get('QTY') < 10 %}
                             <p class="values" data-cart-item>{{ app.session.get('QTY') }} articles</p>
-                        {% else %}
+                        {% elseif app.session.get('QTY') >= 10 and app.session.get('QTY') < 100 %}
                             <p class="valuesDouble" data-cart-item>{{ app.session.get('QTY') }} articles</p>
+                        {% else %}
+                            <p class="valuesTriples" data-cart-item>+99 articles</p>
                         {% endif %}
                     </a>
                 </div>

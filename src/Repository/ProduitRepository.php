@@ -163,11 +163,10 @@ class ProduitRepository extends AbstractLanimalerieRepository
     public function getProductBySlug(string $slug): ?Produit
     {
         return $this->createQueryBuilder('produit')
-            ->select('produit', 'promotion', 'marque', 'categorie', 'photo', 'animal', 'avis')
+            ->select('produit', 'promotion', 'marque', 'categorie', 'animal', 'avis')
             ->leftJoin('produit.promotion', 'promotion')
             ->leftJoin('produit.marque', 'marque')
             ->leftJoin('produit.categorie', 'categorie')
-            ->leftJoin('produit.photo', 'photo')
             ->leftJoin('categorie.animal', 'animal')
             ->leftJoin('produit.avis', 'avis')
             ->where('produit.slug = :slug')

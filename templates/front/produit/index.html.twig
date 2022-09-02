@@ -33,135 +33,73 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6 cardLeft">
                     <div class="cardProduct mx-auto mt-2 mb-2">
-                        <div class="col-12 mx-auto d-flex justify-content-center">
-                            {% for photo in produit.photo %}
-                                {% if photo.estPrincipale == 1 %}
-                                    <img class="col-8 col-sm-8 col-md-12 col-lg-10 col-xl-8"
-                                         src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
-                                         alt="{{ produit.libelle }}">
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="ms-3 mt-3 pb-4">
-                            {% for photo in produit.photo %}
-                                {% if photo.estPrincipale == 1 %}
-                                    <img class="miniature col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 me-3"
-                                         src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
-                                         alt="{{ produit.libelle }}">
-                                {% endif %}
-                            {% endfor %}
-                            {% for photo in produit.photo %}
-                                {% if photo.estPrincipale == 0 %}
-                                    <img class="miniature col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 me-3"
-                                         src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
-                                         alt="{{ produit.libelle }}">
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                        {{ include('front/partials/_photoProduit.html.twig') }}
                     </div>
                 </div>
-                <div class="col-12 col-md-12 col-lg-6 cardRight">
-                    <div class="cardDescription mx-auto mt-2">
-                        <h3 class="mt-5">{{ produit.marque.nom | upper }}</h3>
-                        <h5>{{ produit.libelle }}</h5>
-                        <div class="row d-flex mt-4 mb-3">
-                            <div class="col-4 pe-0 text-center">
-                                {{  moyenne | notes }}
-                            </div>
-                            <div class="col-8 ps-0">
-                                {% if nbTotalNote > 0 %}
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 cardRight">
+                <div class="cardDescription mx-auto mt-2">
+                    <h3 class="mt-5">{{ produit.marque.nom | upper }}</h3>
+                    <h5>{{ produit.libelle }}</h5>
+                    <div class="row d-flex mt-4 mb-3">
+                        <div class="col-4 pe-0 text-center">
+                            {{ moyenne | notes }}
+                        </div>
+                        <div class="col-8 ps-0">
+                            {% if nbTotalNote > 0 %}
                                 <a href="#userReview">nb avis ({{ nbTotalNote }})</a>
-                                {% else %}
+                            {% else %}
                                 Aucun avis
-                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p>{{ produit.description }}</p>
+                    <div class="row d-flex">
+                        {% if produit.quantiteStock > 0 %}
+                            <div class="col-1 pe-0 text-center">
+                                <i class="fas fa-check"></i>
                             </div>
-                        </div>
-                        <p>{{ produit.description }}</p>
-                        <div class="row d-flex">
-                            {% if produit.quantiteStock > 0 %}
-                                <div class="col-1 pe-0 text-center">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="col-8 ms-3 ps-0">
-                                    En stock ({{ produit.quantiteStock }})
-                                </div>
-                            {% elseif produit.quantiteStock == 0 %}
-                                <div class="col-1 pe-0 text-center">
-                                    <i class="fas fa-xmark-circle"></i>
-                                </div>
-                                <div class="col-11 ps-0">
-                                    Rupture de stock
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="price mt-3 ms-3">
-                            {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
-                            {% if produit.promotion is null %}
-                                {{ price }}€
-                            {% else %}
-                                <div class="oldPrice">{{ price }}€</div>
-                                {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
-                            {% endif %}
-                        </div>
-                        <div class="row d-flex mt-3">
-                            {% if app.user %}
-                                <div class="col-1 pe-0 text-center">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="ms-3 col-8 ps-0">
-                                    <a href="{{ path('app_add_favorite', {'slug': produit.slug}) }}">Ajouter aux
-                                        favoris</a>
-                                </div>
-                            {% else %}
-                                <div class="col-1 pe-0 text-center">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="ms-3 col-8 ps-0">
-                                    <a href="{{ path('app_register') }}">Ajouter à liste de souhaits</a>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="row d-flex mt-3">
-                            {% if produit.quantiteStock > 0 %}
-                                <div class="button ms-3 p-0">
-                                    <button id="minus" type="button" class="btn btn-primary">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div class="formQt p-0 ms-3 me-3">
-                                    {% set value = 1 %}
-                                    <input type="number" data-input-add-produit="{{ produit.id }}" class="form-control" readonly="readonly" id="quantity"
-                                           name="quantity" min="1" max="{{ produit.quantiteStock }}" value="{{ value }}">
-                                </div>
-                                <div class="button p-0 me-5 mb-3">
-                                    <button id="plus" type="button" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-6 ms-3 p-0">
-                                   <a href="{{ path('app_produit', {'slug': produit.slug}) }}"> <button type="button" data-produit-id="{{ produit.id }}" class="btn btn-primary addCard">Ajouter au panier</button></a>
-                                </div>
-                            {% elseif produit.quantiteStock == 0 %}
-                                <div class="button ms-3 p-0">
-                                    <button type="button" class="btn btn-primary" disabled>
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div class="formQt p-0 ms-3 me-3">
-                                    <input type="number" class="form-control" readonly="readonly" id="quantity"
-                                           name="quantity" min="1" max="{{ produit.quantiteStock }}" disabled>
-                                </div>
-                                <div class="button p-0 me-5 mb-3">
-                                    <button type="button" class="btn btn-primary" disabled>
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-6 ms-3 p-0">
-                                    <button type="button" class="btn btn-primary addCard" disabled>Ajouter au panier
-                                    </button>
-                                </div>
-                            {% endif %}
-                        </div>
+                            <div class="col-8 ms-3 ps-0">
+                                En stock ({{ produit.quantiteStock }})
+                            </div>
+                        {% else %}
+                            <div class="col-1 pe-0 text-center">
+                                <i class="fas fa-xmark-circle"></i>
+                            </div>
+                            <div class="col-11 ps-0">
+                                Rupture de stock
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="price mt-3 ms-3">
+                        {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
+                        {% if produit.promotion is null %}
+                            {{ price }}€
+                        {% else %}
+                            <div class="oldPrice">{{ price }}€</div>
+                            {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
+                        {% endif %}
+                    </div>
+                    <div class="row d-flex mt-3">
+                        {% if app.user %}
+                            <div class="col-1 pe-0 text-center">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="ms-3 col-8 ps-0">
+                                <a href="{{ path('app_add_favorite', {'slug': produit.slug}) }}">Ajouter aux
+                                    favoris</a>
+                            </div>
+                        {% else %}
+                            <div class="col-1 pe-0 text-center">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="ms-3 col-8 ps-0">
+                                <a href="{{ path('app_register') }}">Ajouter à liste de souhaits</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="row d-flex mt-3">
+                        {{ include('front/partials/_panier.html.twig') }}
                     </div>
                 </div>
             </div>
@@ -193,18 +131,18 @@
                         <div class="mt-3">
                             <div class="row star">
                                 <div class="col-12 text-center">
-                                    {% if produit.avis is not empty  %}
-                                    <p class="mb-1">Avis sur le produit:</p>
+                                    {% if produit.avis is not empty %}
+                                        <p class="mb-1">Avis sur le produit:</p>
                                     {% else %}
-                                    <p class="mb-1">Aucun avis sur le produit</p>
+                                        <p class="mb-1">Aucun avis sur le produit</p>
                                     {% endif %}
                                 </div>
                                 <div class="col-12 p-0 text-center">
                                     {{ moyenne | notes }}
                                 </div>
                             </div>
-                            {% if produit.avis is not empty  %}
-                            {% include 'front/partials/_userReview.html.twig' %}
+                            {% if produit.avis is not empty %}
+                                {% include 'front/partials/_userReview.html.twig' %}
                             {% endif %}
                         </div>
                     </div>

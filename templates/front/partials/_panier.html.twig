@@ -1,0 +1,47 @@
+{% if produit.quantiteStock > 0 %}
+
+    <div class="button ms-3 p-0">
+        <button id="minus" type="button" class="btn btn-primary">
+            <i class="fas fa-minus"></i>
+        </button>
+    </div>
+    <div class="formQt p-0 ms-3 me-3">
+        {% set value = 1 %}
+        <input type="number" data-input-add-produit="{{ produit.id }}" class="form-control" readonly="readonly"
+               id="quantity"
+               name="quantity" min="1" max="{{ produit.quantiteStock }}" value="{{ value }}">
+    </div>
+    <div class="button p-0 me-5 mb-3">
+        <button id="plus" type="button" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="col-6 ms-3 p-0">
+        <a href="{{ path('app_produit', {'slug': produit.slug}) }}">
+            <button type="button" data-produit-id="{{ produit.id }}" class="btn btn-primary addCard">Ajouter au panier
+            </button>
+        </a>
+    </div>
+
+{% elseif produit.quantiteStock == 0 %}
+
+    <div class="button ms-3 p-0">
+        <button type="button" class="btn btn-primary" disabled>
+            <i class="fas fa-minus"></i>
+        </button>
+    </div>
+    <div class="formQt p-0 ms-3 me-3">
+        <input type="number" class="form-control" readonly="readonly" id="quantity"
+               name="quantity" min="1" max="{{ produit.quantiteStock }}" disabled>
+    </div>
+    <div class="button p-0 me-5 mb-3">
+        <button type="button" class="btn btn-primary" disabled>
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div class="col-6 ms-3 p-0">
+        <button type="button" class="btn btn-primary addCard" disabled>Ajouter au panier
+        </button>
+    </div>
+
+{% endif %}

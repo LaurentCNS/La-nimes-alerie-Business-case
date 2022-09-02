@@ -214,6 +214,16 @@ class Produit
         return $this->photo;
     }
 
+    public function getPhotoPrincipale(): ?Photo
+    {
+        foreach ($this->photo as $photo) {
+            if ($photo->isEstPrincipale()) {
+                return $photo;
+            }
+        }
+        return null;
+    }
+
 
     public function addPhoto(Photo $photo): self
     {

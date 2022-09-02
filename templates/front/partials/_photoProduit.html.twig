@@ -1,0 +1,19 @@
+<div class="col-12 mx-auto d-flex justify-content-center">
+    <img data-photo-change="{{ photoPrincipale.url }}"
+         class="col-8 col-sm-8 col-md-12 col-lg-10 col-xl-8"
+         src="{{ asset('build/img/uploads/items/' ~ photoPrincipale.url) }}"
+         alt="{{ photoPrincipale.produit.libelle }}">
+</div>
+<div class="ms-3 mt-3 pb-4">
+    <img data-photo-principale="{{ photoPrincipale.url }}"
+         class="miniature col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 me-3"
+         src="{{ asset('build/img/uploads/items/' ~ photoPrincipale.url) }}"
+         alt="{{ photoPrincipale.produit.libelle }}">
+    {% for photos in produit.photo %}
+    {% if photos.estPrincipale == 0 %}
+        <img data-photos="{{ photos.url }}"
+             class="miniature col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 me-3"
+             src="{{ asset('build/img/uploads/items/' ~ photos.url) }}"
+             alt="{{ photos.produit.libelle }}">
+    {% endif %}
+{% endfor %}

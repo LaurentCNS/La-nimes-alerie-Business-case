@@ -29,36 +29,39 @@ class ProduitController extends AbstractController
         // Récupération du produit sélectionné par le slug envoyer en paramètre
         $produitSelect = $produitRepository->getProductBySlug($slug);
 
+        // Récupération de la photo principale du produit
+        $photoPrincipale = $produit->getPhotoPrincipale();
 
-            // Post-Traitement
-            // Moyenne des notes pour produit.avis.note
-            $moyenne = $produit->getAverageNote($produitSelect);
+        // Moyenne des notes pour produit.avis.note
+        $moyenne = $produit->getAverageNote($produitSelect);
 
-            // creation d'un tableau d'avis pour le paginator et d'un compteur pour le nombre d'avis
-            $avisArray = [];
-            $nbTotalNote = 0;
 
-            foreach ($produitSelect->getAvis() as $nb => $avis) {
-                if ($avis) {
-                    $avisArray[] = $avis;
-                    // Compteur d'avis
-                    $nbTotalNote = $nb + 1;
+        // creation d'un tableau d'avis pour le paginator et d'un compteur pour le nombre d'avis
+        $avisArray = [];
+        $nbTotalNote = 0;
+
+        foreach ($produitSelect->getAvis() as $nb => $avis) {
+            if ($avis) {
+                $avisArray[] = $avis;
+                // Compteur d'avis
+                $nbTotalNote = $nb + 1;
                 }
-            }
+        }
 
-            $avisPaginate = $paginator->paginate(
-                $avisArray,
-                $request->query->getInt('page',1),8
-            );
+        $avisPaginate = $paginator->paginate(
+            $avisArray,
+            $request->query->getInt('page',1),8
+        );
 
 
         return $this->render('front/produit/index.html.twig', [
             'controller_name' => 'ProduitController',
-            'produit' => $produitSelect,
             'categories' => $categories,
-            'avisProduit' => $avisPaginate,
+            'produit' => $produitSelect,
+            'photoPrincipale' => $photoPrincipale,
             'moyenne' => $moyenne,
             'nbTotalNote' => $nbTotalNote,
+            'avisProduit' => $avisPaginate,
         ]);
     }
 }
