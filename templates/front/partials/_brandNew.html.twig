@@ -10,15 +10,15 @@
                 <div>
                     <div class="col-12 mt-3">
                         <div class="price fw-bolder mb-0 mx-3">
-                            {# gestion du prix #}
-                            {% set price = produit[0].prixHt + ((produit[0].prixHt * produit[0].tva) /100) | round(2,'floor') %}
+                            {# filtre du prix #}
                             {% if produit[0].promotion is null %}
-                                {{ price }}€
+                                {{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}
                             {% else %}
-                                {{ (price*produit[0].promotion.pourcentage) | round(2,'floor') }}€
+                                {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}
                             {% endif %}
                         </div>
                         <div class="pb-1">
+                            {# filtre des notes #}
                             {{ produit['note'] | notes }}
                         </div>
                     </div>

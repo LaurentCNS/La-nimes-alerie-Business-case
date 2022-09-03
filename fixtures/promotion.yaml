@@ -1,57 +1,57 @@
 App\Entity\Promotion:
     promotion0:
-        pourcentage: 0.95
+        pourcentage: 5
 
     promotion1:
-        pourcentage: 0.90
+        pourcentage: 10
 
     promotion2:
-        pourcentage: 0.85
+        pourcentage: 15
 
     promotion3:
-        pourcentage: 0.80
+        pourcentage: 20
 
     promotion4:
-        pourcentage: 0.75
+        pourcentage: 25
 
     promotion5:
-        pourcentage: 0.70
+        pourcentage: 30
 
     promotion6:
-        pourcentage: 0.65
+        pourcentage: 35
 
     promotion7:
-        pourcentage: 0.60
+        pourcentage: 40
 
     promotion8:
-        pourcentage: 0.55
+        pourcentage: 45
 
     promotion9:
-        pourcentage: 0.50
+        pourcentage: 50
 
     promotion10:
-        pourcentage: 0.45
+        pourcentage: 55
 
     promotion11:
-        pourcentage: 0.40
+        pourcentage: 60
 
     promotion12:
-        pourcentage: 0.35
+        pourcentage: 65
 
     promotion13:
-        pourcentage: 0.30
+        pourcentage: 70
 
     promotion14:
-        pourcentage: 0.25
+        pourcentage: 75
 
     promotion15:
-        pourcentage: 0.20
+        pourcentage: 80
 
     promotion16:
-        pourcentage: 0.15
+        pourcentage: 85
 
     promotion17:
-        pourcentage: 0.10
+        pourcentage: 90
 
     promotion18:
-        pourcentage: 0.05
+        pourcentage: 95

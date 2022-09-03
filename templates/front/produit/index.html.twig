@@ -43,6 +43,7 @@
                     <h5>{{ produit.libelle }}</h5>
                     <div class="row d-flex mt-4 mb-3">
                         <div class="col-4 pe-0 text-center">
+                            {# Filtre des notes #}
                             {{ moyenne | notes }}
                         </div>
                         <div class="col-8 ps-0">
@@ -72,12 +73,12 @@
                         {% endif %}
                     </div>
                     <div class="price mt-3 ms-3">
-                        {% set price = produit.prixHt + ((produit.prixHt * produit.tva) /100) | round(2,'floor') %}
+                        {# filtre du prix #}
                         {% if produit.promotion is null %}
-                            {{ price }}€
+                            {{ produit.prixHt | prixTtc(produit.tva,0) }}
                         {% else %}
-                            <div class="oldPrice">{{ price }}€</div>
-                            {{ (price*produit.promotion.pourcentage) | round(2,'floor') }}€
+                            <div class="oldPrice">{{ produit.prixHt | prixTtc(produit.tva,0) }}</div>
+                            {{ produits.prixHt | prixTtc(produit.tva,produit.promotion.pourcentage) }}
                         {% endif %}
                     </div>
                     <div class="row d-flex mt-3">

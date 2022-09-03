@@ -1,5 +1,4 @@
 {# boucle sur 'meilleurProduits' avec une sécurité supplémentaire de limite à 6 #}
-
     {% for produit in meilleursProduits|slice(0, 6) %}
         <div class="col-12 col-sm-6 col-md-4 col-xl-2 mt-4 mb-5 test">
             <div class="cardFull">
@@ -13,15 +12,14 @@
                     <div>
                         <h5 class="title-best mt-1 mb-3 mx-3">{{ produit[0].libelle |slice(0,30) }}</h5>
                         <p class="resume-best mx-3 lh-1">{{ produit[0].resume | slice(0,43) }}</p>
-                        {# Gestion des notes #}
+                        {# filtre des notes #}
                         {{ produit['note'] | notes }}
                         <div class="price mx-3 pb-3 fw-bolder">
-                            {# gestion du prix #}
-                            {% set price = produit[0].prixHt + ((produit[0].prixHt * produit[0].tva) /100) | round(2,'floor') %}
+                            {# filtre du prix #}
                             {% if produit[0].promotion is null %}
-                                {{ price }}€
+                            {{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}
                             {% else %}
-                                {{ (price*produit[0].promotion.pourcentage) | round(2,'floor') }}€
+                            {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}
                             {% endif %}
                         </div>
                     </div>

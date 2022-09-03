@@ -151,7 +151,7 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->andWhere('produit.estActif = 1')
             ->andWhere('produit.promotion is not null')
             ->groupBy('produit')
-            ->orderBy('promotion.pourcentage', 'ASC')
+            ->orderBy('promotion.pourcentage', 'DESC')
             ->setMaxResults(6)
             ->getQuery()
             ->getResult();
