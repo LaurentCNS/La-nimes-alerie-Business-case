@@ -1,0 +1,43 @@
+App\Entity\newsletter:
+  newsletter{0}:
+    email (unique): '<safeEmail()>'
+    client: '@client2'
+
+  newsletter{1}:
+    email (unique): '<safeEmail()>'
+    client: '@client3'
+
+  newsletter{2}:
+    email (unique): '<safeEmail()>'
+    client: '@client4'
+
+  newsletter{3}:
+    email (unique): '<safeEmail()>'
+    client: '@client5'
+
+  newsletter{4}:
+    email (unique): '<safeEmail()>'
+    client: '@client6'
+
+  newsletter{5}:
+    email (unique): '<safeEmail()>'
+    client: '@client7'
+
+  newsletter{6}:
+    email (unique): '<safeEmail()>'
+    client: '@client8'
+
+  newsletter{7}:
+    email (unique): '<safeEmail()>'
+    client: '@client9'
+
+  newsletter{8}:
+    email (unique): '<safeEmail()>'
+    client: '@client10'
+
+  newsletter{9}:
+    email (unique): '<safeEmail()>'
+    client: '@client11'
+
+  newsletter{10..99}:
+    email (unique): '<safeEmail()>'

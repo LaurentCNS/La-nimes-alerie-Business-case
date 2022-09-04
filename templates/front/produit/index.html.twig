@@ -75,10 +75,10 @@
                     <div class="price mt-3 ms-3">
                         {# filtre du prix #}
                         {% if produit.promotion is null %}
-                            {{ produit.prixHt | prixTtc(produit.tva,0) }}
+                            {{ produit.prixHt | prixTtc(produit.tva,0) }}€
                         {% else %}
-                            <div class="oldPrice">{{ produit.prixHt | prixTtc(produit.tva,0) }}</div>
-                            {{ produits.prixHt | prixTtc(produit.tva,produit.promotion.pourcentage) }}
+                            <div class="oldPrice">{{ produit.prixHt | prixTtc(produit.tva,0) }}€</div>
+                            {{ produit.prixHt | prixTtc(produit.tva,produit.promotion.pourcentage) }}€
                         {% endif %}
                     </div>
                     <div class="row d-flex mt-3">

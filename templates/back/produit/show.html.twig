@@ -84,7 +84,7 @@
                         <tr>
                             <th>Promotion</th>
                             <td>{% if (produit.promotion) %}
-                                    {{ 100 - (produit.promotion.pourcentage * 100) }}%
+                                    {{ produit.promotion.pourcentage }}%
                                 {% else %}
                                     Aucune promotion
                                 {% endif %}

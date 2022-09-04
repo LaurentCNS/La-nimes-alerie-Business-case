@@ -24,16 +24,13 @@ class Promotion
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    #[
-        Assert\NotBlank([
-            'message' => 'promotion.pourcentage.not_blank',
-        ]),    
-    ]
-    private ?string $pourcentage = null;
+
 
     #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Produit::class)]
     private Collection $produits;
+
+    #[ORM\Column]
+    private ?int $pourcentage = null;
 
     public function __construct()
     {
@@ -45,24 +42,6 @@ class Promotion
         return $this->id;
     }
 
-    public function getPourcentage(): ?string
-    {
-        return $this->pourcentage;
-    }
-
-    public function getPourcentageCalcule(): ?string
-    {
-        // calcule avoir le pourcentage réelle
-        $valeur = $this->pourcentage * 100;
-        return 100 - $valeur;
-    }
-
-    public function setPourcentage(string $pourcentage): self
-    {
-        $this->pourcentage = $pourcentage;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Produit>
@@ -90,6 +69,18 @@ class Promotion
                 $produit->setPromotion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPourcentage(): ?int
+    {
+        return $this->pourcentage;
+    }
+
+    public function setPourcentage(int $pourcentage): self
+    {
+        $this->pourcentage = $pourcentage;
 
         return $this;
     }

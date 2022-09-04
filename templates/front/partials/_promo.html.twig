@@ -10,10 +10,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <p class="mb-0 mx-3 mt-3 fw-bolder"><s>{{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}</s></p>
+                        <p class="mb-0 mx-3 mt-3 fw-bolder"><s>{{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}€</s></p>
                         <p class="price mx-3 pb-2 fw-bolder">
                             {# filtre du prix #}
-                            {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}
+                            {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}€
                     </div>
                     <div class="col-6">
                         <div class="container-promo">

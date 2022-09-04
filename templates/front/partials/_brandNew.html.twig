@@ -12,9 +12,9 @@
                         <div class="price fw-bolder mb-0 mx-3">
                             {# filtre du prix #}
                             {% if produit[0].promotion is null %}
-                                {{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}
+                                {{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}€
                             {% else %}
-                                {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}
+                                {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}€
                             {% endif %}
                         </div>
                         <div class="pb-1">

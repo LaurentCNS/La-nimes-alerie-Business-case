@@ -85,10 +85,16 @@
                     </td>
                     <td>
                         {% set prixTotal = 0 %}
+                        {% set prixTotalPromo = 0 %}
                         {% for ligne in panier.ligne %}
-                            {% set prixTotal = prixTotal + ((ligne.prix + (ligne.prix * ligne.tva / 100 )) * ligne.quantite ) %}
+                            {# filtre du prix #}
+                            {% if ligne.promotion is null %}
+                                {% set prixTotal = prixTotal + (( ligne.prix | prixTtc(ligne.tva,0) ) * ligne.quantite)  %}
+                            {% else %}
+                                {% set prixTotalPromo = prixTotalPromo + (( ligne.prix | prixTtc(ligne.tva,ligne.promotion) )) * ligne.quantite  %}
+                            {% endif %}
                         {% endfor %}
-                        {{ prixTotal | round(2) }}€
+                        {{ prixTotal + prixTotalPromo }}€
                     </td>
                     <td>
                         {{ panier.moyenPaiement.type }}

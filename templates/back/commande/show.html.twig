@@ -94,12 +94,20 @@
                                     <tbody>
                                     {% for ligne in panier.ligne %}
                                         <tr>
-                                            <td>LIBELLE: {{ ligne.libelle }} QTE: {{ ligne.quantite }}
-                                                PUHT: {{ ligne.prix }}€
-                                                PRUTTC : {{ ligne.prix + ((ligne.prix * ligne.tva) / 100)|round(2) }}€
-                                                PVTTC
-                                                : {{ ((ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite) |round(2) }}
-                                                € TVA: {{ ligne.tva }}%
+                                            <td><b>LIBELLE:</b> {{ ligne.libelle }}
+                                                <b>QTE:</b> {{ ligne.quantite }}
+                                                <b>PUHT:</b> {{ ligne.prix }}€
+                                                <b>TVA:</b> {{ ligne.tva }}%
+                                                {# filtre du prix #}
+                                                {% if ligne.promotion is null %}
+                                                    <b>PUTTC:</b> {{ ligne.prix | prixTtc(ligne.tva,0) }}€
+                                                    <b>PVTTC</b> {{ ligne.prix | prixTtc(ligne.tva,0) * ligne.quantite }}€
+                                                {% else %}
+                                                    <b>PUTTC
+                                                        REMISE:</b> {{ ligne.prix | prixTtc(ligne.tva,ligne.promotion) }}€
+                                                    <b>PVTTC</b> {{ ligne.prix | prixTtc(ligne.tva,ligne.promotion) * ligne.quantite }}€
+                                                    ({{ ligne.promotion }}%)
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -112,10 +120,15 @@
                                     <tbody>
                                     <tr>
                                         {% set montant = 0 %}
+                                        {% set montantPromo = 0%}
                                         {% for ligne in panier.ligne %}
-                                            {% set montant = montant + (ligne.prix + ((ligne.prix * ligne.tva) / 100)) * ligne.quantite %}
+                                            {% if ligne.promotion is null %}
+                                                {% set montant = montant + ((ligne.prix | prixTtc(ligne.tva,0)) * ligne.quantite) %}
+                                            {% else %}
+                                                {% set montantPromo = montantPromo + ((ligne.prix | prixTtc(ligne.tva,ligne.promotion)) * ligne.quantite) %}
+                                            {% endif %}
                                         {% endfor %}
-                                        <td>{{ montant | round(2) }}€</td>
+                                        <td>{{ montant + montantPromo }}€</td>
                                     </tr>
                                     </tbody>
                                 </table>

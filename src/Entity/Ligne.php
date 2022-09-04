@@ -63,6 +63,9 @@ class Ligne
     #[ORM\Column(length: 100)]
     private ?string $libelle = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $promotion = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +139,18 @@ class Ligne
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?int
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?int $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }

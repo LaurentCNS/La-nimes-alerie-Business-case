@@ -87,7 +87,7 @@ class ProduitType extends AbstractType
                 'class' => Promotion::class,
                 // choixe la propriété à afficher dans la liste déroulante avec un calcule de promotion
                 'choice_label' => function (Promotion $promotion) {
-                    return $promotion->getPourcentageCalcule() . '%';
+                    return $promotion->getPourcentage() . '%';
                 },
                 'required' => false,
                 'placeholder' => 'Aucune promotion'

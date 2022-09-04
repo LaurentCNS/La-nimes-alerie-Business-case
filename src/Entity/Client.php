@@ -101,7 +101,6 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $adresses;
 
 
-
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -343,6 +342,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
 
 }
