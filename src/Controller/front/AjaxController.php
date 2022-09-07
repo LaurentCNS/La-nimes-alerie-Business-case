@@ -3,6 +3,8 @@
 namespace App\Controller\front;
 
 use App\Entity\Ligne;
+use App\Entity\Panier;
+use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +26,30 @@ class AjaxController extends AbstractController
     public function index(
         Request          $request,
         SessionInterface $session,
+        EntityManagerInterface $entityManager,
+        PanierRepository $panierRepository,
     ): Response
     {
+// si l'utilisateur est connecté
+
+        if ($this->getUser()) {
+            // Si le panier en cours (100) de cet utilisateur n'existe pas dans la bdd (avant le premier ajout)
+            if (!$panierRepository->findOneBy(['client' => $session->get('user'), 'statut' => 100])) {
+
+                //CREATION DU PANIER (100) EN BDD POUR L'UTILISATEUR
+                // On crée en premier le panier
+                $panier = new Panier();
+                // On assigne l'utilisateur au panier
+                $client = $this->getUser();
+                $panier->setClient($client);
+                // On met la date du jour france au panier
+                $panier->setDateCreation(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
+                // On persiste le panier
+                $entityManager->persist($panier);
+                // On commit le panier
+                $entityManager->flush();
+            }
+        }
 
         // On récupère les données envoyées en fetch dans le fichier ts
         $datas = json_decode($request->get('datas'), true);

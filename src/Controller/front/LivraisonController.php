@@ -20,37 +20,29 @@ class LivraisonController extends AbstractController
 
 
         // si le panier existe dans la session
-        if ($session->has(AjaxController::$CART)) {
+        if ($session->has(AjaxController::$CART )) {
 
             // GESTION DU PANIER
-            // Si l'utilisateur identifié a déjà un panier en cours
+            // Si l'utilisateur identifié a déjà un panier en cours (creer lors de l'ajout du premier produit -> AjaxController)
             if ($panierRepository->findOneBy(['client' => $session->get('user'), 'statut' => 100])) {
 
                 // On récupère le panier
                 $panier = $panierRepository->findOneBy(['client' => $session->get('user'), 'statut' => 100]);
                 // On supprime les lignes du panier en premier par rapport au foreign key
                 $lignes = $panier->getLigne();
+                // Si le panier a des lignes
+
+                // On supprime les lignes
                 foreach ($lignes as $ligne) {
                     $entityManager->remove($ligne);
-                    $entityManager->flush();
                 }
-                // On supprime ce panier
-                $entityManager->remove($panier);
+
+                // On commit les lignes
                 $entityManager->flush();
+            }else{
+                return $this->redirectToRoute('app_panier', [
+                ]);
             }
-
-            // On crée un nouveau panier
-            $panier = new Panier();
-            // On assigne l'utilisateur au panier
-            $client = $this->getUser();
-            $client->addPanier($panier);
-            // On met la date du jour france au panier
-            $panier->setDateCreation(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
-            // On persiste le panier
-            $entityManager->persist($panier);
-            // On commit le panier
-            $entityManager->flush();
-
 
             // GESTION DES LIGNES
             // On assigne et persiste les données avec une boucle dans la table ligne

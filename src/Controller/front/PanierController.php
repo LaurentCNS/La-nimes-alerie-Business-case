@@ -50,15 +50,17 @@ class PanierController extends AbstractController
     #[Route('/delete', name: 'app_delete_cart')]
     public function delete(
         SessionInterface $session,
+        PanierRepository $panierRepository,
+        EntityManagerInterface $entityManager,
     ): Response
     {
 
-        // Passe la quantité totale à 0 pour le panier
+        // Passe la quantité totale à 0 pour la session
         $session->set(self::$QTY, 0);
 
         // Supprime la session
         $session->remove(AjaxController::$CART);
-
+        
         return $this->redirectToRoute('app_panier', [
         ]);
 
@@ -66,20 +68,23 @@ class PanierController extends AbstractController
 
     #[Route('/deleteItem/{id}', name: 'app_delete_Item')]
     public function deleteItem(
-        SessionInterface $session, $id
+        SessionInterface $session, $id, PanierRepository $panierRepository, EntityManagerInterface $entityManager
     ): Response
     {
 
         // On récupère le panier
         $cartSession = $session->get(AjaxController::$CART);
 
-        // On verifie si le produit existe dans le panier
+        // On vérifie si le produit existe dans la session
         if( !empty($cartSession[$id])){
-            // On supprime le produit du panier
+            // On supprime le produit de la session
             unset($cartSession[$id]);
-            // On met à jour le panier
+            // Passe la quantité totale à 0
+            $session->set(self::$QTY, 0);
+            // On met à jour la session
             $session->set(AjaxController::$CART, $cartSession);
         }
+
 
         return $this->redirectToRoute('app_panier', [
         ]);

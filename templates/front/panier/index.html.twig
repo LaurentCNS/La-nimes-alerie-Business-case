@@ -54,9 +54,16 @@
                 <a class="btn btn-danger" href="{{ path('app_delete_cart') }}">
                     Vider mon panier
                 </a>
-                <a class="btn btn-primary" href="{{ path('app_livraison') }}">
-                    Etape suivante
-                </a>
+                {% if app.user %}
+                    <a class="btn btn-primary" href="{{ path('app_livraison') }}">
+                        Etape suivante
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('app_register') }}">
+                        Etape suivante
+                    </a>
+                {% endif %}
+
             </div>
         {% endif %}
     </div>
