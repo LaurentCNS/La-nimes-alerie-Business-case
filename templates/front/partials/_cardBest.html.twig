@@ -14,6 +14,7 @@
                         <p class="resume-best mx-3 lh-1">{{ produit[0].resume | slice(0,43) }}</p>
                         {# filtre des notes #}
                         {{ produit['note'] | notes }}
+
                         <div class="price mx-3 pb-3 fw-bolder">
                             {# filtre du prix #}
                             {% if produit[0].promotion is null %}

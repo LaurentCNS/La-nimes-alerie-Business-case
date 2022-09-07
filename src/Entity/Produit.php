@@ -259,6 +259,14 @@ class Produit
         return $this;
     }
 
+    public function getPourcentagePromotion(): ?int
+    {
+        if ($this->promotion) {
+            return $this->promotion->getPourcentage();
+        }
+        return null;
+    }
+
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;

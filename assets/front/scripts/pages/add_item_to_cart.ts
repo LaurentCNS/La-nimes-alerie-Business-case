@@ -1,11 +1,10 @@
 
-// Interface pour la session
-interface ItemQty {
+// Interface pour les données à enregistrer
+interface ItemAndQty {
     produitId: string;
     qty: number;
 }
 
-// Interface pour la réponse du serveur
 interface ResponseCart {
     qtyTotale: string;
 }
@@ -28,7 +27,7 @@ function setUpClickEventAddItem(): void {
                 const inputQty: HTMLInputElement = document.querySelector("[data-input-add-produit='"+produitId+"']");
 
                 // creation de l'objet à envoyer au serveur
-                let datasToSend: ItemQty = {
+                let datasToSend: ItemAndQty = {
                     produitId,
                     qty: inputQty.valueAsNumber
                 };

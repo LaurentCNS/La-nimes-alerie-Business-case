@@ -23,6 +23,9 @@
                 <th>
                     Total
                 </th>
+                <th>
+                    Actions
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +43,8 @@
                     <td>
                         {{ item['qty'] * item['produit'].prixHt }}€
                     </td>
+                    <td>
+                        <a href="{{ path('app_delete_Item', {'id': item['produit'].id}) }}" class="btn btn-danger">Supprimer</a>
                 </tr>
             {% endfor %}
             </tbody>
@@ -49,8 +54,8 @@
                 <a class="btn btn-danger" href="{{ path('app_delete_cart') }}">
                     Vider mon panier
                 </a>
-                <a class="btn btn-primary" href="">
-                    Payer
+                <a class="btn btn-primary" href="{{ path('app_livraison') }}">
+                    Etape suivante
                 </a>
             </div>
         {% endif %}

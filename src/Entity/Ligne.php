@@ -83,12 +83,12 @@ class Ligne
         return $this;
     }
 
-    public function getprix(): ?string
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setprix(string $prix): self
+    public function setPrix(string $prix): self
     {
         $this->prix = $prix;
 

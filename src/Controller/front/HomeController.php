@@ -27,9 +27,10 @@ class HomeController extends AbstractController
 
          // Ajouter une ligne date dans la table nbVisites
         $nbVisites = new NbVisites();
-        $nbVisites->setDateVisite(new \DateTime());
+        $nbVisites->setDateVisite(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $this->entityManager->persist($nbVisites);
         $this->entityManager->flush();
+
 
         // Récupérer les meilleurs produits
         $meilleursProduits = $produitRepository->getBestProducts();

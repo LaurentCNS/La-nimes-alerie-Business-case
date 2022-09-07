@@ -2,6 +2,8 @@
 
 namespace App\Controller\front;
 
+use App\Entity\Ligne;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,12 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjaxController extends AbstractController
 {
 
+    // Déclaration pour la session
     public static string $CART = 'CART';
     public static string $QTY = 'QTY';
 
     #[Route('/addItemToCart/{datas}', name: 'ajax_add_item_to_cart')]
     public function index(
-        Request $request,
+        Request          $request,
         SessionInterface $session,
     ): Response
     {
@@ -30,7 +33,7 @@ class AjaxController extends AbstractController
         // On crée un tableau vide pour stocker les données du produit dans la session
         $currentSession = [];
 
-        // Si la session existe
+        // Si la session existe déjà (à partir du deuxième produit ajouté au panier)
         if ($session->has(self::$CART)) {
             // On récupère les données de la session
             $currentSession = $session->get(self::$CART);
@@ -45,7 +48,7 @@ class AjaxController extends AbstractController
             $currentSession[$datas['produitId']] += $datas['qty'];
         }
 
-        // On enregistre le tableau CART dans la session
+        // On set le tableau CART dans la session
         $session->set(self::$CART, $currentSession);
 
         // On crée une variable pour stocker la quantité totale
@@ -59,14 +62,15 @@ class AjaxController extends AbstractController
         // On enregistre la quantité totale dans la session
         $session->set(self::$QTY, $qtyTotal);
 
+
         // On retourne vers le ts un json avec la quantité totale pour l'affichage dans le panier
         return new JsonResponse(['qtyTotale' => $qtyTotal]);
+
     }
 
     /**
      * @throws Exception
      */
-
 
 
 //    #[Route('/addToFavorite/{datas}', name: 'ajax_add_item_to_favorite')]
@@ -85,6 +89,7 @@ class AjaxController extends AbstractController
 //        $em->flush();
 //        return new JsonResponse(['OK' => $isAdded]);
 //    }
+
 
 }
 

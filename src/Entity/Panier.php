@@ -95,7 +95,8 @@ class Panier
 
     private int $statut = EnumStatutPanier::CREEE;
 
-    #[ORM\ManyToOne(inversedBy: 'panier')]
+    // #[ORM\ManyToOne(inversedBy: 'panier', cascade : ["persist"])]
+    #[ORM\ManyToOne(inversedBy: 'panier',)]
     private ?Client $client = null;
 
     #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Ligne::class)]
@@ -181,6 +182,26 @@ class Panier
         }
 
         return $this;
+    }
+
+    // Récupérer la valuer libelle de la ligne
+    public function getLigneLibelle(): string
+    {
+        $libelle = '';
+        foreach ($this->ligne as $ligne) {
+            $libelle .= $ligne->getLibelle();
+        }
+        return $libelle;
+    }
+
+    // Récupérer la quantité de la ligne
+    public function getLigneQuantite(): int
+    {
+        $quantite = 0;
+        foreach ($this->ligne as $ligne) {
+            $quantite += $ligne->getQuantite();
+        }
+        return $quantite;
     }
 
     public function removeLigne(Ligne $ligne): self
