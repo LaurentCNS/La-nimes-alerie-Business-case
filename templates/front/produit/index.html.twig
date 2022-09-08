@@ -87,7 +87,7 @@
                                 <i class="fas fa-heart"></i>
                             </div>
                             <div class="ms-3 col-8 ps-0">
-                                <a href="{{ path('app_add_favorite', {'slug': produit.slug}) }}">Ajouter aux
+                                <a data-input-favorite-produit="{{ produit.id }}">Ajouter aux
                                     favoris</a>
                             </div>
                         {% else %}

@@ -22,8 +22,7 @@ class ProduitController extends AbstractController
     public function index($slug, ProduitRepository $produitRepository, CategorieRepository $categorieRepository,
                          Produit $produit, PaginatorInterface $paginator, Request $request, SessionInterface $session): Response
     {
-        dump($session->get('CART'));
-        dump($session->get('QTY'));
+
         // Récupération des catégories pour le menu
         $categories = $categorieRepository->findCategorie();
 

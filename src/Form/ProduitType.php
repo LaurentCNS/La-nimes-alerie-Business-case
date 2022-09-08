@@ -49,32 +49,6 @@ class ProduitType extends AbstractType
                     )
                 ]
             ])
-            //ajouter une 3eme secondaire
-            ->add('troisiemePhoto', FileType::class, [
-                'label' => 'Troisème photo',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File(
-                        maxSize: '2048k',
-                        mimeTypes: ['image/png', 'image/jpeg'],
-//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
-                    )
-                ]
-            ])
-            //ajouter une 4eme secondaire
-            ->add('quatriemePhoto', FileType::class, [
-                'label' => 'Quatrième photo',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File(
-                        maxSize: '2048k',
-                        mimeTypes: ['image/png', 'image/jpeg'],
-//                        mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
-                    )
-                ]
-            ])
             ->add('prixHt')
             ->add('quantiteStock')
             ->add('tva')

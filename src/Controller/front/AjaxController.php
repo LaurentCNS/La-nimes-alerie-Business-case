@@ -4,7 +4,9 @@ namespace App\Controller\front;
 
 use App\Entity\Ligne;
 use App\Entity\Panier;
+use App\Repository\ClientRepository;
 use App\Repository\PanierRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +26,14 @@ class AjaxController extends AbstractController
 
     #[Route('/addItemToCart/{datas}', name: 'ajax_add_item_to_cart')]
     public function index(
-        Request          $request,
-        SessionInterface $session,
+        Request                $request,
+        SessionInterface       $session,
         EntityManagerInterface $entityManager,
-        PanierRepository $panierRepository,
+        PanierRepository       $panierRepository,
     ): Response
     {
-// si l'utilisateur est connecté
 
+        // si l'utilisateur est connecté
         if ($this->getUser()) {
             // Si le panier en cours (100) de cet utilisateur n'existe pas dans la bdd (avant le premier ajout)
             if (!$panierRepository->findOneBy(['client' => $session->get('user'), 'statut' => 100])) {
@@ -97,23 +99,38 @@ class AjaxController extends AbstractController
      */
 
 
-//    #[Route('/addToFavorite/{datas}', name: 'ajax_add_item_to_favorite')]
-//    public function addToFavorite(
-//        Request $request,
-//        GameRepository $gameRepository,
-//        AccountRepository $accountRepository,
-//        EntityManagerInterface $em
-//    ): Response
-//    {
-//        $datas = json_decode($request->get('datas'), true);
-//        $game = $gameRepository->findOneBy(['id' => $datas['gameId']]);
-//        $user = $accountRepository->findOneBy(['id' => 606]);
-//        // $user = $this->getUser();
-//        $isAdded = $user->addToFavorite($game);
-//        $em->flush();
-//        return new JsonResponse(['OK' => $isAdded]);
-//    }
+    #[Route('/addToFavorite/{datas}', name: 'ajax_add_item_to_favorite')]
+    public function addToFavorite(
+        Request                $request,
+        ProduitRepository      $produitRepository,
+        ClientRepository       $clientRepository,
+        EntityManagerInterface $em,
+        SessionInterface       $session,
+    ): Response
+    {
+        // On récupère les données envoyées en fetch dans le fichier ts
+        $datas = json_decode($request->get('datas'), true);
 
+        // On récupère le produit
+        $produit = $produitRepository->findOneBy(['id' => $datas['produitId']]);
 
+        // On récupère l'utilisateur connecté
+        $client = $clientRepository->findOneBy(['id' => $session->get('user')]);;
+
+        // Si l'utilisateur n'a pas de favoris
+        if (!$client->getProduits()->contains($produit)) {
+            // On ajoute le produit dans les favoris
+            $isAdded = $client->addProduit($produit);
+            $em->persist($client);
+            $em->flush();
+            return new JsonResponse(['addOk' => $isAdded]);
+        } else {
+            // On supprime le produit des favoris
+            $isRemoved = $client->removeProduit($produit);
+            $em->persist($client);
+            $em->flush();
+            return new JsonResponse([]);
+        }
+    }
 }
 
