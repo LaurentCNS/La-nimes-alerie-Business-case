@@ -84,7 +84,7 @@
                     <div class="row d-flex mt-3">
                         {% if app.user %}
                             <div class="col-1 pe-0 text-center">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart {% if app.user.produits.contains(produit) %}text-danger fa-2x{% endif %}" data-heart></i>
                             </div>
                             <div class="ms-3 col-8 ps-0">
                                 <a data-input-favorite-produit="{{ produit.id }}">Ajouter aux

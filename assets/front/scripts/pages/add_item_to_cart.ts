@@ -47,7 +47,24 @@ function setUpClickEventAddItem(): void {
                     .then((data) => {
                         // On renvoie la quantité totale à afficher dans le panier
                         const qtyCart: HTMLParagraphElement = document.querySelector('[data-cart-item]');
-                        qtyCart.innerText = data.qtyTotale;
+                        let articles: string = ' article';
+                        if (parseInt(data.qtyTotale) > 1 && parseInt(data.qtyTotale) < 10) {
+                            articles += 's';
+                            qtyCart.classList.remove('value');
+                            qtyCart.classList.add('values');
+                        } else if (parseInt(data.qtyTotale) >= 10 && parseInt(data.qtyTotale) < 100) {
+                            articles += 's';
+                            qtyCart.classList.remove('value');
+                            qtyCart.classList.add('valuesDouble');
+                        } else if(parseInt(data.qtyTotale) > 99){
+                            articles += 's';
+                            qtyCart.classList.remove('valuesDouble');
+                            qtyCart.classList.add('valuesTriples');
+                            data.qtyTotale = '99+';
+                        }
+
+                        qtyCart.innerText = data.qtyTotale + articles;
+
                     });
             });
         });

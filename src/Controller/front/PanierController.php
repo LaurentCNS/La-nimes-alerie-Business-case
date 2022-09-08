@@ -16,7 +16,7 @@ class PanierController extends AbstractController
 {
 
     #[Route('/', name: 'app_panier')]
-    public function index(SessionInterface $session, ProduitRepository $produitRepository, PanierRepository $panierRepository,ClientRepository $client, EntityManagerInterface $entityManager): Response
+    public function index(SessionInterface $session, ProduitRepository $produitRepository, PanierRepository $panierRepository, ClientRepository $client, EntityManagerInterface $entityManager): Response
     {
 
         // créer un panier vide
@@ -49,8 +49,8 @@ class PanierController extends AbstractController
 
     #[Route('/delete', name: 'app_delete_cart')]
     public function delete(
-        SessionInterface $session,
-        PanierRepository $panierRepository,
+        SessionInterface       $session,
+        PanierRepository       $panierRepository,
         EntityManagerInterface $entityManager,
     ): Response
     {
@@ -60,11 +60,13 @@ class PanierController extends AbstractController
 
         // Supprime la session
         $session->remove(AjaxController::$CART);
-        
+
         return $this->redirectToRoute('app_panier', [
         ]);
 
     }
+
+    public static string $CART = 'CART';
 
     #[Route('/deleteItem/{id}', name: 'app_delete_Item')]
     public function deleteItem(
@@ -74,17 +76,26 @@ class PanierController extends AbstractController
 
         // On récupère le panier
         $cartSession = $session->get(AjaxController::$CART);
-
         // On vérifie si le produit existe dans la session
-        if( !empty($cartSession[$id])){
+        if (!empty($cartSession[$id])) {
             // On supprime le produit de la session
             unset($cartSession[$id]);
-            // Passe la quantité totale à 0
-            $session->set(self::$QTY, 0);
             // On met à jour la session
             $session->set(AjaxController::$CART, $cartSession);
         }
 
+        // On récupère la quantité totale des produits
+        $currentSession = [];
+        $currentSession = $session->get(self::$CART);
+
+        $qtyTotal = 0;
+        // On parcourt le tableau pour récupérer la quantité totale
+        foreach ($currentSession as $item) {
+            $qtyTotal += $item;
+        }
+
+        // On sous la quantité du produit supprimé
+        $session->set(self::$QTY, $qtyTotal);
 
         return $this->redirectToRoute('app_panier', [
         ]);

@@ -37,10 +37,17 @@ function setUpClickEventAddFavorite(): void {
                     })
 
                     .then((data) => {
+                        const heart: HTMLElement = document.querySelector('[data-heart]');
                         if (data.addOk) {
-                            alert('Favoris ajouté');
+                            if (heart) {
+                                heart.classList.add('text-danger');
+                                heart.classList.add('fa-2x');
+                            }
                         } else {
-                            alert('Favoris supprimé');
+                            if (heart) {
+                                heart.classList.remove('text-danger');
+                                heart.classList.remove('fa-2x');
+                            }
                         }
                     });
             });
