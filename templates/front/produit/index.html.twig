@@ -39,8 +39,28 @@
             </div>
             <div class="col-12 col-md-12 col-lg-6 cardRight">
                 <div class="cardDescription mx-auto mt-2">
-                    <h3 class="mt-5">{{ produit.marque.nom | upper }}</h3>
-                    <h5>{{ produit.libelle }}</h5>
+                    <div class="row">
+                        <div class="col-9">
+                            <h3 class="mt-5">{{ produit.marque.nom | upper }}</h3>
+                            <h5>{{ produit.libelle }}</h5>
+                        </div>
+
+                        <div class="col-2 likeBox">
+                            {% if app.user %}
+                                <div data-input-favorite-produit="{{ produit.id }}">
+                                    <div data-bg class="likeCircle {% if app.user.produits.contains(produit) %}overrideCircle{% endif %}">
+                                        <i data-heart class="fas fa-heart {% if app.user.produits.contains(produit) %}overrideHeart{% endif %}"></i>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <a href="{{ path('app_register') }}">
+                                    <div class="likeCircle">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                     <div class="row d-flex mt-4 mb-3">
                         <div class="col-4 pe-0 text-center">
                             {# Filtre des notes #}
@@ -72,7 +92,7 @@
                             </div>
                         {% endif %}
                     </div>
-                    <div class="price mt-3 ms-3">
+                    <div class="price mt-5 ms-3">
                         {# filtre du prix #}
                         {% if produit.promotion is null %}
                             {{ produit.prixHt | prixTtc(produit.tva,0) }}€
@@ -81,25 +101,7 @@
                             {{ produit.prixHt | prixTtc(produit.tva,produit.promotion.pourcentage) }}€
                         {% endif %}
                     </div>
-                    <div class="row d-flex mt-3">
-                        {% if app.user %}
-                            <div class="col-1 pe-0 text-center">
-                                <i class="fas fa-heart {% if app.user.produits.contains(produit) %}text-danger fa-2x{% endif %}" data-heart></i>
-                            </div>
-                            <div class="ms-3 col-8 ps-0">
-                                <a data-input-favorite-produit="{{ produit.id }}">Ajouter aux
-                                    favoris</a>
-                            </div>
-                        {% else %}
-                            <div class="col-1 pe-0 text-center">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="ms-3 col-8 ps-0">
-                                <a href="{{ path('app_register') }}">Ajouter à liste de souhaits</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="row d-flex mt-3">
+                    <div class="row d-flex mt-4">
                         {{ include('front/partials/_panier.html.twig') }}
                     </div>
                 </div>

@@ -10,7 +10,7 @@ interface ResponseFavorite {
 
 // Fonction pour ajouter en favoris
 function setUpClickEventAddFavorite(): void {
-    const a: NodeListOf<HTMLLinkElement> = document.querySelectorAll('[data-input-favorite-produit]');
+    const a: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-input-favorite-produit]');
 
     if (a) {
         // on ajoute un événement click sur le lien
@@ -36,17 +36,26 @@ function setUpClickEventAddFavorite(): void {
                         return response.json() as Promise<ResponseFavorite>;
                     })
 
+                    // Retour de la promesse pour gérer les classes css
                     .then((data) => {
                         const heart: HTMLElement = document.querySelector('[data-heart]');
                         if (data.addOk) {
                             if (heart) {
-                                heart.classList.add('text-danger');
-                                heart.classList.add('fa-2x');
+                                heart.classList.add('overrideHeart');
                             }
                         } else {
                             if (heart) {
-                                heart.classList.remove('text-danger');
-                                heart.classList.remove('fa-2x');
+                                heart.classList.remove('overrideHeart');
+                            }
+                        }
+                        const bg: HTMLElement = document.querySelector('[data-bg]');
+                        if (data.addOk) {
+                            if (bg) {
+                                bg.classList.add('overrideCircle');
+                            }
+                        } else {
+                            if (bg) {
+                                bg.classList.remove('overrideCircle');
                             }
                         }
                     });
