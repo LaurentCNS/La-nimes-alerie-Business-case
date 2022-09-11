@@ -1,0 +1,65 @@
+#basketUser{
+  a{
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  h3{
+    color: grey;
+    font-weight: bold;
+    font-size: 22px;
+  }
+
+  h4{
+    margin-top: 40px;
+  }
+
+  .cardLeft{
+    .cardProduct{
+      box-shadow: 0 3px 10px #E7E7E6;
+    }
+
+    img {
+      width: 100px;
+      object-fit: cover;
+      object-position: top center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  img:hover{
+    transform: scale(1.05);
+  }
+
+  .price{
+    font-size: 23px;
+    color: #ba0606;
+  }
+
+  .cardRight{
+    .cardShipping{
+      box-shadow: 0 3px 10px #E7E7E6;
+    }
+  }
+
+
+
+
+  @media (max-width: 500px) {
+
+    .title{
+      font-size: 15px;
+    }
+    .price{
+      font-size: 20px;
+    }
+    .qty{
+      font-size: 10px;
+    }
+    .promo{
+      font-size: 12px;
+    }
+  }
+
+
+}
