@@ -1,7 +1,6 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}
-{% endblock %}
+{% block title %}Panier | La Nimes'alerie{% endblock %}
 
 {% block body %}
 
@@ -17,13 +16,13 @@
                             <div class="cardProduct mt-5">
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <a href="{{ path('app_produit', {'slug': item['produit'].slug}) }}"><img
-                                                        class="mt-3 mb-3 ms-2"
+                                                        class="mt-3 mb-3 ms-4"
                                                         src="{{ asset('build/img/uploads/items/' ~ item['produit'].photo[0].url) }}"
-                                                        alt="chien"></a>
+                                                        alt="{{ item['produit'].photo[0].url }}"></a>
                                         </div>
-                                        <div class="col-5 col-md-6 col-lg-6">
+                                        <div class="col-4 col-md-5 col-lg-5">
                                             <h4 class="title ms-5 mt-4">{{ item['produit'].marque.nom }}</h4>
                                             <p class="libelle ms-5 mt-1">{{ item['produit'].libelle }}</p>
                                         </div>
@@ -75,7 +74,7 @@
                                 </div>
                                 <div class="col-12 text-center mt-5">
                                     <div class="ms-3 me-3">
-                                        <a class="col-12 btn btn-primary" href="{{ path('app_register') }}">Etape
+                                        <a class="col-12 btn btn-primary" href="{{ path('app_livraison') }}">Etape
                                             suivante</a>
                                     </div>
                                 </div>
@@ -92,6 +91,31 @@
                                     <span class="ms-2">Paiement sécurisé</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row text-center basketEmpty">
+                <div class="col-12">
+                    <h3 class="mt-5">Votre panier est vide</h3>
+                </div>
+                <div class="col-12 mt-5">
+                    <img src="{{ asset('build/img/basket/empty.png') }}" alt="panier vide">
+                </div>
+                <div class="col-12 mt-5">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2">
+                            <a class="btn btn-primary" href="{{ path('app_home') }}">Retour à l'accueil</a>
+                        </div>
+                        <div class="col-2">
+                            {% if app.user %}
+                                <a class="btn btn-primary" href="{{ path('app_favoris') }}">Liste de souhait</a>
+                            {% else %}
+                                <a class="btn btn-primary" href="{{ path('app_register') }}">Liste de souhait</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

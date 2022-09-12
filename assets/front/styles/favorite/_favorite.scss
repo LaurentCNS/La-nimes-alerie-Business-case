@@ -1,0 +1,87 @@
+#favorite {
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h3 {
+    color: grey;
+    font-weight: bold;
+    font-size: 22px;
+  }
+
+  h4 {
+    margin-top: 40px;
+  }
+
+  .cardProduct {
+    box-shadow: 0 3px 10px #E7E7E6;
+    position: relative;
+  }
+
+  img {
+    width: 100px;
+    object-fit: cover;
+    object-position: top center;
+    background-repeat: no-repeat;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+}
+
+.price {
+  font-size: 23px;
+  color: #ba0606;
+}
+
+.cardRight {
+  .cardShipping {
+    box-shadow: 0 3px 10px #E7E7E6;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .title {
+    font-size: 15px;
+  }
+  .price {
+    font-size: 20px;
+  }
+  .qty {
+    font-size: 10px;
+  }
+  .promo {
+    font-size: 12px;
+  }
+}
+
+.favoriteEmpty {
+  margin-top: 60px;
+}
+
+.deleteItem {
+  height: 40px;
+  width: 40px;
+  background-color: $bleutheme;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  transition: transform .1s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  i {
+    font-size: 22px;
+    margin-left: 10px;
+    margin-top: 8px;
+  }
+}
