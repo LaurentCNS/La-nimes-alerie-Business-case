@@ -1,0 +1,40 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Vos adresses | La Nimes'alerie
+{% endblock %}
+
+{% block body %}
+    <div id="address">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 mt-5">
+                        <h3 class="mt-5">Mes adresses</h3>
+                        <hr>
+                        <div class="col-12 mt-5">
+                            <div class="row d-flex justify-content-around text-center">
+                                <div class="col-5">
+                                    <a href="{{ path('app_adresse_principale') }}">
+                                        <div class="cardAddress">
+                                            <p class="pt-5 fw-bold">Principale</p>
+                                            <i class="fas fa-home mb-5"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-5">
+                                    <a href="{{ path('app_adresse_secondaire') }}">
+                                        <div class="cardAddress">
+                                            <p class="pt-5 fw-bold">Secondaire</p>
+                                            <i class="fas fa-plane mb-5"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

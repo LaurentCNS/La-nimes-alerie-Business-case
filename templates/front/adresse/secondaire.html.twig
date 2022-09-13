@@ -1,0 +1,28 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Vos adresses | La Nimes'alerie
+{% endblock %}
+
+{% block body %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="mx-auto mt-5">
+                        {% if form.vars.value is not null %}
+                            <h3 class="title">Modifier votre adresse secondaire</h3>
+                        {% else %}
+                            <h3 class="title">Ajouter votre adresse secondaire</h3>
+                        {% endif %}
+                        <hr class="mt-0 mb-5">
+                        {{ form_start(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

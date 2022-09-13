@@ -1,0 +1,32 @@
+#address {
+  a {
+    text-decoration: none;
+    color: #1b1b1b;
+  }
+
+  h3 {
+    color: grey;
+    font-weight: bold;
+    font-size: 22px;
+  }
+
+  .cardAddress{
+    box-shadow: 0 3px 10px #E7E7E6;
+    transition: transform .1s;
+    cursor: pointer;
+
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+
+  i{
+    font-size: 65px;
+  }
+}
+
+.title{
+  color: grey;
+  font-weight: bold;
+  font-size: 22px;
+}

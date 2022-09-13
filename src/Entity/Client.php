@@ -321,6 +321,28 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->adresses;
     }
 
+    // Récuperer seulement l'adresse avec estPrincipal = true
+    public function getAdressePrincipale(): ?Adresse
+    {
+        foreach ($this->adresses as $adresse) {
+            if ($adresse->isEstPrincipale()) {
+                return $adresse;
+            }
+        }
+        return null;
+    }
+
+    // Récuperer seulement l'adresse avec estPrincipal = false
+    public function getAdresseSecondaire(): ?Adresse
+    {
+        foreach ($this->adresses as $adresse) {
+            if (!$adresse->isEstPrincipale()) {
+                return $adresse;
+            }
+        }
+        return null;
+    }
+
     public function addAdress(Adresse $adress): self
     {
         if (!$this->adresses->contains($adress)) {

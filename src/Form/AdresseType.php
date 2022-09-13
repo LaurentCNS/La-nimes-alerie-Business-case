@@ -20,7 +20,7 @@ class AdresseType extends AbstractType
                 'choice_label' => 'libelle',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('g')
-                        ->orderBy('g.libelle', 'ASC')
+                        ->orderBy('g.libelle', 'DESC')
                         ;
                 }
             ])
