@@ -77,7 +77,7 @@ class AdresseController extends AbstractController
 
         $form = $this->createForm(AdresseClientType::class);
 
-        // Si l'utilisateur a déjà une adresse principale, on la récupère
+        // Si l'utilisateur a déjà une adresse secondaire, on la récupère
         if ($this->getUser()->getAdresseSecondaire()) {
             $form->setData($this->getUser()->getAdresseSecondaire());
         }
