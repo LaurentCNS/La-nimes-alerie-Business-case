@@ -4,3 +4,5 @@ import "./pages/value_minus_plus";
 import "./pages/photo_change_view";
 import "./pages/add_to_favorite";
 import "./pages/animation_Favorite";
+import "./pages/cart_total_price";
+

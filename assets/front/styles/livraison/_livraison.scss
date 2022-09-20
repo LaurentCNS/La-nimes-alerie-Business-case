@@ -1,5 +1,4 @@
-#shipping
-++++++++++++++++++{
+#shipping{
   a {
     text-decoration: none;
     color: #1b1b1b;
@@ -9,5 +8,13 @@
     color: grey;
     font-weight: bold;
     font-size: 22px;
+  }
+  .cardshipping{
+    box-shadow: 0 3px 10px #E7E7E6;
+  }
+
+  .price{
+    font-size: 23px;
+    color: #ba0606;
   }
 }

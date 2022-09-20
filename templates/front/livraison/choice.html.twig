@@ -1,0 +1,67 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Livraison | La Nimes'alerie
+{% endblock %}
+
+{% block body %}
+
+    <div id="shipping">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-xl-8 cardLeft">
+                    <h3 class="mt-5">Choix de la livraison</h3>
+                    <hr>
+                    <div id="address">
+                        <div class="container">
+                                {{ include('front/partials/_addressShipping.html.twig') }}
+                        </div>
+                        {% if adressePrincipale is not empty %}
+                            <div class="col-6 mt-5 mx-auto">
+                                <div class="cardshipping">
+                                    <div class="p-5">
+                                        {{ adressePrincipale.nom }} {{ adressePrincipale.prenom }}<br>
+                                        {{ adressePrincipale.codePostal }} {{ adressePrincipale.ville }}<br>
+                                        {{ adressePrincipale.pays }}<br>
+                                        {{ adressePrincipale.telephone }}<br>
+                                        <a href="{{ path('app_ajout_adresse',{'choice': 'principale'}) }}">Modifider</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% elseif selector == 'principale' and adressePrincipale is empty %}
+                            <div class="col-6 mt-2 mx-auto">
+                                <div class="text-center">
+                                    <a href="{{ path('app_ajout_adresse',{'choice': 'principale' }) }}"
+                                       class="btn btn-primary mt-5">Ajouter une adresse principale</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if adresseSecondaire is not empty %}
+                            <div class="col-6 mt-5 mx-auto">
+                                <div class="cardshipping">
+                                    <div class="p-5">
+                                        {{ adresseSecondaire.nom }} {{ adresseSecondaire.prenom }}<br>
+                                        {{ adresseSecondaire.codePostal }} {{ adresseSecondaire.ville }}<br>
+                                        {{ adresseSecondaire.pays }}<br>
+                                        {{ adresseSecondaire.telephone }}<br>
+                                        <a href="{{ path('app_ajout_adresse',{'choice': 'secondaire' }) }}">Modifider</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% elseif selector == 'secondaire' and adresseSecondaire is empty %}
+                            <div class="col-6 mt-2 mx-auto">
+                                <div class="text-center">
+                                    <a href="{{ path('app_ajout_adresse',{'choice': 'secondaire' }) }}"
+                                       class="btn btn-primary mt-5">Ajouter une adresse secondaire</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-4 cardRight">
+                    {{ include('front/partials/_resumeShipping.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

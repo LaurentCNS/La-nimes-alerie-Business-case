@@ -18,9 +18,9 @@ class LivraisonController extends AbstractController
 {
 
     public function __construct(
-        private EntityManagerInterface $em,
+        private EntityManagerInterface $em)
+    {}
 
-    ) { }
 
     #[Route('/', name: 'app_livraison')]
     public function index(SessionInterface $session, ProduitRepository $produitRepository, PanierRepository $panierRepository, EntityManagerInterface $entityManager): Response
@@ -32,7 +32,7 @@ class LivraisonController extends AbstractController
         }
 
         // si le panier existe dans la session
-        if ($session->has(AjaxController::$CART )) {
+        if ($session->has(AjaxController::$CART)) {
 
             // GESTION DU PANIER
             // Si l'utilisateur identifié a déjà un panier en cours (creer lors de l'ajout du premier produit -> AjaxController)
@@ -51,7 +51,7 @@ class LivraisonController extends AbstractController
 
                 // On commit les lignes
                 $entityManager->flush();
-            }else{
+            } else {
                 return $this->redirectToRoute('app_panier', [
                 ]);
             }
@@ -82,11 +82,15 @@ class LivraisonController extends AbstractController
             // On commit les lignes
             $entityManager->flush();
 
+            // On récupère le montant total du panier dans la session
+            $totalPrice = $session->get(AjaxController::$TOTALPRICE);
+
             // On crée un sélecteur de css
             $selector = '';
 
             return $this->render('front/livraison/index.html.twig', [
                 'controller_name' => 'LivraisonController',
+                'totalPrice' => $totalPrice,
                 'selector' => $selector,
             ]);
         } else {
@@ -95,8 +99,69 @@ class LivraisonController extends AbstractController
         }
     }
 
-    #[Route('/adresse/{choice}', name: 'app_livraison_adresse')]
-    public function address(Request $request, $choice): Response
+
+    // CHOIX DE L'ADRESSE DE LIVRAISON
+    #[Route('/address/{choice}', name: 'app_livraison_adresse')]
+    public function address(SessionInterface $session,Request $request, $choice): Response
+    {
+        // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_register');
+        }
+
+        // On crée un sélecteur pour le choix de l'adresse
+        $selector = '';
+
+        // Si le choix est principale
+        if ($choice == 'principale') {
+            // Si le client a déjà une adresse de livraison
+            if ($this->getUser()->getAdressePrincipale()) {
+                // On enregistre l'adresse principale
+                $adressePrincipale = $this->getUser()->getAdressePrincipale();
+                // On passe le choix d'adresse de livraison dans la session
+                $request->getSession()->set('adresseLivraison', $adressePrincipale);
+            }else{
+                // Assignation d'un tableau vide temporaire pour les conditions twig
+                $adressePrincipale = [];
+                // On crée un message d'erreur pour l'adresse principale
+                $this->addFlash('danger', 'Pas d\'adresse principale enregistrée');
+            }
+            // On assigne le sélecteur
+            $selector = 'principale';
+
+        } else if ($choice == 'secondaire') {
+            // Si le client a déjà une adresse de livraison
+            if ($this->getUser()->getAdresseSecondaire()) {
+                // On enregistre l'adresse secondaire
+                $adresseSecondaire = $this->getUser()->getAdresseSecondaire();
+                // On passe le choix d'adresse de livraison dans la session
+                $request->getSession()->set('adresseLivraison', $adresseSecondaire);
+            }else{
+                // Assignation d'un tableau vide temporaire pour les conditions twig
+                $adresseSecondaire = [];
+                // On crée un message d'erreur pour l'adresse secondaire
+                $this->addFlash('danger', 'Pas d\'adresse secondaire enregistrée');
+            }
+            // On assigne le sélecteur
+            $selector = 'secondaire';
+        }
+
+        // On récupère le montant total du panier dans la session
+        $totalPrice = $session->get(AjaxController::$TOTALPRICE);
+
+        return $this->render('front/livraison/choice.html.twig', [
+            'controller_name' => 'AdresseController',
+            'totalPrice' => $totalPrice,
+            'selector' => $selector,
+            'adressePrincipale' => $adressePrincipale ?? null,
+            'adresseSecondaire' => $adresseSecondaire ?? null,
+        ]);
+    }
+
+
+    // AJOUT OU MODIFICATION DE L'ADRESSE DE LIVRAISON
+    #[Route('/addAddress/{choice}', name: 'app_ajout_adresse')]
+    public function addAddress(SessionInterface $session,Request $request, $choice): Response
     {
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -131,8 +196,14 @@ class LivraisonController extends AbstractController
         // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             $datas = $form->getData();
-            // Mettre le boolean estPrincipal à true (pour l'adresse principale)
-            $datas->setEstPrincipale(true);
+            // Assignation de l'adresse au client suivant le sélecteur
+            if ($choice == 'principale') {
+                // Mettre le boolean estPrincipal à true (pour l'adresse principale)
+                $datas->setEstPrincipale(true);
+            } else if ($choice == 'secondaire') {
+                // Mettre le boolean estPrincipal à false (pour l'adresse secondaire)
+                $datas->setEstPrincipale(false);
+            }
             // Rattacher l'adresse au client
             $datas->setClient($this->getUser());
             $this->em->persist($datas);
@@ -141,9 +212,13 @@ class LivraisonController extends AbstractController
             return $this->redirectToRoute('app_livraison');
         }
 
-        return $this->render('front/livraison/adresse.html.twig', [
+        // On récupère le montant total du panier dans la session
+        $totalPrice = $session->get(AjaxController::$TOTALPRICE);
+
+        return $this->render('front/livraison/edit.html.twig', [
             'controller_name' => 'AdresseController',
             'form' => $form->createView(),
+            'totalPrice' => $totalPrice,
             'selector' => $selector
         ]);
     }

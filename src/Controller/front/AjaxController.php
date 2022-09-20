@@ -23,6 +23,7 @@ class AjaxController extends AbstractController
     // Déclaration pour la session
     public static string $CART = 'CART';
     public static string $QTY = 'QTY';
+    public static string $TOTALPRICE = 'TOTALPRICE';
 
     #[Route('/addItemToCart/{datas}', name: 'ajax_add_item_to_cart')]
     public function index(
@@ -132,5 +133,27 @@ class AjaxController extends AbstractController
             return new JsonResponse([]);
         }
     }
+
+    #[Route('/totalPrice/{datas}', name: 'ajax_total_price')]
+    public function totalPrice(
+        Request                $request,
+        SessionInterface       $session,
+    ): Response
+    {
+        // On récupère les données envoyées en fetch dans le fichier ts
+        $datas = json_decode($request->get('datas'), true);
+
+        // Si le prix total existe déjà dans la session
+        if ($session->has(self::$TOTALPRICE)) {
+            // On retire le prix total de la session
+            $session->remove(self::$TOTALPRICE);
+        }
+
+        // On enregistre le prix total dans la session en float
+        $session->set(self::$TOTALPRICE, (float)$datas['totalPrice']);
+
+        return new JsonResponse([]);
+    }
+
 }
 

@@ -1,0 +1,47 @@
+<h3 class="mt-5">Récapitulatif</h3>
+<hr>
+<div class="cardShipping mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="row d-flex justify-content-evenly">
+                <div class="col-6">
+                    <h4 class="mt-5 ms-3">Total:</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h3 class="price mt-5 me-3">{{ totalPrice }}€</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 ms-3">
+            <p>Nombre de produits
+                total: ({{ app.session.get('QTY') }} {% if app.session.get('QTY') == 1 %}article{% else %}articles{% endif %}
+                )
+            </p>
+        </div>
+        <div class="col-12 text-center mt-5">
+            <div class="ms-3 me-3">
+                {% if adressePrincipale is defined or adresseSecondaire is defined %}
+                {% if adressePrincipale is not empty or adresseSecondaire is not empty %}
+                    <button class="col-12 btn btn-primary">Etape suivante 2/3</button>
+                {% else %}
+                    <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
+                {% endif %}
+                {% else %}
+                    <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 ms-3 mt-5">
+            <i class="fas fa-shipping-fast"></i>
+            <span class="ms-2">Livraison en 24h</span>
+        </div>
+        <div class="col-12 ms-3 mt-3">
+            <i class="fas fa-arrow-rotate-backward"></i>
+            <span class="ms-2">Retour 30 jours</span>
+        </div>
+        <div class="col-12 ms-3 mt-3 mb-5">
+            <i class="fas fa-lock"></i>
+            <span class="ms-2">Paiement sécurisé</span>
+        </div>
+    </div>
+</div>
