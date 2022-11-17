@@ -17,6 +17,6 @@ class NouveauxClientsController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $nouveauxClients = $this->clientRepository->nbNouveauxClients();
-        return new JsonResponse(json_encode(['data' => $nouveauxClients]));
+        return new JsonResponse($nouveauxClients);
     }
 }

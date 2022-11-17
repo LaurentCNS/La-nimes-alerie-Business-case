@@ -12,10 +12,9 @@ Encore
     // for how to customize public path see:
     // public path used by the web server to access the output path
     .setPublicPath('/build')
-
-    // only needed for CDN's or sub-directory deploy  // DEPLOIEMENT SUR MON HERBERGEMENT DANS UN SOUS DOSSIER
-    //.setPublicPath('/mywork/lanimesalerie/public/build')
-    //.setManifestKeyPrefix('mywork/lanimesalerie/public/build/')
+    // only needed for CDN's or sub-directory deploy
+    .setPublicPath('/mywork/lanimeslerie/public/build')
+    .setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG

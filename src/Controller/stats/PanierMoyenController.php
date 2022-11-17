@@ -18,7 +18,7 @@ class PanierMoyenController extends AbstractController
         $nbTotalVentes = $this->panierRepository->montantTotalVentes();
         $nbCommande = $this->panierRepository->nbCommandes();
         $panierMoyen = round($nbTotalVentes / $nbCommande,2);
-        return new JsonResponse(json_encode(['data' => $panierMoyen]));
+        return new JsonResponse($panierMoyen);
     }
 
 

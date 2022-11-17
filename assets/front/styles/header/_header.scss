@@ -34,24 +34,23 @@
     }
 }
 
+.headeranduser h1{
+    display: none;
+}
+
 .headeranduser .menuburger{
     width: 55px;
     height: 55px;
     background: url(../../../img/icons/burger.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: center;  
-    
+    background-position: center;
 }
 
 @media (min-width: 992px) {
     .headeranduser .menuburger{
         display: none; 
     }
-}
-
-.headeranduser h1{
-    display: none;
 }
 
 .headeranduser .logo{
@@ -83,7 +82,6 @@
     }    
 }
 
-    
 .headeranduser label{
     display: none;
 }

@@ -16,6 +16,6 @@ class NbVisitesController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $visites = $this->nbVisitesRepository->compteurVisite();
-        return new JsonResponse(json_encode(['data' => $visites]));
+        return new JsonResponse($visites);
     }
 }

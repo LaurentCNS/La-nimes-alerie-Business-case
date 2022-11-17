@@ -15,6 +15,54 @@
     }
 }
 
+.resetTextFormat{
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-align: start;
+}
+
+.dropdown{
+    background-color: $bleufonce;
+    color: white;
+    font-family: 'Arya', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-align: center;
+    border: $bleutheme 1px solid;
+}
+
+.dropdown-item{
+    font-family: 'Arya', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-left: 50px;
+    width: 200px;
+}
+
+.offcanvas-top{
+    background-color: $bleufonce;
+    color: white;
+}
+
+.offcanvas-body{
+    background-color: $bleutheme;
+    color: white;
+}
+
+.off-canvas-wrap {
+    .inner-wrap{
+        min-height: 100vh;
+    }
+}
+
+.btn-close{
+    color: white;
+}
+
 .navtop ul li{
     display: inline;   
     position: relative;
@@ -82,3 +130,5 @@
     text-decoration: none; 
     color: black;
 }
+
+

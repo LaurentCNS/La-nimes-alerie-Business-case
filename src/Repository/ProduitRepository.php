@@ -83,7 +83,8 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->setParameter('startDate', $startDate)
             ->setParameter('endDate', $endDate)
             ->groupBy('p.id')
-            ->orderBy('quantite', 'DESC');
+            ->orderBy('quantite', 'DESC')
+            ->setMaxResults(5);
         return $qb->getQuery()->getResult();
     }
 

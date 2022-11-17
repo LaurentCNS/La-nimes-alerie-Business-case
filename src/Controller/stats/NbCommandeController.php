@@ -17,7 +17,7 @@ class NbCommandeController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $nbCommande = $this->panierRepository->nbCommandes();
-        return new JsonResponse(json_encode(['data' => $nbCommande]));
+        return new JsonResponse($nbCommande);
     }
 
    

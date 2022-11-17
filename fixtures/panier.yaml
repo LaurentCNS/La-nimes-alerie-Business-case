@@ -1,74 +1,74 @@
-#App\Entity\Panier:
-#    panier{0..149}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        statut: 100
-#
-#    panier{150..300}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        statut: 100
-#        client: '@client*'
-#
-#    panier{301..800}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 200
-#        numero_commande (unique): <numberBetween(10000, 100000)>
-#        client: '@client*'
-#        adresse: '@adresse*'
-#        montant_total: '<numberBetween(20, 300)>'
-#
-#    panier{801..899}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 300
-#
-#    panier{900..1000}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 300
-#        client: '@client*'
-#
-#    panier{1001..1200}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 400
-#        numero_commande (unique): <numberBetween(10000, 100000)>
-#        client: '@client*'
-#        adresse: '@adresse*'
-#        montant_total: '<numberBetween(20, 300)>'
-#
-#    panier{1201..1350}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 500
-#        numero_commande (unique): <numberBetween(10000, 100000)>
-#        client: '@client*'
-#        adresse: '@adresse*'
-#        montant_total: '<numberBetween(20, 300)>'
-#
-#    panier{1381..1499}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 600
-#        numero_commande (unique): <numberBetween(10000, 100000)>
-#        client: '@client*'
-#        adresse: '@adresse*'
-#        montant_total: '<numberBetween(20, 300)>'
-#
-#    panier{1500..1600}:
-#        date_creation: '<dateTimeBetween("-3000 days", "now")>'
-#        date_paiement: '<dateTimeBetween($date_creation, "now")>'
-#        moyen_paiement: '@moyenPaiement*'
-#        statut: 700
-#        numero_commande (unique): <numberBetween(10000, 100000)>
-#        client: '@client*'
-#        adresse: '@adresse*'
-#        montant_total: '<numberBetween(20, 300)>'
+App\Entity\Panier:
+    panier{0..149}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        statut: 100
+
+    panier{150..300}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        statut: 100
+        client: '@client*'
+
+    panier{301..800}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 200
+        numero_commande (unique): <numberBetween(10000, 100000)>
+        client: '@client*'
+        adresse: '@adresse*'
+        montant_total: '<numberBetween(20, 300)>'
+
+    panier{801..899}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 300
+
+    panier{900..1000}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 300
+        client: '@client*'
+
+    panier{1001..1200}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 400
+        numero_commande (unique): <numberBetween(10000, 100000)>
+        client: '@client*'
+        adresse: '@adresse*'
+        montant_total: '<numberBetween(20, 300)>'
+
+    panier{1201..1350}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 500
+        numero_commande (unique): <numberBetween(10000, 100000)>
+        client: '@client*'
+        adresse: '@adresse*'
+        montant_total: '<numberBetween(20, 300)>'
+
+    panier{1381..1499}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 600
+        numero_commande (unique): <numberBetween(10000, 100000)>
+        client: '@client*'
+        adresse: '@adresse*'
+        montant_total: '<numberBetween(20, 300)>'
+
+    panier{1500..1600}:
+        date_creation: '<dateTimeBetween("-3000 days", "now")>'
+        date_paiement: '<dateTimeBetween($date_creation, "now")>'
+        moyen_paiement: '@moyenPaiement*'
+        statut: 700
+        numero_commande (unique): <numberBetween(10000, 100000)>
+        client: '@client*'
+        adresse: '@adresse*'
+        montant_total: '<numberBetween(20, 300)>'

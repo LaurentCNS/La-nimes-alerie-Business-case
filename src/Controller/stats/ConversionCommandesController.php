@@ -18,8 +18,8 @@ class ConversionCommandesController extends AbstractController
     public function __invoke(): JsonResponse{
         $nbPanierPaye = $this->panierRepository->nbCommandes();
         $nbPanierCree = $this->panierRepository->nbPanierCrees();
-        $conversion = round(($nbPanierPaye/ $nbPanierCree) * 100,2);
-        return new JsonResponse(json_encode(['data' => $conversion]));
+        $conversion = round(($nbPanierPaye/ ($nbPanierCree+$nbPanierPaye)) * 100,2);
+        return new JsonResponse($conversion);
     }
 
 }

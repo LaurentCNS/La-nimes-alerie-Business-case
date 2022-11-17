@@ -74,7 +74,7 @@ class PanierRepository extends AbstractLanimalerieRepository
         }
 
         return $this->createQueryBuilder('p')
-            ->select('SUM(ligne.prix*ligne.quantite)')
+            ->select('SUM(ligne.prix*ligne.quantite ) As nbTotalVentes')
             ->join('p.ligne', 'ligne')
             ->where('p.statut = 200 OR p.statut = 400 OR p.statut = 500')
             ->andWhere('p.dateCreation BETWEEN :startDate AND :endDate')
@@ -93,7 +93,7 @@ class PanierRepository extends AbstractLanimalerieRepository
             $startDate = new \DateTime('2000-01-01');
         }
         return $this->createQueryBuilder('p')
-            ->select('COUNT(p)')
+            ->select('COUNT(p) As nbCommande')
             ->where('p.statut = 200 OR p.statut = 400 OR p.statut = 500')
             ->andWhere('p.dateCreation BETWEEN :startDate AND :endDate')
             ->setParameter('startDate', $startDate)

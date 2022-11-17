@@ -17,7 +17,7 @@ class NbPanierController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $nbPaniers = $this->panierRepository->nbPaniers();
-        return new JsonResponse(json_encode(['data' => $nbPaniers]));
+        return new JsonResponse($nbPaniers);
     }
 
    

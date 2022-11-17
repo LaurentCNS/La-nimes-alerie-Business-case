@@ -20,7 +20,7 @@ class ConversionPaniersController extends AbstractController
         $nbPanier = $this->panierRepository->nbPanierCrees();
         $nbVisites = $this->nbVisitesRepository->compteurVisite();
         $conversion = round(($nbPanier/ $nbVisites) * 100,2);
-        return new JsonResponse(json_encode(['data' => $conversion]));
+        return new JsonResponse($conversion);
     }
 
 }

@@ -1,33 +1,33 @@
-#parameters:
-#    passAdmin: '$2y$13$JQXfKCpisShXJopl4RViY.lyynZIkuRMDC2UzXjsTxAAr4Chm1aA2' # password: Issou2021
-#    password: '$2y$13$vldgApLZb5YMp51QTlLTyOSQf.TTiDYfd55FuaF6ZV2TAAdgE3enG' # password: 1234
-#
-#App\Entity\Client:
-#    client0:
-#        username: 'LaTerreEstPlate'
-#        email (unique): 'capard@admin.fr'
-#        password: '<{passAdmin}>'
-#        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-#        roles: [ROLE_ADMIN]
-#
-#    client1:
-#        username: 'LaFaceCachéeDeLaLune'
-#        email (unique): 'nadege@stats.fr'
-#        password: '<{passAdmin}>'
-#        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-#        roles: [ROLE_STATS]
-#
-#    client{2..300}:
-#        username (unique): '<username()>'
-#        email (unique): '<safeEmail()>'
-#        password: '<{password}>'
-#        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
-#        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-#        roles: [ROLE_USER]
-#
-#    client{301..400}:
-#        username: '<username()>'
-#        email (unique): '<safeEmail()>'
-#        password: '<{password}>'
-#        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
-#        roles: [ROLE_USER]
+parameters:
+    passAdmin: '$2y$13$JQXfKCpisShXJopl4RViY.lyynZIkuRMDC2UzXjsTxAAr4Chm1aA2' # password: Issou2021
+    password: '$2y$13$vldgApLZb5YMp51QTlLTyOSQf.TTiDYfd55FuaF6ZV2TAAdgE3enG' # password: 1234
+
+App\Entity\Client:
+    client0:
+        username: 'LaTerreEstPlate'
+        email (unique): 'capard@admin.fr'
+        password: '<{passAdmin}>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        roles: [ROLE_ADMIN]
+
+    client1:
+        username: 'LaFaceCachéeDeLaLune'
+        email (unique): 'nadege@stats.fr'
+        password: '<{passAdmin}>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        roles: [ROLE_STATS]
+
+    client{2..300}:
+        username (unique): '<username()>'
+        email (unique): '<safeEmail()>'
+        password: '<{password}>'
+        date_naissance: '<dateTimeBetween("-30000 days", "now")>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        roles: [ROLE_USER]
+
+    client{301..400}:
+        username: '<username()>'
+        email (unique): '<safeEmail()>'
+        password: '<{password}>'
+        date_inscription: '<dateTimeBetween("-3000 days", "now")>'
+        roles: [ROLE_USER]

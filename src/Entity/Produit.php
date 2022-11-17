@@ -14,10 +14,31 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        //"get" => ["security" => "is_granted('ROLE_STATS')"],
         "get_TotalProduitsVendus" => ["security" => "is_granted('ROLE_STATS')",
             "method" => "GET",
             "path" => "/TotalProduitsVendus",
+            "parameters" => [
+                [
+                    "name" => "dateDebut",
+                    "in" => "query",
+                    "description" => "Date de début",
+                    "required" => true,
+                    "schema" => [
+                        "type" => "string",
+                        "format" => "date"
+                    ]
+                ],
+                [
+                    "name" => "dateFin",
+                    "in" => "query",
+                    "description" => "Date de fin",
+                    "required" => true,
+                    "schema" => [
+                        "type" => "string",
+                        "format" => "date"
+                    ]
+                ]
+            ],
             "defaults" => ["_format" => "json"],
             "controller" => TotalProduitsVendusController::class
         ],

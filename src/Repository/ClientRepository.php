@@ -91,7 +91,7 @@ class ClientRepository extends AbstractLanimalerieRepository implements Password
             $startDate = new \DateTime('2000-01-01');
         }
             return $this->createQueryBuilder('c')
-                ->select('COUNT(c)','c.adresse')
+                ->select('COUNT()','c.adresse')
                 ->andWhere('c.dateInscription BETWEEN :startDate AND :endDate')
                 ->setParameter('startDate', $startDate)
                 ->setParameter('endDate', $endDate)

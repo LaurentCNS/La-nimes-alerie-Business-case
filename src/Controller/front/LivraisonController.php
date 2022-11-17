@@ -101,7 +101,7 @@ class LivraisonController extends AbstractController
 
 
     // CHOIX DE L'ADRESSE DE LIVRAISON
-    #[Route('/address/{choice}', name: 'app_livraison_adresse')]
+    #[Route('/adresse/{choice}', name: 'app_livraison_adresse')]
     public function address(SessionInterface $session,Request $request, $choice): Response
     {
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
@@ -160,7 +160,7 @@ class LivraisonController extends AbstractController
 
 
     // AJOUT OU MODIFICATION DE L'ADRESSE DE LIVRAISON
-    #[Route('/addAddress/{choice}', name: 'app_ajout_adresse')]
+    #[Route('/ajout/adresse/{choice}', name: 'app_ajout_adresse')]
     public function addAddress(SessionInterface $session,Request $request, $choice): Response
     {
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion

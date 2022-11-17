@@ -17,7 +17,7 @@ class TotalProduitsVendusController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $produitsVendus = $this->produitRepository->findProduitsBestSelling();
-        return new JsonResponse(json_encode(['data' => $produitsVendus]));
+        return new JsonResponse($produitsVendus);
     }
 
 

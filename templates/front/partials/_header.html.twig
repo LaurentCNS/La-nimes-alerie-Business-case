@@ -2,13 +2,12 @@
     <!--LOGO/RECHERCHE/PANIER-->
     <div id="header" class="headeranduser">
         <div class="box">
-
             <a href="{{ path('app_home') }}"><img class="logo" src="{{ asset('build/img/logos/logo.png') }}"
                                                   alt="logo lanimesalerie"></a>
             <h1>LA NIMES ALERIE</h1>
             <div class="absolute">
                 <div class="search-container">
-                    <form action="envoi.php" method="post">
+                    <form>
                         <label for="search">recherche</label>
                         <div class="search">
                             <input type="text" name="search" id="search" placeholder="RECHERCHER" class="round">
@@ -19,10 +18,11 @@
                 <div class="user-space">
                     {% if app.user %}
                         <a href="{{ path('app_favoris') }}" class="wishlist"></a>
+                        <a href="" class="order"></a>
                     {% else %}
                         <a href="{{ path('app_register') }}" class="wishlist"></a>
+                        <a href="{{ path('app_register') }}" class="order"></a>
                     {% endif %}
-                    <a href="" class="order"></a>
                     <a href="{{ path('app_login') }}" class="user"></a>
                     <a href="{{ path('app_panier') }}" class="basketround"></a>
                 </div>
@@ -42,8 +42,8 @@
                         {% endif %}
                     </a>
                 </div>
-                <div class="menuburger">
-                    <a href="" class="burger"></a>
+                <div class="menuburger" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                     aria-controls="offcanvasRight">
                 </div>
             </div>
         </div>
@@ -57,32 +57,67 @@
                 <p>{{ animaux.libelle }}<span class="arrow"></span>
                 </p>
             </li>
-            <!--OFFCANVAS-->
+            <!--OFFCANVAS ECRAN LARGES-->
             <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop{{ animaux.id }}"
                  aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel">Menu</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    <h5 id="offcanvasTopLabel" class="fw-bold ms-5">Produits pour {{ animaux.libelle }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    {% for categories in functionTwigGetCategories() %}
-                        {% if categories.animal.id == animaux.id %}
-                            <div class="row">
-                                {{ categories.nom }} |
-
-                                {% for sousCategories in functionTwigGetSousCategories() %}
-                                    {% if sousCategories.animal.id == animaux.id and sousCategories.parent.id == categories.id %}
-                                        {{ sousCategories.nom }}
-                                    {% endif %}
-                                {% endfor %}
-                                </br>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                    <div class="row">
+                        <div class="d-flex resetTextFormat offcanvasCenter">
+                            {% for categories in functionTwigGetCategories() %}
+                                {% if categories.animal.id == animaux.id %}
+                                    <div class="col-md-3 mt-3">
+                                        <span class="fw-bold"> {{ categories.nom }} </span></br>
+                                        <div class="d-flex justify-content-start">
+                                            <div class="col-md-8">
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        {% for sousCategories in functionTwigGetSousCategories() %}
+                                            {% if sousCategories.animal.id == animaux.id and sousCategories.parent.id == categories.id %}
+                                                {{ sousCategories.nom }}
+                                                </br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </ul>
 </div>
+
+<!-- Collapsible content -->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {#    <form class="d-flex mt-3"> #}
+    {#        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> #}
+    {#        <button class="btn btn-outline-success" type="submit">Search</button> #}
+    {#    </form> #}
+    <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+        {% for animaux in functionTwigGetAnimaux() %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle mb-3 mt-3" href="#" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    {{ animaux.libelle }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 100vh;height: 300px">
+                    {% for categories in functionTwigGetCategories() %}
+                        {% if categories.animal.id == animaux.id %}
+                            <li><a class="dropdown-item mb-3 mt-3 fw-bold" href="#">- {{ categories.nom }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
 

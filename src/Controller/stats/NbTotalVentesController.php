@@ -17,7 +17,7 @@ class NbTotalVentesController extends AbstractController
 
     public function __invoke(): JsonResponse{
         $nbTotalVentes = $this->panierRepository->montantTotalVentes();
-        return new JsonResponse(json_encode(['data' => $nbTotalVentes]));
+        return new JsonResponse( $nbTotalVentes);
     }
 
    

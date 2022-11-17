@@ -1,4 +1,3 @@
-
 // Interface pour les données à enregistrer
 interface ItemAndQty {
     produitId: string;
@@ -8,7 +7,6 @@ interface ItemAndQty {
 interface ResponseCart {
     qtyTotale: string;
 }
-
 
 // fonction pour ajouter un item
 function setUpClickEventAddItem(): void {
@@ -47,24 +45,22 @@ function setUpClickEventAddItem(): void {
                     .then((data) => {
                         // On renvoie la quantité totale à afficher dans le panier
                         const qtyCart: HTMLParagraphElement = document.querySelector('[data-cart-item]');
-                        let articles: string = ' article';
+                        let singOrPlural: string = ' article';
                         if (parseInt(data.qtyTotale) > 1 && parseInt(data.qtyTotale) < 10) {
-                            articles += 's';
+                            singOrPlural += 's';
                             qtyCart.classList.remove('value');
                             qtyCart.classList.add('values');
                         } else if (parseInt(data.qtyTotale) >= 10 && parseInt(data.qtyTotale) < 100) {
-                            articles += 's';
+                            singOrPlural += 's';
                             qtyCart.classList.remove('value');
                             qtyCart.classList.add('valuesDouble');
                         } else if(parseInt(data.qtyTotale) > 99){
-                            articles += 's';
+                            singOrPlural += 's';
                             qtyCart.classList.remove('valuesDouble');
                             qtyCart.classList.add('valuesTriples');
                             data.qtyTotale = '99+';
                         }
-
-                        qtyCart.innerText = data.qtyTotale + articles;
-
+                        qtyCart.innerText = data.qtyTotale + singOrPlural;
                     });
             });
         });

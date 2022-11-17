@@ -1,35 +1,35 @@
-#App\Entity\Ligne:
-#    ligne{0..200}:
-#        quantite: <numberBetween(1, 3)>
-#        libelle: '<word(3)>'
-#        prix: 20.49
-#        panier: '@panier*'
-#        produit: '@produit*'
-#        tva: 20
-#        promotion: '30'
-#
-#    ligne{201..400}:
-#        quantite: <numberBetween(1, 3)>
-#        libelle: '<word(3)>'
-#        prix: 20.49
-#        panier: '@panier*'
-#        produit: '@produit*'
-#        tva: 20
-#        promotion: '10'
-#
-#    ligne{401..600}:
-#        quantite: <numberBetween(1, 3)>
-#        libelle: '<word(3)>'
-#        prix: 20.49
-#        panier: '@panier*'
-#        produit: '@produit*'
-#        tva: 20
-#        promotion: '20'
-#
-#    ligne{601..5000}:
-#        quantite: <numberBetween(1, 3)>
-#        libelle: '<word(3)>'
-#        prix: 20.49
-#        panier: '@panier*'
-#        produit: '@produit*'
-#        tva: 20
+App\Entity\Ligne:
+    ligne{0..200}:
+        quantite: <numberBetween(1, 3)>
+        libelle: '<word(3)>'
+        prix: 20.49
+        panier: '@panier*'
+        produit: '@produit*'
+        tva: 20
+        promotion: '30'
+
+    ligne{201..400}:
+        quantite: <numberBetween(1, 3)>
+        libelle: '<word(3)>'
+        prix: 20.49
+        panier: '@panier*'
+        produit: '@produit*'
+        tva: 20
+        promotion: '10'
+
+    ligne{401..600}:
+        quantite: <numberBetween(1, 3)>
+        libelle: '<word(3)>'
+        prix: 20.49
+        panier: '@panier*'
+        produit: '@produit*'
+        tva: 20
+        promotion: '20'
+
+    ligne{601..5000}:
+        quantite: <numberBetween(1, 3)>
+        libelle: '<word(3)>'
+        prix: 20.49
+        panier: '@panier*'
+        produit: '@produit*'
+        tva: 20
