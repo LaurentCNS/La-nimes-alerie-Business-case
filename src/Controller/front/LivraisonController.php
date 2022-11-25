@@ -51,6 +51,7 @@ class LivraisonController extends AbstractController
 
                 // On commit les lignes
                 $entityManager->flush();
+
             } else {
                 return $this->redirectToRoute('app_panier', [
                 ]);
@@ -85,8 +86,13 @@ class LivraisonController extends AbstractController
             // On récupère le montant total du panier dans la session
             $totalPrice = $session->get(AjaxController::$TOTALPRICE);
 
+            // dump de la session
+            dump($session->get(AjaxController::$QTY));
+
+            dump($totalPrice);
+
             // On crée un sélecteur de css
-            $selector = '';
+            $selector = 'livraison';
 
             return $this->render('front/livraison/index.html.twig', [
                 'controller_name' => 'LivraisonController',

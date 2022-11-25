@@ -37,8 +37,12 @@ class PanierController extends AbstractController
                 ];
             }
         }
+
+        $selector = "panier";
+
         return $this->render('front/panier/index.html.twig', [
             'controller_name' => 'PanierController',
+            'selector' => $selector,
             'produitSession' => $datasWithProduct
         ]);
     }

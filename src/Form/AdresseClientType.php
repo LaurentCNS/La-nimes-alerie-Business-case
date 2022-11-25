@@ -41,7 +41,7 @@ class AdresseClientType extends AbstractType
                 'label' => 'Complément d\'adresse',
                 'required' => false,
             ])
-            ->add('codePostal', NumberType::class,
+            ->add('codePostal', TextType::class,
             )
             ->add('ville',TextType::class,
             )

@@ -24,6 +24,7 @@ class AjaxController extends AbstractController
     public static string $CART = 'CART';
     public static string $QTY = 'QTY';
     public static string $TOTALPRICE = 'TOTALPRICE';
+    public static string $CHOICEPAY = 'CHOICEPAY';
 
     #[Route('/addItemToCart/{datas}', name: 'ajax_add_item_to_cart')]
     public function index(
@@ -100,6 +101,7 @@ class AjaxController extends AbstractController
         SessionInterface       $session,
     ): Response
     {
+
         // On récupère les données envoyées en fetch dans le fichier ts
         $datas = json_decode($request->get('datas'), true);
 
@@ -142,6 +144,28 @@ class AjaxController extends AbstractController
 
         // On enregistre le prix total dans la session en float
         $session->set(self::$TOTALPRICE, (float)$datas['totalPrice']);
+
+        return new JsonResponse([]);
+    }
+
+    #[Route('/choicePay/{datas}', name: 'ajax_choice_pay')]
+    public function choicePay(
+        Request                $request,
+        SessionInterface       $session,
+    ): Response
+    {
+
+        // On récupère les données envoyées en fetch dans le fichier ts
+        $datas = json_decode($request->get('datas'), true);
+
+        // Si le choix de paiement existe déjà dans la session
+        if ($session->has(self::$CHOICEPAY))  {
+            // On retire le choix de paiement de la session
+            $session->remove(self::$CHOICEPAY);
+        }
+
+        // On enregistre le choix de paiement dans la session
+        $session->set(self::$CHOICEPAY, $datas['choicePay']);
 
         return new JsonResponse([]);
     }

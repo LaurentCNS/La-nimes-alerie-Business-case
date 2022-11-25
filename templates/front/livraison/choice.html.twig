@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-xl-8 cardLeft">
-                    <h3 class="mt-5">Choix de la livraison</h3>
+                    <h3 class="mt-5 ariane"><a href="{{ path('app_panier') }}">Détail de votre panier</a> > livraison</h3>
                     <hr>
                     <div id="address">
                         <div class="container">
@@ -23,7 +23,7 @@
                                         {{ adressePrincipale.codePostal }} {{ adressePrincipale.ville }}<br>
                                         {{ adressePrincipale.pays }}<br>
                                         {{ adressePrincipale.telephone }}<br>
-                                        <a href="{{ path('app_ajout_adresse',{'choice': 'principale'}) }}">Modifider</a>
+                                        <a href="{{ path('app_ajout_adresse',{'choice': 'principale'}) }}">Modifier</a>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                         {{ adresseSecondaire.codePostal }} {{ adresseSecondaire.ville }}<br>
                                         {{ adresseSecondaire.pays }}<br>
                                         {{ adresseSecondaire.telephone }}<br>
-                                        <a href="{{ path('app_ajout_adresse',{'choice': 'secondaire' }) }}">Modifider</a>
+                                        <a href="{{ path('app_ajout_adresse',{'choice': 'secondaire' }) }}">Modifier</a>
                                     </div>
                                 </div>
                             </div>

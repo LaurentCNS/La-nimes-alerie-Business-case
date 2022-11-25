@@ -1,0 +1,88 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Paiement | La Nimes'alerie
+{% endblock %}
+
+{% block body %}
+
+    {% if selector == "paiementOff" or selector == "paiement" %}
+        <div id="shipping">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-8 cardLeft">
+                        <h3 class="mt-5 ariane"><a href="{{ path('app_panier') }}">Détail de votre panier</a> > <a
+                                    href="{{ path('app_livraison') }}">livraison</a> > paiement</h3>
+                        <hr>
+                        <div id="address" class="mt-5">
+                            <h5 class="ms-3">Choisir un moyen de paiement:</h5>
+                            <p class="ms-3">Toutes les transactions sont sécurisées et chiffrées.</p>
+                            <div class="container">
+                                {% if selector == "paiementOff" %}
+                                    <form>
+                                        <div class="mt-5 mb-3 payCard">
+                                            <div class="ms-3 form-check">
+                                                <input data-choice-pay="cb" class="form-check-input radio" type="radio"
+                                                       name="Radios" id="cb"
+                                                       value="cb">
+                                                <label class="form-check-label label" for="cb">
+                                                </label>
+                                                <img class="cbLogo" src="{{ asset('build/img/logos/paiement.png') }}"
+                                                     alt="cb">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4 payCard">
+                                            <div class="ms-3 form-check">
+                                                <input data-choice-pay="paypal" class="form-check-input radio"
+                                                       type="radio" name="Radios"
+                                                       id="paypal"
+                                                       value="paypal">
+                                                <label class="form-check-label label" for="paypal">
+                                                </label>
+                                                <img class="paypalLogo" src="{{ asset('build/img/logos/paypal.png') }}"
+                                                     alt="paypal">
+                                            </div>
+                                        </div>
+                                        <a href="{{ path('app_payer') }}">
+                                            <button data-input-paiement-valid type="button" class="btn btn-primary">
+                                                Valider
+                                            </button>
+                                        </a>
+                                    </form>
+                                {% elseif selector == "paiement" %}
+                                    {% if choicePay == "cb" %}
+                                        <div class="mt-5 mb-3">
+                                            <div class="ms-3 card">
+                                                <img class="cbLogo" src="{{ asset('build/img/logos/paiement.png') }}"
+                                                     alt="cb">
+                                            </div>
+                                        </div>
+                                    {% elseif choicePay == "paypal" %}
+                                        <div class="mt-5 mb-3">
+                                            <div class="ms-3 card">
+                                                <img class="cbLogo" src="{{ asset('build/img/logos/paypal.png') }}"
+                                                     alt="cb">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-4 cardRight">
+                        {{ include('front/partials/_resumeShipping.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elseif selector == "payer" %}
+        <div id="shipping">
+            <div class="container">
+                <div class="row">
+                    <h3>ok</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

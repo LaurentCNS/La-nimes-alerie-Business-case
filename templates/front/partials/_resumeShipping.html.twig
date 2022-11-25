@@ -14,20 +14,31 @@
         </div>
         <div class="col-12 ms-3">
             <p>Nombre de produits
-                total: ({{ app.session.get('QTY') }} {% if app.session.get('QTY') == 1 %}article{% else %}articles{% endif %}
+                total:
+                ({{ app.session.get('QTY') }} {% if app.session.get('QTY') == 1 %}article{% else %}articles{% endif %}
                 )
             </p>
         </div>
         <div class="col-12 text-center mt-5">
             <div class="ms-3 me-3">
                 {% if adressePrincipale is defined or adresseSecondaire is defined %}
-                {% if adressePrincipale is not empty or adresseSecondaire is not empty %}
-                    <button class="col-12 btn btn-primary">Etape suivante 2/3</button>
-                {% else %}
+                    {% if adressePrincipale is not empty or adresseSecondaire is not empty %}
+                        <a href="{{ path('app_paiement') }}">
+                            <button class="col-12 btn btn-primary">Etape suivante 2/3</button>
+                        </a>
+                    {% else %}
+                        <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
+                    {% endif %}
+                {% elseif selector == "livraison" %}
                     <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
-                {% endif %}
-                {% else %}
-                    <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
+                {% elseif selector == "paiement" %}
+                    <a href="{{ path('app_confirmee') }}">
+                    <button  class="col-12 btn btn-success">Payer</button>
+                    </a>
+                {% elseif selector == "paiementOff" %}
+                        <button disabled class="col-12 btn btn-success">Payer</button>
+                {% elseif selector == "panier" %}
+                    <a data-calculated-totalPrice="{{ totalPrice }}" class="col-12 btn btn-primary" href="{{ path('app_livraison') }}">Etape suivante 1/3</a>
                 {% endif %}
             </div>
         </div>
