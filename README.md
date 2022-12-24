@@ -37,15 +37,19 @@ La ligne à copier et à modifier sur votre fichier `.env.local` est :
 
 ```DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"```
 
+Verifier la version de php installée sur votre machine (8.0.2) :
+
+```php -v```
+
 Installer les dépandances symfony  :  
 
 ```symfony composer install```
 
+Si vous avez une erreur sodium, rajouter dans php.ini: extension=php_sodium.dll  
+Si vous êtes dans la bonne version de php mais que vous avez quand même une erreur: composer config platform.php 8.0.2
+
 ```yarn install```
 
-Verifier la version de php installée sur votre machine (8.0 ou +) :  
-
-```php -v```
 
 Creer la base de données :  
 
@@ -57,9 +61,17 @@ Faire les migrations sur la bdd :
 
 Envoyer les données de test des fixtures :  
 
+```php bin/console hautelook:fixtures:load```  
+
+Si vous avez une erreur de memory limit, modifier dans php.ini: memory_limit = 128M en 512M   
+
+Pour purger la base avec d'autres fixtures :  
+
 ```symfony console doctrine:fixtures:load --purge-with-truncate```
 
-Generer la clé public et privée pour le token du dossier config/jwt :  
+Vous aurez besoin d'une clé pour l'authentification JWT pour l'API REST.
+
+
 
 ## Lancer le projet
 

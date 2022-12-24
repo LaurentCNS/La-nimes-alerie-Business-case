@@ -32,7 +32,7 @@
                 {% elseif selector == "livraison" %}
                     <button class="col-12 btn btn-primary" disabled>Etape suivante 2/3</button>
                 {% elseif selector == "paiement" %}
-                    <a href="{{ path('app_confirmee') }}">
+                    <a href="{{ path('app_commande') }}">
                     <button  class="col-12 btn btn-success">Payer</button>
                     </a>
                 {% elseif selector == "paiementOff" %}

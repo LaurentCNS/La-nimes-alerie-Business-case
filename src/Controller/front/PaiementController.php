@@ -15,10 +15,24 @@ class PaiementController extends AbstractController
     #[Route('/', name: 'app_paiement')]
     public function index(SessionInterface $session,Request $request,): Response
     {
+
+        // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_register');
+        }
+
+        // Si la session est vide, on le redirige vers la page d'accueil
+        if ($session->get('CART') == null) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $selector = 'paiementOff';
 
         // On récupère le montant total du panier dans la session
         $totalPrice = $session->get(AjaxController::$TOTALPRICE);
+
+        //DUMP SESSION
+        //dump($session->all());
 
         // si il existe un moyen de paiement dans la session on le supprime
         if ($session->has(AjaxController::$CHOICEPAY)) {
@@ -37,6 +51,16 @@ class PaiementController extends AbstractController
     public function payer(SessionInterface $session,Request $request,): Response
     {
 
+        // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_register');
+        }
+
+        // Si la session est vide, on le redirige vers la page d'accueil
+        if ($session->get('CART') == null) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $selector = 'paiementOff';
 
         // On récupère le montant total du panier dans la session
@@ -50,27 +74,11 @@ class PaiementController extends AbstractController
             $selector = 'paiement';
         }
 
-        dump($choicePay);
-
 
         return $this->render('/front/paiement/index.html.twig', [
             'totalPrice' => $totalPrice,
             'choicePay' => $choicePay,
             'selector' => $selector,
-            'controller_name' => 'PaiementController',
-        ]);
-    }
-
-
-    #[Route('/commande-confirmee/', name: 'app_confirmee')]
-    public function recapitulatif($choice, SessionInterface $session,Request $request,): Response
-    {
-
-
-
-
-
-        return $this->render('/front/paiement/index.html.twig', [
             'controller_name' => 'PaiementController',
         ]);
     }

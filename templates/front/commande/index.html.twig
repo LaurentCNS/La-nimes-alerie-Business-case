@@ -6,7 +6,34 @@
 
 {% block body %}
 
-
+    <div class="pt-5 mb-5">
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div class="col-2 d-flex justify-content-center">
+                    <img src="{{ asset('build/img/basket/commandvalid.jpg') }}" alt="Panier vide">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <h5 class="text-center mb-5">Commande confirmée</h5>
+                    <div>
+                    <p>Bonjour {{ adresse.nom }} {{ adresse.prenom }} </p>
+                    <p>Nous avons le plaisir de vous annoncer que votre commande est confirmée.</p>
+                    <p>Bien sûr, nous vous informerons de son expédition par email.</p>
+                    <p>Un grand merci pour la confiance que vous nous accordez.</p>
+                    <p>A très bientôt!</p>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ path('app_home') }}"><button  type="button" class="btn btn-primary mt-5">Retour à l'accueil</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

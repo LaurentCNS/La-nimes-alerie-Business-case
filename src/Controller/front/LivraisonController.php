@@ -86,10 +86,6 @@ class LivraisonController extends AbstractController
             // On récupère le montant total du panier dans la session
             $totalPrice = $session->get(AjaxController::$TOTALPRICE);
 
-            // dump de la session
-            dump($session->get(AjaxController::$QTY));
-
-            dump($totalPrice);
 
             // On crée un sélecteur de css
             $selector = 'livraison';
@@ -113,6 +109,11 @@ class LivraisonController extends AbstractController
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_register');
+        }
+
+        // Si la session est vide, on le redirige vers la page d'accueil
+        if ($session->get('CART') == null) {
+            return $this->redirectToRoute('app_home');
         }
 
         // On crée un sélecteur pour le choix de l'adresse

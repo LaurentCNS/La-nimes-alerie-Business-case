@@ -25,7 +25,7 @@ class FavorisController extends AbstractController
         $favoris = $this->getUser()->getProduits();
 
 
-        dump($favoris);
+
         return $this->render('front/favoris/index.html.twig', [
             'controller_name' => 'FavorisController',
             'favoris' => $favoris,

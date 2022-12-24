@@ -50,17 +50,17 @@
                                     </form>
                                 {% elseif selector == "paiement" %}
                                     {% if choicePay == "cb" %}
-                                        <div class="mt-5 mb-3">
-                                            <div class="ms-3 card">
+                                        <div class="mt-5 mb-3 payCardOn">
+                                            <div class="ps-0 form-check d-flex justify-content-center">
                                                 <img class="cbLogo" src="{{ asset('build/img/logos/paiement.png') }}"
                                                      alt="cb">
                                             </div>
                                         </div>
                                     {% elseif choicePay == "paypal" %}
-                                        <div class="mt-5 mb-3">
-                                            <div class="ms-3 card">
-                                                <img class="cbLogo" src="{{ asset('build/img/logos/paypal.png') }}"
-                                                     alt="cb">
+                                        <div class="mt-5 mb-3 payCardOn">
+                                            <div class="ps-0 form-check d-flex justify-content-center">
+                                                <img class="paypalLogo" src="{{ asset('build/img/logos/paypal.png') }}"
+                                                     alt="paypal">
                                             </div>
                                         </div>
                                     {% endif %}

@@ -10,9 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
 #[Route('/adresse')]
 class AdresseController extends AbstractController
 {
+
+
     public function __construct(
         private EntityManagerInterface $em,
 
@@ -44,6 +48,7 @@ class AdresseController extends AbstractController
         // Si l'utilisateur a déjà une adresse principale, on la récupère
         if ($this->getUser()->getAdressePrincipale()) {
             $form->setData($this->getUser()->getAdressePrincipale());
+
         }
         $form->handleRequest($request);
 
