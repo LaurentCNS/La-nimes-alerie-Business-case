@@ -64,6 +64,7 @@ class MoyenPaiement
         return $this;
     }
 
+
     /**
      * @return Collection<int, Panier>
      */

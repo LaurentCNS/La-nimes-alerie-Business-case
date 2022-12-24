@@ -2,6 +2,9 @@
 
 namespace App\Controller\front;
 
+use App\Entity\Adresse;
+use App\Entity\Client;
+use App\Entity\MoyenPaiement;
 use App\Entity\Panier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,29 +40,29 @@ class CommandeController extends AbstractController
         $totalPrice = $session->get('TOTALPRICE');
 
         // Informations pour le panier
-        //$idClient = $clientSession->getId();
-
-        // get client
-
+        $idClient = $clientSession->getId();
+        $client = $entityManager->getRepository(Client::class)->find($idClient);
         $idAdresse = $adresse->getId();
-        if($moyenPaiement == 'CB') {
-            $idMoyenPaiement = 1;
+        $adresse = $entityManager->getRepository(Adresse::class)->find($idAdresse);
+
+        if($moyenPaiement == 'cb') {
+            $idMoyenPaiement = 'Carte Bancaire';
         } else {
-            $idMoyenPaiement = 2;
+            $idMoyenPaiement = 'Paypal';
         };
+        // On récupère le moyen de paiement par son type
+        $moyenPaiement = $entityManager->getRepository(MoyenPaiement::class)->findOneBy(['type' => $idMoyenPaiement]);
         $dateCreation = new \DateTime();
         $statut = 200;
         $datePaiement = new \DateTime();
         $numeroCommande = rand(1,100000);
         $montant = $totalPrice;
 
-
-
         // On enregistre les infos de la commande
         $commande = new Panier();
-        //$commande = $commande->setClient($client);
-        //$commande->setAdresse($adresse);
-        //$commande->setMoyenPaiement($idMoyenPaiement);
+        $commande = $commande->setClient($client);
+        $commande->setAdresse($adresse);
+        $commande->setMoyenPaiement($moyenPaiement);
         $commande->setDateCreation($dateCreation);
         $commande->setStatut($statut);
         $commande->setDatePaiement($datePaiement);
@@ -69,8 +72,12 @@ class CommandeController extends AbstractController
         $entityManager->persist($commande);
         $entityManager->flush();
 
-        // On vide la session
-        $session->clear();
+        // On vide la session sauf l'utilisateur
+        $session->remove('CART');
+        $session->remove('adresseLivraison');
+        $session->remove('CHOICEPAY');
+        $session->remove('TOTALPRICE');
+        $session->remove('QTY');
 
 
         return $this->render('front/commande/index.html.twig', [
