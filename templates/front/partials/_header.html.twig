@@ -18,7 +18,7 @@
                 <div class="user-space">
                     {% if app.user %}
                         <a href="{{ path('app_favoris') }}" class="wishlist"></a>
-                        <a href="" class="order"></a>
+                        <a href="{{ path('app_commandes_client') }}" class="order"></a>
                     {% else %}
                         <a href="{{ path('app_register') }}" class="wishlist"></a>
                         <a href="{{ path('app_register') }}" class="order"></a>

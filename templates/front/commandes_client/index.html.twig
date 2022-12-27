@@ -1,0 +1,41 @@
+{% extends 'front/base.html.twig' %}
+
+
+{% block title %}Mes commandes{% endblock %}
+
+
+{% block body %}
+    {% if paniers %}
+        <div class="container mt-5 mb-5">
+            <h4 class="mb-5 text-center">Mes commandes</h4>
+            {% for panier in paniers %}
+                <a class="linkNone" href="{{ path('app_commandes_client_choice', {'choice': panier.id}) }}">
+                <div class="row d-flex justify-content-center mb-4">
+                    <div class="col-md-8 col-lg-5">
+                        <div class="cardUser">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-10 my-auto">
+                                        <p class="m-0">Commande N° <b>{{ panier.numeroCommande }}</b> du <b>{{ panier.datePaiement | date('d-m-Y') }}</b></p>
+                                    </div>
+                                    <div class="col-2 my-auto">
+                                        <p class="m-0"><b>{{ panier.montantTotal }}€</b></p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            {% endfor %}
+            <div class="d-flex justify-content-center">
+                <a href="{{ path('app_login') }}">
+                    <button type="button" class="btn btn-primary mt-5">Retour compte</button>
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="container mt-5 mb-5">
+            <h4 class="mb-4 text-center">Aucunes commandes</h4>
+        </div>
+    {% endif %}
+
+{% endblock %}

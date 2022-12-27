@@ -32,6 +32,15 @@ $beige: #DDD2BC;
     background: #E19F30;
 }
 
+.linkNone{
+    text-decoration: none;
+    color: #1b1b1b;
+}
+
+.linkNone:hover{
+    color: $orange;
+}
+
 // OVERDRIVE BTN BOOTSTRAP //
 
 .btn-primary{
