@@ -3,9 +3,8 @@
 namespace App\Controller\front;
 
 use App\Entity\Adresse;
-use App\Entity\Client;
 use App\Entity\MoyenPaiement;
-use App\Entity\Panier;
+use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande')]
-    public function index(SessionInterface $session,Request $request, EntityManagerInterface $entityManager): Response
+    public function index(SessionInterface $session,Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
     {
 
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
@@ -34,14 +33,12 @@ class CommandeController extends AbstractController
 
         // On récupère les infos de la session
         $clientSession = $session->get('user');
-        $panier = $session->get('CART');
         $adresse = $session->get('adresseLivraison');
         $moyenPaiement = $session->get('CHOICEPAY');
         $totalPrice = $session->get('TOTALPRICE');
 
         // Informations pour le panier
         $idClient = $clientSession->getId();
-        $client = $entityManager->getRepository(Client::class)->find($idClient);
         $idAdresse = $adresse->getId();
         $adresse = $entityManager->getRepository(Adresse::class)->find($idAdresse);
 
@@ -52,24 +49,22 @@ class CommandeController extends AbstractController
         };
         // On récupère le moyen de paiement par son type
         $moyenPaiement = $entityManager->getRepository(MoyenPaiement::class)->findOneBy(['type' => $idMoyenPaiement]);
-        $dateCreation = new \DateTime();
         $statut = 200;
         $datePaiement = new \DateTime();
-        $numeroCommande = rand(1,100000);
         $montant = $totalPrice;
 
+        // On récupère le panier
+        $panier = $panierRepository->findOneBy(['client' => $session->get('user'), 'statut' => 100]);
+        $panierId = $panier->getId();
         // On enregistre les infos de la commande
-        $commande = new Panier();
-        $commande = $commande->setClient($client);
-        $commande->setAdresse($adresse);
-        $commande->setMoyenPaiement($moyenPaiement);
-        $commande->setDateCreation($dateCreation);
-        $commande->setStatut($statut);
-        $commande->setDatePaiement($datePaiement);
-        $commande->setNumeroCommande($numeroCommande);
-        $commande->setMontantTotal($montant);
+        $panier->setNumeroCommande($panierId);
+        $panier->setAdresse($adresse);
+        $panier->setMoyenPaiement($moyenPaiement);
+        $panier->setStatut($statut);
+        $panier->setDatePaiement($datePaiement);
+        $panier->setMontantTotal($montant);
 
-        $entityManager->persist($commande);
+        $entityManager->persist($panier);
         $entityManager->flush();
 
         // On vide la session sauf l'utilisateur

@@ -65,9 +65,6 @@ Envoyer les données de test des fixtures :
 
 Si vous avez une erreur de memory limit, modifier dans php.ini: memory_limit = 128M en 512M   
 
-Pour purger la base avec d'autres fixtures :  
-
-```symfony console doctrine:fixtures:load --purge-with-truncate```
 
 Vous aurez besoin d'une clé pour l'authentification JWT pour l'API REST.
 

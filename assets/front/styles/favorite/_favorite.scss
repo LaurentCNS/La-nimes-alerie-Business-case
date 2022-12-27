@@ -1,5 +1,5 @@
 #favorite {
-  .deleteItem{
+  .deleteItem {
     a {
       text-decoration: none;
       color: white;
@@ -31,6 +31,21 @@
   img:hover {
     transform: scale(1.05);
   }
+  @media (max-width: 500px) {
+
+    .title {
+      font-size: 15px;
+    }
+    .price {
+      font-size: 20px;
+    }
+    .qty {
+      font-size: 10px;
+    }
+    .promo {
+      font-size: 12px;
+    }
+  }
 }
 
 .price {
@@ -41,22 +56,6 @@
 .cardRight {
   .cardShipping {
     box-shadow: 0 3px 10px #E7E7E6;
-  }
-}
-
-@media (max-width: 500px) {
-
-  .title {
-    font-size: 15px;
-  }
-  .price {
-    font-size: 20px;
-  }
-  .qty {
-    font-size: 10px;
-  }
-  .promo {
-    font-size: 12px;
   }
 }
 

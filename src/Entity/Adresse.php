@@ -56,13 +56,13 @@ class Adresse
     #[ORM\Column(length: 50)]
     #[
         Assert\NotBlank([
-            'message' => 'adresse.ligne.not_blank',
+            'message' => 'adresse.ligne1.not_blank',
         ]),
         Assert\Length([
             'min' => 3,
             'max' => 50,
-            'minMessage' => 'adresse.ligne.min_length',
-            'maxMessage' => 'adresse.ligne.max_length',
+            'minMessage' => 'adresse.ligne1.min_length',
+            'maxMessage' => 'adresse.ligne1.max_length',
         ]),
     ]
     private ?string $ligne1 = null;
@@ -70,8 +70,10 @@ class Adresse
     #[ORM\Column(length: 50, nullable: true)]
     #[
         Assert\Length([
+            'min' => 3,
             'max' => 50,
-            'maxMessage' => 'adresse.ligne.max_length',
+            'minMessage' => 'adresse.ligne2.min_length',
+            'maxMessage' => 'adresse.ligne2.max_length',
         ]),     
     ]
     private ?string $ligne2 = null;
@@ -80,8 +82,10 @@ class Adresse
     #[ORM\Column(length: 50, nullable: true)]
     #[
         Assert\Length([
+            'min' => 3,
             'max' => 50,
-            'maxMessage' => 'adresse.ligne.max_length',
+            'minMessage' => 'adresse.ligne3.min_length',
+            'maxMessage' => 'adresse.ligne3.max_length',
         ]),     
     ]
     private ?string $ligne3 = null;

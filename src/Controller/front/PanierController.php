@@ -47,7 +47,6 @@ class PanierController extends AbstractController
         ]);
     }
 
-
     // La quantité d'un produit stockée dans la session pour le delete
     public static string $QTY = 'QTY';
 
@@ -98,7 +97,7 @@ class PanierController extends AbstractController
             $qtyTotal += $item;
         }
 
-        // On sous la quantité du produit supprimé
+        // On set la quantité du produit supprimé
         $session->set(self::$QTY, $qtyTotal);
 
         return $this->redirectToRoute('app_panier', [
