@@ -178,5 +178,19 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->getOneOrNullResult();
     }
 
+    // Récupère les produits correspondant à la recherche
+    public function getProductsBySearch(string $search): array
+    {
+        return $this->createQueryBuilder('produit')
+            ->select('produit.libelle', 'produit.slug')
+            ->andWhere('produit.estActif = 1')
+            ->andWhere('produit.libelle LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->groupBy('produit')
+            ->orderBy('produit.libelle', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }

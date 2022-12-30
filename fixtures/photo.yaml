@@ -98,8 +98,3 @@ App\Entity\Photo:
         url: 'creek_colier_chiens.png'
         est_principale: true
         produit: '@produit11'
-
-    photo20:
-        url: 'bozita_gelee_chats.png'
-        est_principale: false
-        produit: '@produit8'

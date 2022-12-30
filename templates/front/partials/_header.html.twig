@@ -10,10 +10,13 @@
                     <form>
                         <label for="search">recherche</label>
                         <div class="search">
-                            <input type="text" name="search" id="search" placeholder="RECHERCHER" class="round">
+                            <input type="text" name="search" id="search" placeholder="RECHERCHER"
+                                   class="round search-input-class" autocomplete="off" spellcheck="false">
                             <input type="submit" value="" class="glass">
                         </div>
                     </form>
+                </div>
+                <div class="product-results d-none">
                 </div>
                 <div class="user-space">
                     {% if app.user %}
@@ -36,13 +39,15 @@
                         {% elseif app.session.get('QTY') < 10 %}
                             <p class="values" data-cart-item>{{ app.session.get('QTY') }} articles</p>
                         {% elseif app.session.get('QTY') >= 10 and app.session.get('QTY') < 100 %}
-                            <p class="valuesDouble" data-cart-item>{{ app.session.get('QTY') }} articles</p>
+                            <p class="valuesDouble" data-cart-item>{{ app.session.get('QTY') }}
+                                articles</p>
                         {% else %}
                             <p class="valuesTriples" data-cart-item>99+ articles</p>
                         {% endif %}
                     </a>
                 </div>
-                <div class="menuburger" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                <div class="menuburger" data-bs-toggle="collapse"
+                     data-bs-target="#navbarSupportedContent"
                      aria-controls="offcanvasRight">
                 </div>
             </div>
@@ -96,10 +101,10 @@
 
 <!-- Collapsible content -->
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    {#    <form class="d-flex mt-3"> #}
-    {#        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> #}
-    {#        <button class="btn btn-outline-success" type="submit">Search</button> #}
-    {#    </form> #}
+    {#        <form class="d-flex mt-3"> #}
+    {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> #}
+    {#            <button class="btn btn-outline-success" type="submit">Search</button> #}
+    {#        </form> #}
     <ul class="navbar-nav me-auto mb-3 mb-lg-0">
         {% for animaux in functionTwigGetAnimaux() %}
             <li class="nav-item dropdown">

@@ -129,8 +129,8 @@ class AjaxController extends AbstractController
 
     #[Route('/totalPrice/{datas}', name: 'ajax_total_price')]
     public function totalPrice(
-        Request                $request,
-        SessionInterface       $session,
+        Request          $request,
+        SessionInterface $session,
     ): Response
     {
         // On récupère les données envoyées en fetch dans le fichier ts
@@ -150,8 +150,8 @@ class AjaxController extends AbstractController
 
     #[Route('/choicePay/{datas}', name: 'ajax_choice_pay')]
     public function choicePay(
-        Request                $request,
-        SessionInterface       $session,
+        Request          $request,
+        SessionInterface $session,
     ): Response
     {
 
@@ -159,7 +159,7 @@ class AjaxController extends AbstractController
         $datas = json_decode($request->get('datas'), true);
 
         // Si le choix de paiement existe déjà dans la session
-        if ($session->has(self::$CHOICEPAY))  {
+        if ($session->has(self::$CHOICEPAY)) {
             // On retire le choix de paiement de la session
             $session->remove(self::$CHOICEPAY);
         }
@@ -168,6 +168,31 @@ class AjaxController extends AbstractController
         $session->set(self::$CHOICEPAY, $datas['choicePay']);
 
         return new JsonResponse([]);
+    }
+
+    #[Route('/searchItems/{datas}', name: 'ajax_filter_search', methods: ['GET'])]
+    public function filterSearch(
+        string            $datas,
+        ProduitRepository $produitRepository,
+    ): Response
+    {
+        $searchValue = json_decode($datas, true);
+
+        // Si searchValue n'est pas vide
+        if (!empty($searchValue)) {
+            // On récupère les produits correspondant à la recherche
+            $produits = $produitRepository->getProductsBySearch($searchValue);
+            // Si aucun produit n'est trouvé on affiche un message
+            if (count($produits) === 0) {
+                return new JsonResponse(['message' => 'Aucun produit trouvé']);
+            } else {
+                // Sinon on retoune les produits trouvés
+                return new JsonResponse(['produits' => $produits, 'message' => 'ok']);
+            }
+        } else {
+            // Sinon je retourne une réponse pour le ts
+            return new JsonResponse(['message' => 'noSearch']);
+        }
     }
 
 }
