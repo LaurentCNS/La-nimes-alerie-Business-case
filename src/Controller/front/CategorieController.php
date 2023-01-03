@@ -2,6 +2,8 @@
 
 namespace App\Controller\front;
 
+use App\Repository\AnimalRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,16 +14,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     #[Route('/{animal}', name: 'app_animal')]
-    public function index($animal, ProduitRepository $produitRepository): Response
+    public function index($animal, ProduitRepository $produitRepository, CategorieRepository $categorieRepository, AnimalRepository $animalRepository): Response
     {
 
-        $productsByAnimal = $produitRepository->getProductsByAnimal($animal);
+        $idAnimal = $animalRepository->findOneBy(['libelle' => $animal]);
 
-        dump($productsByAnimal);
+        $productsByAnimal = $produitRepository->getProductsByAnimal($animal);
+        $categories = $categorieRepository->findCategorieByAnimal($idAnimal);
 
         return $this->render('front/categorie/index.html.twig', [
             'controller_name' => 'AnimalController',
+            'animal' => $animal,
             'productsByAnimal' => $productsByAnimal,
+            'categories' => $categories,
         ]);
     }
 

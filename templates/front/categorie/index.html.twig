@@ -6,6 +6,67 @@
 
 {% block body %}
 
-    <i class="fas fa-heart"></i>
+    <div id="byAnimal" class="mt-5">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row d-flex justify-content-center">
+                    <h3>Catégories pour {{ animal }}</h3>
+                    <hr>
+                    {% for categorie in categories %}
+                        <div class="col-md-3 mb-3">
+                            <a href="">
+                            <div class="card cardCategorie">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{ categorie.nom }}</p>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row d-flex justify-content-center mt-5">
+                    <h3>Tous les produits</h3>
+                    <hr>
+                    {% if productsByAnimal %}
+                    {% for produit in productsByAnimal %}
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-2 mt-4 mb-5 test">
+                            <div class="cardFull">
+                                <a href="{{ path('app_produit', {'slug': produit[0].slug}) }}">
+                                    <div class="picture">
+                                        {% for photo in produit[0].photo %}
+                                            <img class="mt-3" src="{{ asset('build/img/uploads/items/' ~ photo.url) }}"
+                                                 alt="{{ produit[0].libelle }}">
+                                        {% endfor %}
+                                    </div>
+                                    <div>
+                                        <h5 class="title-best mt-1 mb-3 mx-3">{{ produit[0].libelle |slice(0,30) }}</h5>
+                                        <p class="resume-best mx-3 lh-1">{{ produit[0].resume | slice(0,43) }}</p>
+                                        {# filtre des notes #}
+                                        {{ produit['note'] | notes }}
+
+                                        <div class="price mx-3 pb-3 fw-bolder">
+                                            {# filtre du prix #}
+                                            {% if produit[0].promotion is null %}
+                                                {{ produit[0].prixHt | prixTtc(produit[0].tva,0) }}€
+                                            {% else %}
+                                                {{ produit[0].prixHt | prixTtc(produit[0].tva,produit[0].promotion.pourcentage) }}€
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <h5 class="text-center mt-5">Aucun produit pour {{ animal }}</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

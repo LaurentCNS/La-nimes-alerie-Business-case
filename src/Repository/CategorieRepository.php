@@ -95,5 +95,17 @@ class CategorieRepository extends AbstractLanimalerieRepository
         ;
     }
 
+    //Fonction pour récupérer les catégories par animal
+    public function findCategorieByAnimal($animal): array
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.animal = :animal')
+            ->AndWhere('c.parent is null')
+            ->setParameter('animal', $animal)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 
 }
