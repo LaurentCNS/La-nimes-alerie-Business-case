@@ -192,5 +192,64 @@ class ProduitRepository extends AbstractLanimalerieRepository
             ->getResult();
     }
 
+    public function getProductsByAnimal(string $animal): array
+    {
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'photo', 'categorie', 'animal', 'AVG(avis.note) as note')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->join('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('categorie.animal', 'animal')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('produit.estActif = 1')
+            ->andWhere('animal.libelle = :animal')
+            ->groupBy('produit')
+            ->orderBy('produit.libelle', 'ASC')
+            ->setParameter('animal', $animal)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getProductsByCategorieParent(string $animal, string $categorieParent): array
+    {
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'photo', 'categorie', 'animal', 'AVG(avis.note) as note')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->join('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('categorie.animal', 'animal')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('produit.estActif = 1')
+            ->andWhere('categorie.nom = :categorieParent')
+            ->groupBy('produit')
+            ->orderBy('produit.libelle', 'ASC')
+            ->setParameter('categorieParent', $categorieParent)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getProductsByAnimalAndCategorie(string $animal, string $categorie): array
+    {
+        return $this->createQueryBuilder('produit')
+            ->select('produit', 'promotion', 'photo', 'categorie', 'animal', 'AVG(avis.note) as note')
+            ->leftJoin('produit.promotion', 'promotion')
+            ->join('produit.photo', 'photo')
+            ->leftJoin('produit.avis', 'avis')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('categorie.animal', 'animal')
+            ->where('photo.estPrincipale = 1')
+            ->andWhere('produit.estActif = 1')
+            ->andWhere('animal.libelle = :animal')
+            ->andWhere('categorie.nom = :categorie')
+            ->groupBy('produit')
+            ->orderBy('produit.libelle', 'ASC')
+            ->setParameter('animal', $animal)
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }
